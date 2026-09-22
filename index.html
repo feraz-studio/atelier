@@ -756,7 +756,7 @@
         }
 
         .temi-block {
-            margin-bottom: 10px; /* Reducido al máximo solicitado antes de la sección de contacto */
+            margin-bottom: 10px;
             padding-bottom: 0px;
         }
         
@@ -777,11 +777,11 @@
             margin-bottom: 0;
         }
 
-        /* SECCIÓN CONTACTO DIRECTO (SIN DEGRADADO, CAMBIO DE COLOR SEAMLESS) */
+        /* SECCIÓN CONTACTO DIRECTO (SIN DEGRADADO) */
         .contact-section-light {
             background-color: #FAF9F6;
             color: #000000;
-            padding: 24px 20px 20px 20px; /* Sin degradado, unión perfecta */
+            padding: 24px 20px 20px 20px;
             font-family: 'HK Grotesk', sans-serif;
         }
 
@@ -815,7 +815,7 @@
 
         .contact-info-block a {
             color: #000000;
-            text-decoration: underline; /* Teléfono y correo subrayados */
+            text-decoration: underline;
         }
 
         /* FOOTER CHAPARRITO UNIFORME */
@@ -869,7 +869,7 @@
 <div class="atelier-container">
     
     <div class="hero-section">
-        <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" alt="Feraz Hospitality Atelier" class="hero-image">
+        <img src="https://github.com/feraz-studio/feraz-assets/raw/main/Portada%201.png" alt="Feraz Hospitality Atelier" class="hero-image">
         <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="hero-logo">
         <div class="hero-content">
             <h1 class="hero-title">Hospitality Atelier</h1>
@@ -1504,7 +1504,6 @@
             totalMensual: total
         };
 
-        // Enviar datos al Webhook de Make
         fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
             method: 'POST',
             headers: {
@@ -1524,3 +1523,7 @@
             alert('Error de conexión.');
         });
     });
+</script>
+
+</body>
+</html>
