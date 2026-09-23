@@ -553,13 +553,18 @@
     .checkout-logo-container {
         width: 120px;
         height: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
     }
 
     .checkout-logo-container img {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        object-position: right;
+        object-position: top right;
+        transform-origin: top right;
+        transition: transform 0.3s ease;
     }
 
     .checkout-summary-list {
@@ -887,7 +892,6 @@
 
     <div class="atelier-header-block" id="atelier-header">
         <div class="hotel-header-logo-container">
-            <!-- ID AÑADIDO PARA JS -->
             <img id="ui-logo-header" src="https://github.com/feraz-studio/feraz-assets/blob/main/OctaviaCasa.png?raw=true" alt="Octavia Casa">
         </div>
 
@@ -1158,7 +1162,6 @@
         <div class="checkout-header-grid">
             <div class="category-main-title">RESUMEN</div>
             <div class="checkout-logo-container">
-                <!-- ID AÑADIDO PARA JS -->
                 <img id="ui-logo-checkout" src="https://github.com/feraz-studio/feraz-assets/blob/main/OctaviaCasa.png?raw=true" alt="Octavia Casa">
             </div>
         </div>
@@ -1240,11 +1243,9 @@
 </div>
 
 <script>
-// VARIABLES GLOBALES PARA IDENTIFICAR EL HOTEL
 let currentSlug = "";
 let currentHotelName = "";
 
-// BASE DE DATOS DE HOTELES (Generada desde el CSV)
 const baseDeDatosHoteles = {
       "casa-polanco": {
             "nombre": "Casa Polanco",
@@ -1274,7 +1275,8 @@ const baseDeDatosHoteles = {
       "orchid-house": {
             "nombre": "Orchid House",
             "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png",
-            "habitaciones": 13
+            "habitaciones": 13,
+            "scale": 0.7
       },
       "kimpton-virgilio": {
             "nombre": "Kimpton Virgilio",
@@ -1299,7 +1301,8 @@ const baseDeDatosHoteles = {
       "el-alfonsa": {
             "nombre": "El Alfonsa",
             "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png",
-            "habitaciones": 13
+            "habitaciones": 13,
+            "scale": 0.7
       },
       "casa-luciana": {
             "nombre": "Casa Luciana",
@@ -1319,7 +1322,8 @@ const baseDeDatosHoteles = {
       "lulu-condesa": {
             "nombre": "Lulú Condesa",
             "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png",
-            "habitaciones": 16
+            "habitaciones": 16,
+            "scale": 0.7
       },
       "maison-du-comte": {
             "nombre": "Maison du Comte",
@@ -1339,7 +1343,8 @@ const baseDeDatosHoteles = {
       "nima": {
             "nombre": "Nima Local House",
             "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png",
-            "habitaciones": 4
+            "habitaciones": 4,
+            "scale": 0.7
       },
       "brick": {
             "nombre": "Brick",
@@ -1374,7 +1379,8 @@ const baseDeDatosHoteles = {
       "roso-gh": {
             "nombre": "Roso Guest House",
             "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png",
-            "habitaciones": 10
+            "habitaciones": 10,
+            "scale": 0.7
       },
       "ignacia": {
             "nombre": "Ignacia Guest House",
@@ -1384,11 +1390,11 @@ const baseDeDatosHoteles = {
       "hoteldama": {
             "nombre": "Hotel Dama",
             "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png",
-            "habitaciones": 17
+            "habitaciones": 17,
+            "scale": 0.7
       }
 };
 
-// AUTO-COMPLETAR DATOS AL CARGAR LA PÁGINA
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     let slug = urlParams.get("hotel") || urlParams.get("slug");
@@ -1405,21 +1411,22 @@ document.addEventListener("DOMContentLoaded", function () {
         currentSlug = slug;
         currentHotelName = datosHotel.nombre;
 
-        // Actualizar el logo en la parte superior
         const logoHeader = document.getElementById("ui-logo-header");
         if (logoHeader) {
             logoHeader.src = datosHotel.logo;
             logoHeader.alt = datosHotel.nombre;
         }
 
-        // Actualizar el logo en la sección de resumen
         const logoCheckout = document.getElementById("ui-logo-checkout");
         if (logoCheckout) {
             logoCheckout.src = datosHotel.logo;
             logoCheckout.alt = datosHotel.nombre;
+            
+            // Aplica la escala al logo del resumen si viene definido en la base de datos
+            const factorEscala = datosHotel.scale || 1;
+            logoCheckout.style.transform = `scale(${factorEscala})`;
         }
 
-        // Actualizar número de habitaciones y recalcular total inicial si aplica
         const roomsInput = document.getElementById("rooms-count-top");
         if (roomsInput) {
             roomsInput.value = datosHotel.habitaciones;
@@ -1649,7 +1656,6 @@ btnToggleCheckout.addEventListener('click', () => {
     }
 });
 
-// EVENTO DE ENVÍO Y GENERACIÓN DEL PAYLOAD
 document.getElementById('send-btn').addEventListener('click', () => {
     const nameInput = document.getElementById('client-name');
     const emailInput = document.getElementById('client-email');
@@ -1687,7 +1693,6 @@ document.getElementById('send-btn').addEventListener('click', () => {
         return;
     }
 
-    // CONSTRUCCIÓN DEL PAQUETE DE DATOS PARA MAKE (WEBHOOK)
     const payload = {
         nombreClient: name,
         emailContacto: email,
@@ -1701,23 +1706,17 @@ document.getElementById('send-btn').addEventListener('click', () => {
     console.log("Payload enviado a Make:", payload);
 
     /* 
-      ===============================================================
-      AQUÍ VA TU CONEXIÓN CON MAKE (Descomenta y cambia la URL)
-      ===============================================================
-      
       fetch('TU_URL_DEL_WEBHOOK_DE_MAKE', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
       }).then(res => {
           alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
-          // Opcional: Reiniciar el formulario o redirigir
       }).catch(err => {
           alert('Hubo un error al enviar la cotización. Por favor, intenta de nuevo.');
       });
     */
 
-    // Alerta temporal de éxito (Bórrala cuando actives el fetch de arriba)
     alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
 });
 </script>
