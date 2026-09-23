@@ -1173,14 +1173,14 @@
         </ul>
 
         <div class="checkout-action-wrapper" id="actionWrapper">
-            <button class="btn-checkout-dynamic" id="btn-toggle-checkout">Obtener cotización</button>
+            <button type="button" class="btn-checkout-dynamic" id="btn-toggle-checkout">Obtener cotización</button>
         </div>
 
         <div class="expandable-form" id="expandable-checkout-form">
             <p class="atelier-desc" style="color:#c5a059;">En menos de 72 horas, prepararemos un concepto alineado a su selección, sirviendo como punto de partida tangible antes de su compromiso final.</p>
             <input type="text" id="client-name" class="client-input-grey" placeholder="Nombre y apellido" required>
             <input type="email" id="client-email" class="client-input-grey" placeholder="Correo electrónico" required>
-            <button class="submit-checkout-btn" id="send-btn">
+            <button type="button" class="submit-checkout-btn" id="send-btn">
                 Enviar
                 <svg class="submit-icon" viewBox="0 0 24 24"><path d="M17 12L7 2v20z"/></svg>
             </button>
@@ -1424,7 +1424,6 @@ document.addEventListener("DOMContentLoaded", function () {
             logoCheckout.src = datosHotel.logo;
             logoCheckout.alt = datosHotel.nombre;
             
-            // Aplica la escala al logo del resumen si viene definido en la base de datos
             const factorEscala = datosHotel.scale || 1;
             logoCheckout.style.transform = `scale(${factorEscala})`;
         }
@@ -1658,7 +1657,9 @@ btnToggleCheckout.addEventListener('click', () => {
     }
 });
 
-document.getElementById('send-btn').addEventListener('click', () => {
+document.getElementById('send-btn').addEventListener('click', (e) => {
+    e.preventDefault(); // Detiene cualquier recarga de la página
+
     const nameInput = document.getElementById('client-name');
     const emailInput = document.getElementById('client-email');
     const name = nameInput.value.trim();
@@ -1705,21 +1706,17 @@ document.getElementById('send-btn').addEventListener('click', () => {
         servicios: selectedServices
     };
 
-console.log("Payload enviado a Make:", payload);
+    console.log("Payload enviado a Make:", payload);
 
-    // Activamos la conexión borrando los /* y */
     fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).then(res => {
         alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
-        // Opcional: Aquí podrías redirigir al cliente a tu web principal
-        // window.location.href = "https://feraz.studio";
     }).catch(err => {
         alert('Hubo un error al enviar la cotización. Por favor, intenta de nuevo.');
     });
-
 });
 </script>
 </body>
