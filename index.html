@@ -1705,21 +1705,21 @@ document.getElementById('send-btn').addEventListener('click', () => {
         servicios: selectedServices
     };
 
-    console.log("Payload enviado a Make:", payload);
+console.log("Payload enviado a Make:", payload);
 
-    /* 
-      fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-      }).then(res => {
-          alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
-      }).catch(err => {
-          alert('Hubo un error al enviar la cotización. Por favor, intenta de nuevo.');
-      });
-    */
+    // Activamos la conexión borrando los /* y */
+    fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
+        // Opcional: Aquí podrías redirigir al cliente a tu web principal
+        // window.location.href = "https://feraz.studio";
+    }).catch(err => {
+        alert('Hubo un error al enviar la cotización. Por favor, intenta de nuevo.');
+    });
 
-    alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
 });
 </script>
 </body>
