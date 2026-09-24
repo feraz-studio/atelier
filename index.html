@@ -2038,13 +2038,17 @@ fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         body: JSON.stringify(payload)
     }).then(res => {
         const calBaseUrl = "https://cal.com/feraz-studio/feraz-tasting";
-        const hotelNameParam = encodeURIComponent(currentHotelName || "Hotel sin especificar");
-        const addressParam = encodeURIComponent(currentHotelAddress);
         const emailParam = encodeURIComponent(email);
         const clientNameParam = encodeURIComponent(name);
         
-        // Estructura completa pre-llenada para Cal.com Overlay:
-        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${clientNameParam}&email=${emailParam}&location=${addressParam}&notes=${hotelNameParam}`;
+        // Formato exacto que exige Cal.com para 'In Person (Attendee Address)'
+        const locationObject = JSON.stringify({
+            optionValue: "inPerson",
+            value: currentHotelAddress || "CDMX"
+        });
+        const locationParam = encodeURIComponent(locationObject);
+        
+        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${clientNameParam}&email=${emailParam}&location=${locationParam}`;
 
         document.getElementById('btn-agendar-cal-overlay').href = calUrl;
         document.getElementById('btn-post-submit-cal').href = calUrl;
