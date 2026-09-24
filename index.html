@@ -31,14 +31,16 @@
         scroll-behavior: smooth;
     }
 
-    body {
+body {
         background-color: #1a1a1a;
         color: #ffffff;
         font-family: 'HK Grotesk', sans-serif;
         display: flex;
         justify-content: center;
+        margin: 0; /* Asegura que no haya márgenes nativos */
         padding: 0;
-        overflow-x: clip;
+        width: 100vw;
+        overflow-x: hidden;
     }
 
     .atelier-container {
@@ -46,6 +48,7 @@
         max-width: 375px;
         background: #111111;
         position: relative;
+        margin: 0 auto; /* Centra perfectamente el contenedor móvil */
         transition: opacity 3s ease;
     }
 
@@ -933,9 +936,10 @@
     .success-overlay {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
+        /* Cambiamos el comportamiento del fondo para que no se estire de más */
         background-image: linear-gradient(rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.88)), url('https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true');
         background-size: cover;
-        background-position: center;
+        background-position: center top; /* Alineado para respetar la proporción superior */
         z-index: 99999;
         display: flex;
         flex-direction: column;
@@ -944,7 +948,7 @@
         pointer-events: none;
         transition: opacity 3s ease;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* Asegura el scroll en iOS y trackpads */
+        -webkit-overflow-scrolling: touch;
         padding: 24px;
     }
 
@@ -1021,7 +1025,7 @@
     }
 
     .success-overlay.booking-active .hotel-logo-overlay {
-        height: 24px; /* Aprox 60% del original */
+        height: 35px; /* Aprox 60% del original */
         opacity: 1;
         margin: 35px 0 10px 0;
     }
