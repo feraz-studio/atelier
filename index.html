@@ -46,6 +46,14 @@
         max-width: 375px;
         background: #111111;
         position: relative;
+        transition: opacity 3s ease;
+    }
+
+    /* TRANSICIÓN CROSSFADE INMEDIATA DE 3 SEGUNDOS */
+    .crossfade-out {
+        opacity: 0 !important;
+        pointer-events: none;
+        transition: opacity 3s ease !important;
     }
 
     .hero-section {
@@ -154,12 +162,12 @@
         align-items: center;
         gap: 6px;
         font-size: 11px;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         color: #b3b2ad;
     }
 
     .rooms-input {
-        width: 20px;
+        width: 28px;
         background: transparent;
         border: none;
         border-bottom: 1px solid #666;
@@ -178,6 +186,15 @@
     }
     .rooms-input[type=number] {
         -moz-appearance: textfield;
+    }
+
+    .rooms-warning-text {
+        color: #c5a059;
+        font-size: 10px;
+        font-family: 'HK Grotesk', sans-serif;
+        font-weight: 600;
+        margin-bottom: 16px;
+        display: none;
     }
 
     .atelier-desc {
@@ -451,7 +468,7 @@
         font-family: 'HK Grotesk', sans-serif;
     }
 
-    /* BARRA STICKY */
+    /* BARRA STICKY (Calculadora) */
     .sticky-pill-bar {
         position: -webkit-sticky;
         position: sticky;
@@ -480,6 +497,13 @@
         visibility: visible;
     }
 
+    .sticky-pill-bar.frozen {
+        position: relative !important;
+        bottom: 0;
+        margin-bottom: 40px;
+        cursor: default;
+    }
+
     .pill-bg {
         position: absolute;
         top: 0; left: 0;
@@ -501,6 +525,7 @@
         opacity: 0;
         transform: translateY(8px);
         transition: opacity 0.4s ease, transform 0.4s ease;
+        width: 100%;
     }
 
     .pill-price-text.visible {
@@ -511,7 +536,8 @@
     .total-group {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
+        width: 100%;
     }
 
     .total-label {
@@ -534,6 +560,20 @@
         color: #ffffff;
         line-height: 1;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .total-warning-text {
+        display: none;
+        font-family: 'HK Grotesk', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        color: #ffffff;
+        text-transform: uppercase;
+        text-align: right;
+        max-width: 250px;
+        line-height: 1.3;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        margin-left: auto;
     }
 
     /* SECCIÓN CHECKOUT / COTIZACIÓN */
@@ -583,19 +623,8 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        opacity: 0;
-        max-height: 0;
         padding: 0 0;
         margin: 0;
-        border-bottom: 0 solid #222;
-        overflow: hidden;
-        transition: max-height 1.5s ease, opacity 1.5s ease, padding 1.5s ease, border-width 1.5s ease;
-    }
-
-    .checkout-summary-item.show {
-        opacity: 1;
-        max-height: 150px;
-        padding: 8px 0;
         border-bottom: 1px solid #222;
     }
 
@@ -647,6 +676,22 @@
         font-weight: 600;
         white-space: nowrap;
         margin-top: 2px;
+    }
+
+    /* ESTILOS DE ANIDACIÓN PARA RESUMEN */
+    .checkout-summary-item.nested-item {
+        border-bottom: none !important;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .checkout-summary-item.nested-item .summary-left {
+        padding-left: 20px;
+        margin-top: -2px;
+    }
+
+    .checkout-summary-item.nested-item + .checkout-summary-item:not(.nested-item) {
+        border-top: 1px solid #222;
     }
 
     .checkout-action-wrapper {
@@ -759,6 +804,26 @@
         fill: #ffffff;
     }
 
+    /* CTA STICKY POST ENVÍO (Nuevo comportamiento para que flote) */
+    .post-submit-action {
+        display: none;
+        position: -webkit-sticky;
+        position: sticky;
+        bottom: 20px;
+        z-index: 100;
+        width: 100%;
+        justify-content: center;
+        padding: 0;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
     .temi-block {
         margin-bottom: 10px;
         padding-bottom: 0px;
@@ -866,11 +931,165 @@
     .globe-icon-img:hover {
         opacity: 0.7;
     }
+
+    /* ========================================= */
+    /* ESTILOS DEL OVERLAY DE ÉXITO (CROSSFADE 3S) */
+    /* ========================================= */
+    .success-overlay {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 375px;
+        height: 100vh;
+        background-image: linear-gradient(rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.88)), url('https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true');
+        background-size: cover;
+        background-position: center;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 3s ease;
+    }
+
+    .success-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .success-logo {
+        position: absolute;
+        top: 24px;
+        width: 67px;
+    }
+
+    .success-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0 24px;
+    }
+
+    .success-text {
+        font-family: 'HK Grotesk', sans-serif;
+        color: #FAF9F6;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 1.6;
+        text-align: center;
+        max-width: 320px;
+        margin-bottom: 40px;
+    }
+
+    .success-text p {
+        margin-bottom: 16px;
+    }
+    .success-text p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* BOTÓN PILL METÁLICO (Cromo Líquido Continuo) */
+    .btn-metallic {
+        position: relative;
+        width: 200px;
+        height: 45px;
+        border-radius: 22.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        overflow: hidden;
+        background: #111;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        margin: 0 auto;
+    }
+
+    .btn-metallic::before {
+        content: '';
+        position: absolute;
+        width: 240%;
+        height: 240%;
+        background: conic-gradient(
+            from 0deg,
+            #888888 0%,
+            #fdfdfd 20%,
+            #707070 40%,
+            #e6e6e6 60%,
+            #555555 80%,
+            #ffffff 100%
+        );
+        animation: etheralMetal 6s ease-in-out infinite alternate;
+    }
+
+    .btn-metallic::after {
+        content: '';
+        position: absolute;
+        inset: 1.5px; 
+        background: #151515; 
+        border-radius: 21px;
+    }
+
+    .btn-metallic span {
+        position: relative;
+        z-index: 10;
+        color: #fff;
+        font-family: 'HK Grotesk', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    @keyframes etheralMetal {
+        0% { transform: rotate(0deg) scale(1) translate(0px, 0px); }
+        50% { transform: rotate(200deg) scale(1.05) translate(-2px, 2px); }
+        100% { transform: rotate(360deg) scale(1) translate(0px, 0px); }
+    }
+
+    .btn-volver {
+        margin-top: 50px;
+        font-family: 'HK Grotesk', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-bottom: 1px solid #fff;
+        padding-bottom: 2px;
+        transition: opacity 0.3s;
+    }
+
+    .btn-volver:hover {
+        opacity: 0.7;
+    }
 </style>
 </head>
 
 <body>
-<div class="atelier-container">
+
+<!-- OVERLAY DE CONFIRMACIÓN -->
+<div class="success-overlay" id="success-overlay">
+    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="success-logo">
+    <div class="success-content">
+        <div class="success-text">
+            <p>Muchas gracias por su selección.<br>En breve recibirá la cotización con los servicios de nuestro taller.</p>
+            <p>Por favor, le invitamos a reservar un tasting sensorial en su propiedad, donde vivirá una experiencia única cortesía de Feraz.</p>
+        </div>
+        <a href="#" target="_blank" class="btn-metallic" id="btn-agendar-cal-overlay">
+            <span>Reservar Tasting</span>
+        </a>
+        <a href="#" class="btn-volver" id="btn-volver">VOLVER</a>
+    </div>
+</div>
+
+<div class="atelier-container" id="main-container">
 
 <div class="hero-section">
     <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" alt="Feraz Hospitality Atelier" class="hero-image">
@@ -892,13 +1111,15 @@
 
     <div class="atelier-header-block" id="atelier-header">
         <div class="hotel-header-logo-container">
-            <img id="ui-logo-header" src="https://github.com/feraz-studio/feraz-assets/blob/main/OctaviaCasa.png?raw=true" alt="Octavia Casa">
+            <img id="ui-logo-header" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
         </div>
 
         <div class="rooms-line">
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" id="rooms-count-top" class="rooms-input" value="20" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" id="rooms-count-top" class="rooms-input" value="20" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
             <span>habitaciones.</span>
         </div>
+        <div id="rooms-warning" class="rooms-warning-text">Ofrecemos nuestros servicios para un mínimo de 4 habitaciones, por favor modifique su selección.</div>
+        
         <p class="atelier-desc">
             Le damos la bienvenida a nuestro atelier, aquí podrá configurar el conjunto de servicios que mejor se adapte a las necesidades y objetivos actuales de su propiedad.<br><br>
             Esperamos que lo encuentre de utilidad e invite a emocionarle tanto como a nosotros el realizar proyectos de experiencia de huéspedes.
@@ -936,8 +1157,9 @@
                     <div class="service-desc">Mazapanes (cacahuate), trufas, pâte de fruit, toffees.</div>
                 </div>
                 <div class="service-right">
+                    <span class="included-tag">Incluido</span>
                     <span class="service-price">$ 375</span>
-                    <input type="checkbox" class="calc-item checkin-exclusive" value="375" data-name="Check-in Base" data-desc="Mazapanes (cacahuate), trufas, pâte de fruit, toffees." data-format="Servicio individual" data-type="room">
+                    <input type="checkbox" class="calc-item checkin-exclusive" id="chk-checkin-base" value="375" data-name="Check-in Base" data-desc="Mazapanes (cacahuate), trufas, pâte de fruit, toffees." data-format="Servicio individual" data-type="room">
                 </div>
             </label>
 
@@ -947,8 +1169,9 @@
                     <div class="service-desc">Bombones, confitería boutique + colecciones / temporada.</div>
                 </div>
                 <div class="service-right">
+                    <span class="included-tag">Incluido</span>
                     <span class="service-price">$ 590</span>
-                    <input type="checkbox" class="calc-item checkin-exclusive" value="590" data-name="Check-in Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
+                    <input type="checkbox" class="calc-item checkin-exclusive" id="chk-checkin-firma" value="590" data-name="Check-in Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
                 </div>
             </label>
 
@@ -990,8 +1213,9 @@
                     <div class="service-desc">Bombones, confitería boutique + colecciones / temporada.</div>
                 </div>
                 <div class="service-right">
+                    <span class="included-tag">Incluido</span>
                     <span class="service-price">$ 1,180</span>
-                    <input type="checkbox" class="calc-item turndown-exclusive" value="1180" data-name="Turndown Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
+                    <input type="checkbox" class="calc-item turndown-exclusive" id="chk-turndown-firma" value="1180" data-name="Turndown Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
                 </div>
             </label>
 
@@ -1019,11 +1243,12 @@
             <label class="service-row">
                 <div class="service-info">
                     <div class="service-title">Vajilla permanente</div>
-                    <div class="service-desc">2.5x número de habitaciones piezas. Reemplazo por roturas.</div>
+                    <div class="service-desc" id="desc-vajilla">2.5x número de habitaciones (piezas). Reemplazo por roturas.</div>
                 </div>
                 <div class="service-right">
+                    <span class="included-tag">Incluido</span>
                     <span class="service-price">$ 200</span>
-                    <input type="checkbox" class="calc-item" value="200" data-name="Vajilla permanente" data-desc="2.5x número de habitaciones piezas. Reemplazo por roturas." data-format="Servicio individual" data-type="room">
+                    <input type="checkbox" class="calc-item" id="chk-vajilla" value="200" data-name="Vajilla permanente" data-desc="2.5x número de habitaciones (piezas). Reemplazo por roturas." data-format="Servicio individual" data-type="room">
                 </div>
             </label>
 
@@ -1044,8 +1269,9 @@
                     <div class="service-desc">Bilingüe, papel brillante o de algodón.</div>
                 </div>
                 <div class="service-right">
+                    <span class="included-tag">Incluido</span>
                     <span class="service-price">$ 45</span>
-                    <input type="checkbox" class="calc-item" value="45" data-name="Papelería premium" data-desc="Bilingüe, papel brillante o de algodón." data-format="Servicio individual" data-type="room">
+                    <input type="checkbox" class="calc-item" id="chk-papeleria" value="45" data-name="Papelería premium" data-desc="Bilingüe, papel brillante o de algodón." data-format="Servicio individual" data-type="room">
                 </div>
             </label>
             <div class="category-legend">
@@ -1101,7 +1327,7 @@
                     <span class="crossed-price">$ 620</span>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span>$ 590</span>
-                        <input type="checkbox" class="calc-item set-exclusive" value="590" data-name="Set Check-in" data-desc="Diseño Culinario (Base) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
+                        <input type="checkbox" class="calc-item set-exclusive" id="chk-set-checkin" value="590" data-name="Set Check-in" data-desc="Diseño Culinario (Base) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
                     </div>
                 </div>
             </div>
@@ -1115,7 +1341,7 @@
                     <span class="crossed-price">$ 1,425</span>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span>$ 1,350</span>
-                        <input type="checkbox" class="calc-item set-exclusive" value="1350" data-name="Set Turndown Service" data-desc="Diseño Culinario (Firma) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
+                        <input type="checkbox" class="calc-item set-exclusive" id="chk-set-turndown" value="1350" data-name="Set Turndown Service" data-desc="Diseño Culinario (Firma) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
                     </div>
                 </div>
             </div>
@@ -1129,7 +1355,7 @@
                     <span class="crossed-price">$ 2,260</span>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span>$ 2,050</span>
-                        <input type="checkbox" class="calc-item set-exclusive" value="2050" data-name="Set Ambos" data-desc="Diseño Culinario (Firma) + Vajilla permanente (2) + Papelería creativa (2)" data-format="Paquete" data-type="room">
+                        <input type="checkbox" class="calc-item set-exclusive" id="chk-set-ambos" value="2050" data-name="Set Ambos" data-desc="Diseño Culinario (Firma) + Vajilla permanente (2) + Papelería creativa (2)" data-format="Paquete" data-type="room">
                     </div>
                 </div>
             </div>
@@ -1138,7 +1364,7 @@
             </div>
         </div>
 
-        <!-- BARRA STICKY -->
+        <!-- BARRA STICKY (Calculadora) -->
         <div class="sticky-pill-bar" id="stickyPill">
             <div class="pill-bg active" id="bg-checkin" title="Fondo Check-in" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%201.png?raw=true')"></div>
             <div class="pill-bg" id="bg-turndown" title="Fondo Turndown Service" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%203.png?raw=true')"></div>
@@ -1147,9 +1373,12 @@
             <div class="pill-bg" id="bg-sets" title="Fondo Sets" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true')"></div>
 
             <div class="pill-price-text" id="priceContainer">
-                <div class="total-group">
+                <div class="total-group" id="total-group-normal">
                     <div class="total-label">TOTAL</div>
                     <div class="total-value">MXN <span id="total-amount">0</span> / mes</div>
+                </div>
+                <div class="total-warning-text" id="total-group-warning">
+                    Para ver su selección, modifique el número de habitaciones
                 </div>
             </div>
         </div>
@@ -1158,11 +1387,10 @@
 
     <!-- SECCIÓN CHECKOUT -->
     <div class="checkout-box" id="contacto-section">
-
         <div class="checkout-header-grid">
             <div class="category-main-title">RESUMEN</div>
             <div class="checkout-logo-container">
-                <img id="ui-logo-checkout" src="https://github.com/feraz-studio/feraz-assets/blob/main/OctaviaCasa.png?raw=true" alt="Octavia Casa">
+                <img id="ui-logo-checkout" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
             </div>
         </div>
 
@@ -1177,7 +1405,7 @@
         </div>
 
         <div class="expandable-form" id="expandable-checkout-form">
-            <p class="atelier-desc" style="color:#c5a059;">En menos de 72 horas, prepararemos un concepto alineado a su selección, sirviendo como punto de partida tangible antes de su compromiso final.</p>
+            <p class="atelier-desc" style="color:#c5a059;">Obtenga su cotización Feraz al instante.</p>
             <input type="text" id="client-name" class="client-input-grey" placeholder="Nombre y apellido" required>
             <input type="email" id="client-email" class="client-input-grey" placeholder="Correo electrónico" required>
             <button type="button" class="submit-checkout-btn" id="send-btn">
@@ -1185,7 +1413,13 @@
                 <svg class="submit-icon" viewBox="0 0 24 24"><path d="M17 12L7 2v20z"/></svg>
             </button>
         </div>
+    </div> <!-- Fin de checkout-box -->
 
+    <!-- CTA STICKY POST ENVÍO (Fuera de checkout-box para heredar pista de content-body) -->
+    <div class="post-submit-action" id="post-submit-action">
+        <a href="#" target="_blank" class="btn-metallic" id="btn-post-submit-cal">
+            <span>Reservar Tasting</span>
+        </a>
     </div>
 
     <!-- SECCIÓN TEMI -->
@@ -1208,7 +1442,7 @@
         </ul>
     </div>
 
-</div>
+</div> <!-- Fin de content-body -->
 
 <!-- SECCIÓN CONTACTO DIRECTO -->
 <div class="contact-section-light">
@@ -1247,154 +1481,34 @@ let currentSlug = "";
 let currentHotelName = "";
 
 const baseDeDatosHoteles = {
-      "casa-polanco": {
-            "nombre": "Casa Polanco",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png",
-            "habitaciones": 19
-      },
-      "octavia-casa": {
-            "nombre": "Octavia Casa",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png",
-            "habitaciones": 8
-      },
-      "the-alest": {
-            "nombre": "The Alest",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png",
-            "habitaciones": 19
-      },
-      "uma-casa": {
-            "nombre": "Uma Casa",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png",
-            "habitaciones": 9
-      },
-      "wild-oscar": {
-            "nombre": "The Wild Oscar",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png",
-            "habitaciones": 9
-      },
-      "orchid-house": {
-            "nombre": "Orchid House",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png",
-            "habitaciones": 13,
-            "scale": 0.7
-      },
-      "kimpton-virgilio": {
-            "nombre": "Kimpton Virgilio",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png",
-            "habitaciones": 48
-      },
-      "kimpton-castelar": {
-            "nombre": "Kimpton El Castelar",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png",
-            "habitaciones": 34,
-            "scale": 0.6
-      },
-      "casa-levora": {
-            "nombre": "Casa Lévora",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png",
-            "habitaciones": 9
-      },
-      "casa-cuenca": {
-            "nombre": "Casa Cuenca",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png",
-            "habitaciones": 10
-      },
-      "el-alfonsa": {
-            "nombre": "El Alfonsa",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png",
-            "habitaciones": 13,
-            "scale": 0.7
-      },
-      "casa-luciana": {
-            "nombre": "Casa Luciana",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png",
-            "habitaciones": 8
-      },
-      "the-amsterdam": {
-            "nombre": "The Amsterdam",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png",
-            "habitaciones": 14
-      },
-      "casa-mali": {
-            "nombre": "Casa Malí",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png",
-            "habitaciones": 20
-      },
-      "lulu-condesa": {
-            "nombre": "Lulú Condesa",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png",
-            "habitaciones": 16,
-            "scale": 0.7
-      },
-      "maison-du-comte": {
-            "nombre": "Maison du Comte",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png",
-            "habitaciones": 6
-      },
-      "el-cortes": {
-            "nombre": "El Cortés",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png",
-            "habitaciones": 15
-      },
-      "casa-talavera": {
-            "nombre": "Casa Talavera",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png",
-            "habitaciones": 13
-      },
-      "nima": {
-            "nombre": "Nima Local House",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png",
-            "habitaciones": 4,
-            "scale": 0.7
-      },
-      "brick": {
-            "nombre": "Brick",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png",
-            "habitaciones": 17
-      },
-      "casa-margarita": {
-            "nombre": "Casa Margarita",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png",
-            "habitaciones": 4
-      },
-      "onto": {
-            "nombre": "ONTO",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png",
-            "habitaciones": 110
-      },
-      "casa-tenue": {
-            "nombre": "Casa Tenue",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Tenue.png",
-            "habitaciones": 8
-      },
-      "colima-71": {
-            "nombre": "Colima 71",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png",
-            "habitaciones": 16
-      },
-      "maison-celeste": {
-            "nombre": "Maison Celeste x Lezard",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png",
-            "habitaciones": 13
-      },
-      "roso-gh": {
-            "nombre": "Roso Guest House",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png",
-            "habitaciones": 10,
-            "scale": 0.7
-      },
-      "ignacia": {
-            "nombre": "Ignacia Guest House",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png",
-            "habitaciones": 9,
-            "scale": 0.7
-      },
-      "hoteldama": {
-            "nombre": "Hotel Dama",
-            "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png",
-            "habitaciones": 17,
-            "scale": 0.7
-      }
+      "casa-polanco": { "nombre": "Casa Polanco", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png", "habitaciones": 19 },
+      "octavia-casa": { "nombre": "Octavia Casa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png", "habitaciones": 8 },
+      "the-alest": { "nombre": "The Alest", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png", "habitaciones": 19 },
+      "uma-casa": { "nombre": "Uma Casa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png", "habitaciones": 9 },
+      "wild-oscar": { "nombre": "The Wild Oscar", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png", "habitaciones": 9 },
+      "orchid-house": { "nombre": "Orchid House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png", "habitaciones": 13, "scale": 0.7 },
+      "kimpton-virgilio": { "nombre": "Kimpton Virgilio", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "habitaciones": 48 },
+      "kimpton-castelar": { "nombre": "Kimpton El Castelar", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "habitaciones": 34, "scale": 0.6 },
+      "casa-levora": { "nombre": "Casa Lévora", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png", "habitaciones": 9 },
+      "casa-cuenca": { "nombre": "Casa Cuenca", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png", "habitaciones": 10 },
+      "el-alfonsa": { "nombre": "El Alfonsa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png", "habitaciones": 13, "scale": 0.7 },
+      "casa-luciana": { "nombre": "Casa Luciana", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png", "habitaciones": 8 },
+      "the-amsterdam": { "nombre": "The Amsterdam", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png", "habitaciones": 14 },
+      "casa-mali": { "nombre": "Casa Malí", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png", "habitaciones": 20 },
+      "lulu-condesa": { "nombre": "Lulú Condesa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png", "habitaciones": 16, "scale": 0.7 },
+      "maison-du-comte": { "nombre": "Maison du Comte", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png", "habitaciones": 6 },
+      "el-cortes": { "nombre": "El Cortés", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png", "habitaciones": 15 },
+      "casa-talavera": { "nombre": "Casa Talavera", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png", "habitaciones": 13 },
+      "nima": { "nombre": "Nima Local House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png", "habitaciones": 4, "scale": 0.7 },
+      "brick": { "nombre": "Brick", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png", "habitaciones": 17 },
+      "casa-margarita": { "nombre": "Casa Margarita", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png", "habitaciones": 4 },
+      "onto": { "nombre": "ONTO", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png", "habitaciones": 110 },
+      "casa-tenue": { "nombre": "Casa Tenue", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Tenue.png", "habitaciones": 8 },
+      "colima-71": { "nombre": "Colima 71", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png", "habitaciones": 16 },
+      "maison-celeste": { "nombre": "Maison Celeste x Lezard", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png", "habitaciones": 13 },
+      "roso-gh": { "nombre": "Roso Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png", "habitaciones": 10, "scale": 0.7 },
+      "ignacia": { "nombre": "Ignacia Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png", "habitaciones": 9, "scale": 0.7 },
+      "hoteldama": { "nombre": "Hotel Dama", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "habitaciones": 17, "scale": 0.7 }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1441,6 +1555,7 @@ document.getElementById('btnIniciar').addEventListener('click', (e) => {
     document.getElementById('atelier-header').scrollIntoView({ behavior: 'smooth' });
 });
 
+// VARIABLES DE LOGICA
 const checkboxes = document.querySelectorAll('.calc-item');
 const checkinBoxes = document.querySelectorAll('.checkin-exclusive');
 const turndownBoxes = document.querySelectorAll('.turndown-exclusive');
@@ -1453,14 +1568,49 @@ const summaryList = document.getElementById('checkout-summary-list');
 const stickyPill = document.getElementById('stickyPill');
 const priceContainer = document.getElementById('priceContainer');
 const magnoRow = document.getElementById('magno-checkin-row');
+const roomsWarning = document.getElementById('rooms-warning');
+const groupNormal = document.getElementById('total-group-normal');
+const groupWarning = document.getElementById('total-group-warning');
 
 const chkContenido = document.getElementById('chk-contenido-mensual');
 const chkExpDigital = document.getElementById('chk-exp-digital');
 const expDigitalPrice = document.getElementById('exp-digital-price');
 const expDigitalTag = document.getElementById('exp-digital-tag');
 
-roomsInputTop.addEventListener('input', calculateTotal);
+const chkCheckinBase = document.getElementById('chk-checkin-base');
+const chkCheckinFirma = document.getElementById('chk-checkin-firma');
+const chkTurndownFirma = document.getElementById('chk-turndown-firma');
+const chkVajilla = document.getElementById('chk-vajilla');
+const chkPapeleria = document.getElementById('chk-papeleria');
 
+const chkSetCheckin = document.getElementById('chk-set-checkin');
+const chkSetTurndown = document.getElementById('chk-set-turndown');
+const chkSetAmbos = document.getElementById('chk-set-ambos');
+
+let preSetState = null;
+
+// LÓGICA DE HABITACIONES Y VARIABLES DINÁMICAS
+function updateVajillaText() {
+    const rooms = parseInt(roomsInputTop.value) || 0;
+    let multiplier = chkSetAmbos.checked ? 2 : 1;
+    let pieces = Math.ceil(rooms * 2.5) * multiplier;
+    const newDesc = `2.5x número de habitaciones (${pieces} piezas). Reemplazo por roturas.`;
+    
+    document.getElementById('desc-vajilla').textContent = newDesc;
+    chkVajilla.setAttribute('data-desc', newDesc);
+}
+
+roomsInputTop.addEventListener('input', () => {
+    updateVajillaText();
+    calculateTotal();
+});
+
+roomsInputTop.addEventListener('blur', () => {
+    const r = parseInt(roomsInputTop.value) || 0;
+    roomsWarning.style.display = r < 4 ? 'block' : 'none';
+});
+
+// LÓGICA INCLUSIÓN EXPERIENCIA DIGITAL
 chkContenido.addEventListener('change', () => {
     if (chkContenido.checked) {
         chkExpDigital.checked = true;
@@ -1483,6 +1633,64 @@ chkExpDigital.addEventListener('change', () => {
     calculateTotal();
 });
 
+// FUNCIONES AUXILIARES DE ESTADO
+function captureState() {
+    return Array.from(checkboxes).map(chk => chk.checked);
+}
+
+function restoreState(stateArray) {
+    checkboxes.forEach((chk, i) => {
+        chk.checked = stateArray[i];
+    });
+}
+
+function forceCheckAndStyle(chk, newPriceLabel) {
+    chk.checked = true;
+    const rightContainer = chk.closest('.service-right');
+    const priceSpan = rightContainer.querySelector('.service-price');
+    const tagSpan = rightContainer.querySelector('.included-tag');
+
+    if (newPriceLabel) priceSpan.textContent = newPriceLabel;
+    priceSpan.classList.add('included');
+    tagSpan.classList.add('visible');
+}
+
+function resetServiceVisuals(chk, originalPriceLabel) {
+    const rightContainer = chk.closest('.service-right');
+    const priceSpan = rightContainer.querySelector('.service-price');
+    const tagSpan = rightContainer.querySelector('.included-tag');
+
+    priceSpan.textContent = originalPriceLabel;
+    priceSpan.classList.remove('included');
+    tagSpan.classList.remove('visible');
+}
+
+function applySetInclusions() {
+    resetServiceVisuals(chkCheckinBase, "$ 375");
+    resetServiceVisuals(chkCheckinFirma, "$ 590");
+    resetServiceVisuals(chkTurndownFirma, "$ 1,180");
+    resetServiceVisuals(chkVajilla, "$ 200");
+    resetServiceVisuals(chkPapeleria, "$ 45");
+
+    if (chkSetAmbos.checked) {
+        forceCheckAndStyle(chkCheckinFirma);
+        forceCheckAndStyle(chkTurndownFirma);
+        forceCheckAndStyle(chkVajilla, "$ 400");
+        forceCheckAndStyle(chkPapeleria, "$ 90");
+    } else if (chkSetCheckin.checked) {
+        forceCheckAndStyle(chkCheckinBase);
+        forceCheckAndStyle(chkVajilla);
+        forceCheckAndStyle(chkPapeleria);
+    } else if (chkSetTurndown.checked) {
+        forceCheckAndStyle(chkTurndownFirma);
+        forceCheckAndStyle(chkVajilla);
+        forceCheckAndStyle(chkPapeleria);
+    }
+    
+    updateVajillaText(); // Refrescar variable dinámica al cambiar de set
+}
+
+// LÓGICA DE EXCLUSIVOS
 function handleExclusive(group, currentBox) {
     if (currentBox.checked) {
         group.forEach(other => {
@@ -1494,71 +1702,154 @@ function handleExclusive(group, currentBox) {
 
 checkinBoxes.forEach(box => box.addEventListener('change', () => handleExclusive(checkinBoxes, box)));
 turndownBoxes.forEach(box => box.addEventListener('change', () => handleExclusive(turndownBoxes, box)));
-setBoxes.forEach(box => box.addEventListener('change', () => handleExclusive(setBoxes, box)));
 
+// COMPORTAMIENTO DE LOS SETS
+setBoxes.forEach(setBox => {
+    setBox.addEventListener('change', (e) => {
+        if (setBox.checked) {
+            if (!preSetState) {
+                setBox.checked = false;
+                preSetState = captureState();
+                setBox.checked = true;
+            }
+            setBoxes.forEach(other => { if (other !== setBox) other.checked = false; });
+            applySetInclusions();
+        } else {
+            if (preSetState) {
+                restoreState(preSetState);
+                preSetState = null;
+            }
+            applySetInclusions();
+        }
+        calculateTotal();
+    });
+});
+
+// DESMARCAR SERVICIOS DEPENDIENTES ROMPE EL SET
+const setDependentChildren = [chkCheckinBase, chkCheckinFirma, chkTurndownFirma, chkVajilla, chkPapeleria];
+setDependentChildren.forEach(child => {
+    child.addEventListener('click', (e) => {
+        const isChildOfActiveSet = 
+            (chkSetCheckin.checked && [chkCheckinBase, chkVajilla, chkPapeleria].includes(child)) ||
+            (chkSetTurndown.checked && [chkTurndownFirma, chkVajilla, chkPapeleria].includes(child)) ||
+            (chkSetAmbos.checked && [chkCheckinFirma, chkTurndownFirma, chkVajilla, chkPapeleria].includes(child));
+            
+        if (isChildOfActiveSet) {
+            e.preventDefault(); 
+            chkSetCheckin.checked = false;
+            chkSetTurndown.checked = false;
+            chkSetAmbos.checked = false;
+            
+            if (preSetState) {
+                restoreState(preSetState);
+                preSetState = null;
+            }
+            applySetInclusions();
+            calculateTotal();
+        }
+    });
+});
+
+// ASEGURAR QUE INDIVIDUALES DISPAREN CÁLCULO
+checkboxes.forEach(box => {
+    if (box !== chkContenido && box !== chkExpDigital && !box.classList.contains('checkin-exclusive') && !box.classList.contains('turndown-exclusive') && !box.classList.contains('set-exclusive')) {
+        box.addEventListener('change', calculateTotal);
+    }
+});
+
+// CÁLCULO Y CONSTRUCCIÓN DEL RESUMEN VISUAL ANIDADO
 function calculateTotal() {
     let roomsCostSum = 0;
     let fixedCostSum = 0;
     let activeCount = 0;
-    let activeItemIds = [];
+
+    let activeItemsData = new Map();
 
     checkboxes.forEach(box => {
         if (box.checked) {
             activeCount++;
-
             let price = parseInt(box.value);
-            if (box === chkExpDigital && chkContenido.checked) {
-                price = 0;
-            }
+            
+            // Si está dentro de paquete, costo cero
+            if (box === chkExpDigital && chkContenido.checked) price = 0;
+            if (chkSetAmbos.checked && [chkCheckinFirma, chkTurndownFirma, chkVajilla, chkPapeleria].includes(box)) price = 0;
+            if (chkSetCheckin.checked && [chkCheckinBase, chkVajilla, chkPapeleria].includes(box)) price = 0;
+            if (chkSetTurndown.checked && [chkTurndownFirma, chkVajilla, chkPapeleria].includes(box)) price = 0;
 
             if (box.getAttribute('data-type') === 'room') {
                 roomsCostSum += price;
             } else {
                 fixedCostSum += price;
             }
-
-            const name = box.getAttribute('data-name');
-            const itemId = 'summary-item-' + name.replace(/\s+/g, '-');
-            activeItemIds.push(itemId);
-            let li = document.getElementById(itemId);
-
-            if (!li) {
-                const desc = box.getAttribute('data-desc');
-                const format = box.getAttribute('data-format');
-                const priceFormatted = price.toLocaleString('es-MX');
-
-                li = document.createElement('li');
-                li.id = itemId;
-                li.className = 'checkout-summary-item';
-                li.innerHTML = `
-                    <div class="summary-left">
-                        <span class="summary-dot">•</span>
-                        <div class="summary-text-block">
-                            <span class="summary-name">${name} <span class="summary-format-tag">[${format}]</span></span>
-                            <span class="summary-desc">${desc}</span>
-                        </div>
-                    </div>
-                    <div class="summary-price">$ ${priceFormatted}</div>
-                `;
-                summaryList.appendChild(li);
-                void li.offsetWidth;
-            } else {
-                const priceFormatted = price.toLocaleString('es-MX');
-                li.querySelector('.summary-price').textContent = `$ ${priceFormatted}`;
-            }
-
-            li.classList.add('show');
+            activeItemsData.set(box, price);
         }
     });
 
-    Array.from(summaryList.children).forEach(li => {
-        if (!activeItemIds.includes(li.id)) {
-            li.classList.remove('show');
-        }
-    });
-
+    summaryList.innerHTML = ''; 
+    
     if (activeCount > 0) {
         summaryList.classList.add('has-items');
+        
+        function renderBox(box, isNested) {
+            if (!activeItemsData.has(box)) return;
+            const price = activeItemsData.get(box);
+            const name = box.getAttribute('data-name');
+            const desc = box.getAttribute('data-desc');
+            const format = box.getAttribute('data-format');
+            
+            let liClass = 'checkout-summary-item show';
+            let dotHTML = '<span class="summary-dot">•</span>';
+            let tagHTML = `<span class="summary-format-tag">[${format}]</span>`;
+            let priceHTML = `<div class="summary-price">$ ${price.toLocaleString('es-MX')}</div>`;
+
+            if (isNested) {
+                liClass += ' nested-item';
+                dotHTML = ''; 
+                tagHTML = ''; 
+                priceHTML = ''; 
+            } else if (price === 0) {
+                priceHTML = `<div class="summary-price">Incluido</div>`;
+            }
+
+            const li = document.createElement('li');
+            li.className = liClass;
+            li.innerHTML = `
+                <div class="summary-left">
+                    ${dotHTML}
+                    <div class="summary-text-block">
+                        <span class="summary-name">${name} ${tagHTML}</span>
+                        <span class="summary-desc">${desc}</span>
+                    </div>
+                </div>
+                ${priceHTML}
+            `;
+            summaryList.appendChild(li);
+            activeItemsData.delete(box); 
+        }
+
+        if (chkSetAmbos.checked) {
+            renderBox(chkSetAmbos, false);
+            [chkCheckinFirma, chkTurndownFirma, chkVajilla, chkPapeleria].forEach(b => renderBox(b, true));
+        } else {
+            if (chkSetCheckin.checked) {
+                renderBox(chkSetCheckin, false);
+                [chkCheckinBase, chkVajilla, chkPapeleria].forEach(b => renderBox(b, true));
+            }
+            if (chkSetTurndown.checked) {
+                renderBox(chkSetTurndown, false);
+                [chkTurndownFirma, chkVajilla, chkPapeleria].forEach(b => renderBox(b, true));
+            }
+        }
+
+        if (chkContenido.checked) {
+            renderBox(chkContenido, false);
+            renderBox(chkExpDigital, true);
+        }
+
+        Array.from(activeItemsData.keys()).forEach(box => {
+            renderBox(box, false);
+        });
+
     } else {
         summaryList.classList.remove('has-items');
     }
@@ -1566,19 +1857,17 @@ function calculateTotal() {
     const rooms = parseInt(roomsInputTop.value) || 0;
     const grandTotal = (roomsCostSum * rooms) + fixedCostSum;
     totalAmountSpan.textContent = grandTotal.toLocaleString('es-MX');
+    
+    if (rooms < 4) {
+        groupNormal.style.display = 'none';
+        groupWarning.style.display = 'block';
+    } else {
+        groupNormal.style.display = 'flex';
+        groupWarning.style.display = 'none';
+    }
 
     evaluateStates(activeCount);
 }
-
-checkboxes.forEach(box => {
-    if (!box.classList.contains('checkin-exclusive') &&
-        !box.classList.contains('turndown-exclusive') &&
-        !box.classList.contains('set-exclusive') &&
-        box !== chkContenido &&
-        box !== chkExpDigital) {
-        box.addEventListener('change', calculateTotal);
-    }
-});
 
 function evaluateStates(activeCount) {
     const magnoRect = magnoRow.getBoundingClientRect();
@@ -1657,15 +1946,38 @@ btnToggleCheckout.addEventListener('click', () => {
     }
 });
 
+// LÓGICA DE TRANSICIÓN POST ENVÍO Y VOLVER
+document.getElementById('btn-volver').addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    document.getElementById('success-overlay').classList.remove('active');
+    document.getElementById('main-container').classList.remove('crossfade-out');
+    document.body.style.overflow = '';
+
+    document.getElementById('actionWrapper').style.display = 'none';
+    document.getElementById('expandable-checkout-form').style.display = 'none';
+    
+    // Mostramos el CTA Flotante
+    document.getElementById('post-submit-action').style.display = 'flex';
+    document.getElementById('stickyPill').classList.add('frozen');
+});
+
+// ENVÍO DE FORMULARIO
 document.getElementById('send-btn').addEventListener('click', (e) => {
-    e.preventDefault(); // Detiene cualquier recarga de la página
+    e.preventDefault(); 
 
     const nameInput = document.getElementById('client-name');
     const emailInput = document.getElementById('client-email');
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
-    const rooms = roomsInputTop.value;
+    const rooms = parseInt(roomsInputTop.value) || 0;
     const total = totalAmountSpan.textContent;
+
+    if (rooms < 4) {
+        alert('Ofrecemos nuestros servicios para un mínimo de 4 habitaciones. Por favor modifique su selección antes de enviar.');
+        roomsInputTop.focus();
+        return;
+    }
 
     if (!name) {
         alert('Por favor, ingresa tu nombre y apellido.');
@@ -1683,11 +1995,19 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
     let selectedServices = [];
     checkboxes.forEach(box => {
         if (box.checked) {
-            selectedServices.push({
-                nombre: box.getAttribute('data-name'),
-                descripcion: box.getAttribute('data-desc'),
-                precioBase: parseInt(box.value)
-            });
+            let isDependent = false;
+            if (chkSetAmbos.checked && [chkCheckinFirma, chkTurndownFirma, chkVajilla, chkPapeleria].includes(box)) isDependent = true;
+            else if (chkSetCheckin.checked && [chkCheckinBase, chkVajilla, chkPapeleria].includes(box)) isDependent = true;
+            else if (chkSetTurndown.checked && [chkTurndownFirma, chkVajilla, chkPapeleria].includes(box)) isDependent = true;
+            else if (chkContenido.checked && box === chkExpDigital) isDependent = true;
+
+            if (!isDependent) {
+                selectedServices.push({
+                    nombre: box.getAttribute('data-name'),
+                    descripcion: box.getAttribute('data-desc'),
+                    precioBase: parseInt(box.value)
+                });
+            }
         }
     });
 
@@ -1701,23 +2021,32 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
         emailContacto: email,
         slug: currentSlug || "general",
         hotelName: currentHotelName || "Hotel sin especificar",
-        habitaciones: parseInt(rooms),
+        habitaciones: rooms,
         totalMensual: total,
         servicios: selectedServices
     };
 
-    console.log("Payload enviado a Make:", payload);
+    document.body.style.overflow = 'hidden'; 
+    document.getElementById('main-container').classList.add('crossfade-out');
+    document.getElementById('success-overlay').classList.add('active');
 
     fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).then(res => {
-        alert('Cotización enviada con éxito. Nos pondremos en contacto a la brevedad.');
+        const calBaseUrl = "https://cal.com/feraz-studio/feraz-tasting";
+        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&hotel=${encodeURIComponent(currentHotelName || "Hotel sin especificar")}`;
+
+        document.getElementById('btn-agendar-cal-overlay').href = calUrl;
+        document.getElementById('btn-post-submit-cal').href = calUrl;
     }).catch(err => {
-        alert('Hubo un error al enviar la cotización. Por favor, intenta de nuevo.');
+        console.error('Error en webhook:', err);
     });
 });
+
+// Inicializamos el texto base
+updateVajillaText();
 </script>
 </body>
 </html>
