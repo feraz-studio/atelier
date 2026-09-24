@@ -1479,38 +1479,39 @@
 <script>
 let currentSlug = "";
 let currentHotelName = "";
+let currentHotelAddress = "";
 
 const baseDeDatosHoteles = {
-      "casa-polanco": { "nombre": "Casa Polanco", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png", "habitaciones": 19 },
-      "octavia-casa": { "nombre": "Octavia Casa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png", "habitaciones": 8 },
-      "the-alest": { "nombre": "The Alest", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png", "habitaciones": 19 },
-      "uma-casa": { "nombre": "Uma Casa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png", "habitaciones": 9 },
-      "wild-oscar": { "nombre": "The Wild Oscar", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png", "habitaciones": 9 },
-      "orchid-house": { "nombre": "Orchid House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png", "habitaciones": 13, "scale": 0.7 },
-      "kimpton-virgilio": { "nombre": "Kimpton Virgilio", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "habitaciones": 48 },
-      "kimpton-castelar": { "nombre": "Kimpton El Castelar", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "habitaciones": 34, "scale": 0.6 },
-      "casa-levora": { "nombre": "Casa Lévora", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png", "habitaciones": 9 },
-      "casa-cuenca": { "nombre": "Casa Cuenca", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png", "habitaciones": 10 },
-      "el-alfonsa": { "nombre": "El Alfonsa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png", "habitaciones": 13, "scale": 0.7 },
-      "casa-luciana": { "nombre": "Casa Luciana", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png", "habitaciones": 8 },
-      "the-amsterdam": { "nombre": "The Amsterdam", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png", "habitaciones": 14 },
-      "casa-mali": { "nombre": "Casa Malí", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png", "habitaciones": 20 },
-      "lulu-condesa": { "nombre": "Lulú Condesa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png", "habitaciones": 16, "scale": 0.7 },
-      "maison-du-comte": { "nombre": "Maison du Comte", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png", "habitaciones": 6 },
-      "el-cortes": { "nombre": "El Cortés", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png", "habitaciones": 15 },
-      "casa-talavera": { "nombre": "Casa Talavera", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png", "habitaciones": 13 },
-      "nima": { "nombre": "Nima Local House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png", "habitaciones": 4, "scale": 0.7 },
-      "brick": { "nombre": "Brick", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png", "habitaciones": 17 },
-      "casa-margarita": { "nombre": "Casa Margarita", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png", "habitaciones": 4 },
-      "onto": { "nombre": "ONTO", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png", "habitaciones": 110 },
-      "casa-tenue": { "nombre": "Casa Tenue", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Tenue.png", "habitaciones": 8 },
-      "colima-71": { "nombre": "Colima 71", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png", "habitaciones": 16 },
-      "maison-celeste": { "nombre": "Maison Celeste x Lezard", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png", "habitaciones": 13 },
-      "roso-gh": { "nombre": "Roso Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png", "habitaciones": 10, "scale": 0.7 },
-      "ignacia": { "nombre": "Ignacia Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png", "habitaciones": 9, "scale": 0.7 },
-      "hoteldama": { "nombre": "Hotel Dama", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "habitaciones": 17, "scale": 0.7 }
+      "casa-polanco": { "nombre": "Casa Polanco", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png", "habitaciones": 19, "direccion": "Luis G. Urbina 84, Polanco, CDMX" },
+      "octavia-casa": { "nombre": "Octavia Casa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png", "habitaciones": 8, "direccion": "Amatlán 126, Condesa, CDMX" },
+      "the-alest": { "nombre": "The Alest", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png", "habitaciones": 19, "direccion": "Eugenio Sue 45, Polanco, CDMX" },
+      "uma-casa": { "nombre": "Uma Casa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png", "habitaciones": 9, "direccion": "Prado Norte 420, Lomas de Chapultepec, CDMX" },
+      "wild-oscar": { "nombre": "The Wild Oscar", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png", "habitaciones": 9, "direccion": "Lamartine 325, Polanco, CDMX" },
+      "orchid-house": { "nombre": "Orchid House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png", "habitaciones": 13, "scale": 0.7, "direccion": "Campos Elíseos 259, Polanco, CDMX" },
+      "kimpton-virgilio": { "nombre": "Kimpton Virgilio", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "habitaciones": 48, "direccion": "Polanquito, CDMX" },
+      "kimpton-castelar": { "nombre": "Kimpton El Castelar", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "habitaciones": 34, "scale": 0.6, "direccion": "Emilio Castelar, Polanco, CDMX" },
+      "casa-levora": { "nombre": "Casa Lévora", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png", "habitaciones": 9, "direccion": "Roma Norte, CDMX" },
+      "casa-cuenca": { "nombre": "Casa Cuenca", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png", "habitaciones": 10, "direccion": "Cuauhtémoc, CDMX" },
+      "el-alfonsa": { "nombre": "El Alfonsa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png", "habitaciones": 13, "scale": 0.7, "direccion": "Condesa, CDMX" },
+      "casa-luciana": { "nombre": "Casa Luciana", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png", "habitaciones": 8, "direccion": "Condesa, CDMX" },
+      "the-amsterdam": { "nombre": "The Amsterdam", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png", "habitaciones": 14, "direccion": "Amsterdam, Condesa, CDMX" },
+      "casa-mali": { "nombre": "Casa Malí", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png", "habitaciones": 20, "direccion": "México 107, Condesa, CDMX" },
+      "lulu-condesa": { "nombre": "Lulú Condesa", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png", "habitaciones": 16, "scale": 0.7, "direccion": "Condesa, CDMX" },
+      "maison-du-comte": { "nombre": "Maison du Comte", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png", "habitaciones": 6, "direccion": "Roma Norte, CDMX" },
+      "el-cortes": { "nombre": "El Cortés", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png", "habitaciones": 15, "direccion": "Centro Histórico, CDMX" },
+      "casa-talavera": { "nombre": "Casa Talavera", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png", "habitaciones": 13, "direccion": "Roma Sur, CDMX" },
+      "nima": { "nombre": "Nima Local House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png", "habitaciones": 4, "scale": 0.7, "direccion": "Colima 236, Roma Norte, CDMX" },
+      "brick": { "nombre": "Brick", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png", "habitaciones": 17, "direccion": "Orizaba 95, Roma Norte, CDMX" },
+      "casa-margarita": { "nombre": "Casa Margarita", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png", "habitaciones": 4, "direccion": "Roma Norte, CDMX" },
+      "onto": { "nombre": "ONTO", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png", "habitaciones": 110, "direccion": "CDMX" },
+      "casa-tenue": { "nombre": "Casa Tenue", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Tenue.png", "habitaciones": 8, "direccion": "Condesa, CDMX" },
+      "colima-71": { "nombre": "Colima 71", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png", "habitaciones": 16, "direccion": "Colima 71, Roma Norte, CDMX" },
+      "maison-celeste": { "nombre": "Maison Celeste x Lezard", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png", "habitaciones": 13, "direccion": "Roma Norte, CDMX" },
+      "roso-gh": { "nombre": "Roso Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png", "habitaciones": 10, "scale": 0.7, "direccion": "Roma Norte, CDMX" },
+      "ignacia": { "nombre": "Ignacia Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png", "habitaciones": 9, "scale": 0.7, "direccion": "Jalapa 208, Roma Norte, CDMX" },
+      "hoteldama": { "nombre": "Hotel Dama", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "habitaciones": 17, "scale": 0.7, "direccion": "Juárez, CDMX" }
 };
-
+    
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     let slug = urlParams.get("hotel") || urlParams.get("slug");
@@ -1526,6 +1527,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const datosHotel = baseDeDatosHoteles[slug];
         currentSlug = slug;
         currentHotelName = datosHotel.nombre;
+        currentHotelAddress = datosHotel.direccion || "";
 
         const logoHeader = document.getElementById("ui-logo-header");
         if (logoHeader) {
@@ -2030,13 +2032,17 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
     document.getElementById('main-container').classList.add('crossfade-out');
     document.getElementById('success-overlay').classList.add('active');
 
-    fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
+fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).then(res => {
         const calBaseUrl = "https://cal.com/feraz-studio/feraz-tasting";
-        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&hotel=${encodeURIComponent(currentHotelName || "Hotel sin especificar")}`;
+        const hotelNameParam = encodeURIComponent(currentHotelName || "Hotel sin especificar");
+        const addressParam = encodeURIComponent(currentHotelAddress);
+        const emailParam = encodeURIComponent(email);
+        
+        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${hotelNameParam}&email=${emailParam}&location=${addressParam}`;
 
         document.getElementById('btn-agendar-cal-overlay').href = calUrl;
         document.getElementById('btn-post-submit-cal').href = calUrl;
