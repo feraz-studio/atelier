@@ -943,7 +943,7 @@
         align-items: center;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 3s ease;
+        transition: opacity 1.5s ease;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch; 
         padding: 24px;
@@ -962,12 +962,6 @@
         width: 100%;
         margin-top: auto;
         margin-bottom: auto;
-        transition: margin-top 1.5s cubic-bezier(0.25, 1, 0.3, 1);
-    }
-
-    .success-overlay.booking-active .overlay-content-wrapper {
-        margin-top: 30px; 
-        margin-bottom: 0;
     }
 
     .feraz-logo-overlay {
@@ -998,46 +992,12 @@
         margin-bottom: 0;
     }
 
-    .success-overlay.booking-active .feraz-logo-overlay,
-    .success-overlay.booking-active .success-text {
-        opacity: 0;
-        max-height: 0;
-        margin-bottom: 0;
-        pointer-events: none;
-    }
-
     .hotel-logo-overlay {
         height: 0;
         opacity: 0;
         margin: 0;
         object-fit: contain;
         filter: brightness(0) invert(1);
-        transition: opacity 2s ease 1s, height 1s cubic-bezier(0.25, 1, 0.3, 1) 0.5s, margin 1s ease 0.5s;
-    }
-
-    .success-overlay.booking-active .hotel-logo-overlay {
-        height: 24px; 
-        opacity: 1;
-        margin: 35px 0 10px 0;
-    }
-
-    /* EMBED CAL.COM INLINE CONTAINER */
-    #cal-booking-place {
-        width: 100%;
-        height: 0;
-        opacity: 0;
-        pointer-events: none;
-        overflow: visible; 
-        transition: opacity 1.5s ease 2s; 
-    }
-
-    .success-overlay.booking-active #cal-booking-place {
-        height: auto;
-        min-height: 600px; 
-        opacity: 1;
-        pointer-events: auto;
-        margin-top: 10px;
-        margin-bottom: 40px;
     }
 
     /* MENSAJE DE ÉXITO PROPIO FERAZ */
@@ -1048,7 +1008,6 @@
         width: 100%;
         opacity: 0;
         transition: opacity 0.8s ease;
-        margin-top: 20px;
     }
 
     /* BOTONES METÁLICOS Y ESTADO VERDE DINÁMICO */
@@ -1157,7 +1116,7 @@
 
 <body>
 
-<!-- OVERLAY DINÁMICO DE CONFIRMACIÓN Y CAL.COM -->
+<!-- OVERLAY DINÁMICO DE CONFIRMACIÓN -->
 <div class="success-overlay" id="success-overlay">
     
     <div class="overlay-content-wrapper" id="overlay-wrapper">
@@ -1172,14 +1131,6 @@
             <span>Reservar Tasting</span>
         </a>
 
-        <!-- Logo Blanco del Hotel -->
-        <img id="overlay-hotel-logo" src="" alt="Hotel" class="hotel-logo-overlay">
-
-        <!-- Contenedor del Calendario Inline (Con su ID exacto para el SDK) -->
-        <div id="cal-booking-place">
-            <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-feraz-tasting"></div>
-        </div>
-
         <!-- PANTALLA DE ÉXITO EXCLUSIVA FERAZ -->
         <div id="feraz-success-message">
             <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay" style="margin-bottom: 24px; max-height: 100px; opacity: 1; pointer-events: auto;">
@@ -1190,7 +1141,6 @@
                 <p style="color: #c5a059; margin-top: 12px;">Nos emociona profundamente crear este espacio para ustedes.</p>
             </div>
         </div>
-
     </div>
 
     <!-- Botón Volver -->
@@ -1582,13 +1532,13 @@
 </footer>
 </div>
 
-<!-- SCRIPT CAL.COM SDK (EMBED) CON LISTENER NATIVO DE ÉXITO -->
+<!-- SCRIPT CAL.COM SDK (MODAL) Y LÓGICA GENERAL -->
 <script type="text/javascript">
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  
   Cal("init", "feraz-tasting", {origin:"https://app.cal.com"});
   Cal.config = Cal.config || {};
   Cal.config.forwardQueryParams = true;
+  Cal.ns["feraz-tasting"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
 </script>
 
 <script>
@@ -1656,13 +1606,6 @@ document.addEventListener("DOMContentLoaded", function () {
             logoCheckout.alt = datosHotel.nombre;
             const factorEscala = datosHotel.scale || 1;
             logoCheckout.style.transform = `scale(${factorEscala})`;
-        }
-        
-        const overlayHotelLogo = document.getElementById("overlay-hotel-logo");
-        if (overlayHotelLogo) {
-            overlayHotelLogo.src = datosHotel.logo;
-            const factorEscala = datosHotel.scale || 1;
-            overlayHotelLogo.style.transform = `scale(${factorEscala * 0.8})`; 
         }
 
         const successHotelLogo = document.getElementById("success-hotel-logo");
@@ -2062,7 +2005,6 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
     
     const overlay = document.getElementById('success-overlay');
     overlay.classList.remove('active');
-    overlay.classList.remove('booking-active');
     
     document.getElementById('main-container').classList.remove('crossfade-out');
     document.body.style.overflow = '';
@@ -2145,78 +2087,64 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
     });
 });
 
-// INICIALIZACIÓN DEL EMBED DE CAL.COM Y ESCUCHA NATIVA DE ÉXITO VIA SDK
+// DISPARADOR DE MODAL CAL.COM DIRECTO DESDE JAVASCRIPT
 function triggerCalComBooking() {
-    
     if (document.getElementById('btn-post-submit-cal').classList.contains('success-state')) {
-        document.getElementById('cal-booking-place').style.display = 'none';
-        document.getElementById('overlay-hotel-logo').style.display = 'none';
         document.getElementById('feraz-success-message').style.display = 'flex';
         document.getElementById('feraz-success-message').style.opacity = '1';
-        
         document.getElementById('initial-feraz-logo').style.display = 'none';
         document.getElementById('success-text-content').style.display = 'none';
         return;
     }
 
-    const overlay = document.getElementById('success-overlay');
-    overlay.classList.add('booking-active');
-    
-    setTimeout(() => {
-        const calContainer = document.getElementById('my-cal-inline-feraz-tasting');
-        if (calContainer.innerHTML.trim() === "") {
-            
-            const clientName = document.getElementById('client-name').value.trim();
-            const clientEmail = document.getElementById('client-email').value.trim();
+    const clientName = document.getElementById('client-name').value.trim();
+    const clientEmail = document.getElementById('client-email').value.trim();
 
-            // Inicializamos exactamente con tu bloque embed
-            Cal.ns["feraz-tasting"]("inline", {
-                elementOrSelector: "#my-cal-inline-feraz-tasting",
-                config: {"layout": "month_view", "useSlotsViewOnSmallScreen": "true", name: clientName, email: clientEmail, hotel: currentHotelName},
-                calLink: "feraz-studio/feraz-tasting",
-            });
+    // Lanzamos el modal de Cal.com inyectando el nombre, email y hotel
+    Cal.ns["feraz-tasting"]("modal", {
+        calLink: "feraz-studio/feraz-tasting",
+        config: {
+            name: clientName,
+            email: clientEmail,
+            hotel: currentHotelName,
+            layout: "month_view",
+            useSlotsViewOnSmallScreen: "true"
+        }
+    });
 
-            Cal.ns["feraz-tasting"]("ui", {"hideEventTypeDetails": false, "layout": "month_view"});
-            
-            // Interceptamos el éxito mediante el puente seguro del SDK de Cal.com
-            Cal.ns["feraz-tasting"]("on", {
-                action: "bookingSuccessful",
-                callback: (e) => {
-                    console.log("¡Tasting reservado con éxito!", e.detail);
-                    
-                    // Desaparecemos de inmediato el contenedor del embed para evitar la pantalla blanca
-                    const calWrapper = document.getElementById('cal-booking-place');
-                    if (calWrapper) {
-                        calWrapper.style.display = 'none';
-                    }
-                    
-                    document.getElementById('overlay-hotel-logo').style.display = 'none';
-                    
-                    // Mostramos nuestra tarjeta propia de Feraz
-                    const successMsg = document.getElementById('feraz-success-message');
-                    successMsg.style.display = 'flex';
+    // Interceptamos el éxito desde la ventana flotante
+    Cal.ns["feraz-tasting"]("on", {
+        action: "bookingSuccessful",
+        callback: (e) => {
+            console.log("¡Tasting reservado con éxito!", e.detail);
+
+            // Ocultamos la UI inicial del overlay oscuro
+            document.getElementById('initial-feraz-logo').style.display = 'none';
+            document.getElementById('success-text-content').style.display = 'none';
+
+            // Mostramos la tarjeta exclusiva de éxito Feraz
+            const successMsg = document.getElementById('feraz-success-message');
+            successMsg.style.display = 'flex';
+            setTimeout(() => {
+                successMsg.style.opacity = '1';
+            }, 50);
+
+            // Crossfade y transición a verde metálico en los botones
+            const buttons = [document.getElementById('btn-agendar-cal-overlay'), document.getElementById('btn-post-submit-cal')];
+            buttons.forEach(btn => {
+                if (!btn) return;
+                btn.classList.add('success-state');
+                const span = btn.querySelector('span');
+                if (span) {
+                    span.style.opacity = '0';
                     setTimeout(() => {
-                        successMsg.style.opacity = '1';
-                    }, 50);
-
-                    // Crossfade y cambio de color a verde en los botones
-                    const buttons = [document.getElementById('btn-agendar-cal-overlay'), document.getElementById('btn-post-submit-cal')];
-                    buttons.forEach(btn => {
-                        if (!btn) return;
-                        btn.classList.add('success-state');
-                        const span = btn.querySelector('span');
-                        if (span) {
-                            span.style.opacity = '0';
-                            setTimeout(() => {
-                                span.textContent = 'Tasting Reservado';
-                                span.style.opacity = '1';
-                            }, 400);
-                        }
-                    });
+                        span.textContent = 'Tasting Reservado';
+                        span.style.opacity = '1';
+                    }, 400);
                 }
             });
         }
-    }, 400); 
+    });
 }
 
 document.getElementById('btn-agendar-cal-overlay').addEventListener('click', (e) => {
