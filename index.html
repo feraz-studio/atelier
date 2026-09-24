@@ -930,23 +930,23 @@
         opacity: 0.7;
     }
 
-    /* OVERLAY Y FÍSICAS DE ANIMACIÓN */
+    /* OVERLAY Y FÍSICAS DE ANIMACIÓN (Offset vertical fuerte y proporciones correctas) */
     .success-overlay {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background-image: linear-gradient(rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.88)), url('https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true');
+        background-image: linear-gradient(rgba(15, 15, 15, 0.90), rgba(15, 15, 15, 0.90)), url('https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true');
         background-size: cover;
-        background-position: center top;
+        background-position: center center;
         z-index: 99999;
         display: flex;
         flex-direction: column;
         align-items: center;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 1.5s ease;
+        transition: opacity 2s ease;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch; 
-        padding: 24px;
+        padding: 60px 24px; /* Offset fuerte arriba y abajo */
     }
 
     .success-overlay.active {
@@ -960,57 +960,55 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-top: auto;
-        margin-bottom: auto;
+        max-width: 330px;
+        margin: auto; /* Consolidado al centro exacto */
     }
 
     .feraz-logo-overlay {
         width: 67px;
-        margin-bottom: 40px;
-        transition: opacity 0.8s ease, max-height 0.8s ease, margin 0.8s ease;
-        max-height: 100px;
+        margin-bottom: 35px;
     }
 
     .success-text {
         font-family: 'HK Grotesk', sans-serif;
         color: #FAF9F6;
         font-weight: 400;
-        font-size: 11px;
+        font-size: 10.5px;
         line-height: 1.6;
         text-align: center;
-        max-width: 320px;
-        margin-bottom: 40px;
-        transition: opacity 0.8s ease, max-height 0.8s ease, margin 0.8s ease;
-        max-height: 200px;
-        overflow: hidden;
+        width: 100%;
+        margin-bottom: 35px;
     }
     
     .success-text p {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
     .success-text p:last-child {
         margin-bottom: 0;
     }
 
-    .hotel-logo-overlay {
-        height: 0;
-        opacity: 0;
-        margin: 0;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
+    .success-text a {
+        color: #FAF9F6;
+        text-decoration: underline;
     }
 
-    /* MENSAJE DE ÉXITO PROPIO FERAZ */
+    /* ANIMACIÓN BLUR-IN LENTO DE 1.8s PARA LA PÁGINA DE ÉXITO */
     #feraz-success-message {
         display: none;
         flex-direction: column;
         align-items: center;
         width: 100%;
         opacity: 0;
-        transition: opacity 0.8s ease;
+        filter: blur(10px);
+        transition: opacity 1.8s ease, filter 1.8s ease;
     }
 
-    /* BOTONES METÁLICOS Y ESTADO VERDE DINÁMICO */
+    #feraz-success-message.visible {
+        opacity: 1;
+        filter: blur(0px);
+    }
+
+    /* BOTONES METÁLICOS Y GLOW ESMERALDA */
     .btn-metallic {
         position: relative;
         width: 200px;
@@ -1026,7 +1024,7 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         margin: 0 auto;
         flex-shrink: 0;
-        transition: pointer-events 0.1s;
+        transition: pointer-events 0.1s, box-shadow 0.5s ease;
     }
 
     .btn-metallic::before {
@@ -1044,6 +1042,11 @@
             #ffffff 100%
         );
         animation: etheralMetal 6s ease-in-out infinite alternate;
+    }
+
+    /* ESTADO VERDE CON GLOW ESMERALDA */
+    .btn-metallic.success-state {
+        box-shadow: 0 0 25px rgba(45, 130, 70, 0.5), 0 10px 30px rgba(0,0,0,0.6);
     }
 
     .btn-metallic.success-state::before {
@@ -1092,8 +1095,7 @@
     }
 
     .btn-volver {
-        margin-top: auto; 
-        margin-bottom: 20px;
+        margin-top: 40px; 
         font-family: 'HK Grotesk', sans-serif;
         font-size: 12px;
         font-weight: 600;
@@ -1131,14 +1133,14 @@
             <span>Reservar Tasting</span>
         </a>
 
-        <!-- PANTALLA DE ÉXITO EXCLUSIVA FERAZ -->
+        <!-- PANTALLA DE ÉXITO EXCLUSIVA FERAZ (Blur-in 1.8s) -->
         <div id="feraz-success-message">
-            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay" style="margin-bottom: 24px; max-height: 100px; opacity: 1; pointer-events: auto;">
-            <img id="success-hotel-logo" src="" alt="Hotel" class="hotel-logo-overlay" style="height: 32px; opacity: 1; margin: 0 0 20px 0; transform: none; transition: none;">
-            <div class="success-text" style="opacity: 1; max-height: none; margin-bottom: 30px; pointer-events: auto;">
-                <p style="font-family: 'Zilla Slab', serif; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; margin-bottom: 12px;">Tasting Programado</p>
-                <p>Hemos agendado con éxito su experiencia sensorial. Los detalles y la invitación de calendario han sido enviados a su correo electrónico.</p>
-                <p style="color: #c5a059; margin-top: 12px;">Nos emociona profundamente crear este espacio para ustedes.</p>
+            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay">
+            <div class="success-text">
+                <p style="font-family: 'HK Grotesk', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; margin-bottom: 16px;">NOS VEMOS PRONTO</p>
+                <p>Hemos agendado su experiencia exitosamente.</p>
+                <p>Los detalles y la invitación han sido enviados a su correo electrónico.</p>
+                <p>Si tiene alguna duda o comentario antes de nuestro tasting, no dude en contactarnos en <br><a href="mailto:collabs@feraz.studio">collabs@feraz.studio</a><br>o al <br><a href="https://wa.me/525549400957" target="_blank">5549400957</a></p>
             </div>
         </div>
     </div>
@@ -1606,13 +1608,6 @@ document.addEventListener("DOMContentLoaded", function () {
             logoCheckout.alt = datosHotel.nombre;
             const factorEscala = datosHotel.scale || 1;
             logoCheckout.style.transform = `scale(${factorEscala})`;
-        }
-
-        const successHotelLogo = document.getElementById("success-hotel-logo");
-        if (successHotelLogo) {
-            successHotelLogo.src = datosHotel.logo;
-            const factorEscala = datosHotel.scale || 1;
-            successHotelLogo.style.transform = `scale(${factorEscala * 0.8})`; 
         }
 
         const roomsInput = document.getElementById("rooms-count-top");
@@ -2090,17 +2085,21 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
 // DISPARADOR DE MODAL CAL.COM DIRECTO DESDE JAVASCRIPT
 function triggerCalComBooking() {
     if (document.getElementById('btn-post-submit-cal').classList.contains('success-state')) {
-        document.getElementById('feraz-success-message').style.display = 'flex';
-        document.getElementById('feraz-success-message').style.opacity = '1';
         document.getElementById('initial-feraz-logo').style.display = 'none';
         document.getElementById('success-text-content').style.display = 'none';
+        
+        const successMsg = document.getElementById('feraz-success-message');
+        successMsg.style.display = 'flex';
+        setTimeout(() => {
+            successMsg.classList.add('visible');
+        }, 50);
         return;
     }
 
     const clientName = document.getElementById('client-name').value.trim();
     const clientEmail = document.getElementById('client-email').value.trim();
 
-    // Lanzamos el modal de Cal.com inyectando el nombre, email y hotel
+    // Lanzamos el modal de Cal.com inyectando nombre, email y hotel
     Cal.ns["feraz-tasting"]("modal", {
         calLink: "feraz-studio/feraz-tasting",
         config: {
@@ -2118,18 +2117,19 @@ function triggerCalComBooking() {
         callback: (e) => {
             console.log("¡Tasting reservado con éxito!", e.detail);
 
-            // Ocultamos la UI inicial del overlay oscuro
+            // Ocultamos la UI inicial del overlay
             document.getElementById('initial-feraz-logo').style.display = 'none';
             document.getElementById('success-text-content').style.display = 'none';
+            document.getElementById('btn-agendar-cal-overlay').style.display = 'none';
 
-            // Mostramos la tarjeta exclusiva de éxito Feraz
+            // Mostramos la tarjeta exclusiva de éxito Feraz con blur-in lento de 1.8s
             const successMsg = document.getElementById('feraz-success-message');
             successMsg.style.display = 'flex';
             setTimeout(() => {
-                successMsg.style.opacity = '1';
+                successMsg.classList.add('visible');
             }, 50);
 
-            // Crossfade y transición a verde metálico en los botones
+            // Transición a verde metálico con glow esmeralda en los botones
             const buttons = [document.getElementById('btn-agendar-cal-overlay'), document.getElementById('btn-post-submit-cal')];
             buttons.forEach(btn => {
                 if (!btn) return;
