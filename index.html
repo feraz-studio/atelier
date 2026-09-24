@@ -2041,8 +2041,10 @@ fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         const hotelNameParam = encodeURIComponent(currentHotelName || "Hotel sin especificar");
         const addressParam = encodeURIComponent(currentHotelAddress);
         const emailParam = encodeURIComponent(email);
+        const clientNameParam = encodeURIComponent(name);
         
-        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${hotelNameParam}&email=${emailParam}&location=${addressParam}`;
+        // Estructura completa pre-llenada para Cal.com Overlay:
+        const calUrl = `${calBaseUrl}?overlayCalendar=true&name=${clientNameParam}&email=${emailParam}&location=${addressParam}&notes=${hotelNameParam}`;
 
         document.getElementById('btn-agendar-cal-overlay').href = calUrl;
         document.getElementById('btn-post-submit-cal').href = calUrl;
