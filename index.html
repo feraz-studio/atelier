@@ -2121,7 +2121,6 @@ function triggerCalComBooking() {
     const overlay = document.getElementById('success-overlay');
     overlay.classList.add('booking-active');
     
-    // El delay natural permite que el botón se deslice antes de cargar el widget
     setTimeout(() => {
         const calContainer = document.getElementById('cal-booking-place');
         if (calContainer.innerHTML.trim() === "") {
@@ -2136,20 +2135,41 @@ function triggerCalComBooking() {
                 calLink: "feraz-studio/feraz-tasting",
                 layout: "month_view",
                 config: {
-                    name: clientName,
+                    name: currentHotelName, // Dejamos el nombre del cliente para que Google Calendar lo lea bien
                     email: clientEmail,
                     notes: notesContent,
-                    // Si tienes el Custom Input llamado 'hotel', se pasará aquí
-                    hotel: currentHotelName
+                    hotel: currentHotelName // Aquí se pasa el hotel al custom input
                 }
             });
 
             Cal.ns["feraz-tasting"]("ui", {"hideEventTypeDetails": false, "layout": "month_view"});
             
+            // Interceptar el éxito de la reserva para mostrar pantalla propia de Feraz
             Cal("on", {
                 action: "bookingSuccessful",
                 callback: (e) => {
                     console.log("¡Tasting reservado con éxito!", e.detail);
+                    
+                    const calPlace = document.getElementById('cal-booking-place');
+                    calPlace.style.transition = 'opacity 0.8s ease';
+                    calPlace.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        calPlace.innerHTML = ''; 
+                        
+                        const wrapper = document.getElementById('overlay-wrapper');
+                        wrapper.innerHTML = `
+                            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay" style="margin-bottom: 24px;">
+                            
+                            <img src="${document.getElementById('overlay-hotel-logo').src}" alt="Hotel" class="hotel-logo-overlay" style="height: 32px; opacity: 1; margin: 0 0 20px 0; transform: none;">
+                            
+                            <div class="success-text" style="opacity: 1; max-height: none; margin-bottom: 30px;">
+                                <p style="font-family: 'Zilla Slab', serif; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; margin-bottom: 12px;">Tasting Programado</p>
+                                <p>Hemos agendado con éxito su experiencia sensorial. Los detalles y la invitación de calendario han sido enviados a su correo electrónico.</p>
+                                <p style="color: #c5a059; margin-top: 12px;">Nos emociona profundamente crear este espacio para ustedes.</p>
+                            </div>
+                        `;
+                    }, 800);
                 }
             });
         }
