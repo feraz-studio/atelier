@@ -2116,7 +2116,7 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
 });
 
 
-// INICIALIZACIÓN DEL EMBED DE CAL.COM Y ANIMACIÓN
+// INICIALIZACIÓN DEL EMBED DE CAL.COM Y DISEÑO DE ÉXITO PROPIO
 function triggerCalComBooking() {
     const overlay = document.getElementById('success-overlay');
     overlay.classList.add('booking-active');
@@ -2127,31 +2127,35 @@ function triggerCalComBooking() {
             
             const clientName = document.getElementById('client-name').value.trim();
             const clientEmail = document.getElementById('client-email').value.trim();
-            const notesContent = `Hotel / Propiedad: ${currentHotelName || "Hotel sin especificar"}\nDirección: ${currentHotelAddress || "No especificada"}`;
+            
+            // Notas totalmente libres para alérgenos y restricciones del cliente
+            const notesContent = "";
 
-            // Iniciar Embed Inline de Cal.com
+            // Iniciar Embed Inline de Cal.com limpio
             Cal.ns["feraz-tasting"]("inline", {
                 elementOrSelector: "#cal-booking-place",
                 calLink: "feraz-studio/feraz-tasting",
                 layout: "month_view",
                 config: {
-                    name: clientName, // Dejamos el nombre del cliente para que Google Calendar lo lea bien
+                    name: clientName,
                     email: clientEmail,
                     notes: notesContent,
-                    hotel: currentHotelName // Aquí se pasa el hotel al custom input
+                    hotel: currentHotelName
                 }
             });
 
             Cal.ns["feraz-tasting"]("ui", {"hideEventTypeDetails": false, "layout": "month_view"});
             
-            // Interceptar el éxito de la reserva para mostrar pantalla propia de Feraz
+            // Si Cal.com insiste en mostrar su pantalla de éxito nativa en el embed, 
+            // interceptamos cualquier cambio de estado o implementamos nuestro propio botón de "Ya agendé" 
+            // para mostrar inmediatamente la tarjeta de éxito de Feraz.
             Cal("on", {
                 action: "bookingSuccessful",
                 callback: (e) => {
-                    console.log("¡Tasting reservado con éxito!", e.detail);
+                    console.log("Reserva completada con éxito", e.detail);
                     
                     const calPlace = document.getElementById('cal-booking-place');
-                    calPlace.style.transition = 'opacity 0.8s ease';
+                    calPlace.style.transition = 'opacity 0.5s ease';
                     calPlace.style.opacity = '0';
                     
                     setTimeout(() => {
@@ -2169,7 +2173,7 @@ function triggerCalComBooking() {
                                 <p style="color: #c5a059; margin-top: 12px;">Nos emociona profundamente crear este espacio para ustedes.</p>
                             </div>
                         `;
-                    }, 800);
+                    }, 500);
                 }
             });
         }
