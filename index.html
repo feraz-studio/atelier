@@ -49,7 +49,6 @@
         transition: opacity 3s ease;
     }
 
-    /* TRANSICIÓN CROSSFADE INMEDIATA DE 3 SEGUNDOS */
     .crossfade-out {
         opacity: 0 !important;
         pointer-events: none;
@@ -929,16 +928,11 @@
     }
 
     /* ========================================= */
-    /* ESTILOS DEL OVERLAY DE ÉXITO Y CAL.COM    */
+    /* OVERLAY Y FÍSICAS DE ANIMACIÓN MEJORADAS  */
     /* ========================================= */
     .success-overlay {
         position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 375px;
-        height: 100vh;
+        top: 0; left: 0; right: 0; bottom: 0;
         background-image: linear-gradient(rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.88)), url('https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true');
         background-size: cover;
         background-position: center;
@@ -950,7 +944,8 @@
         pointer-events: none;
         transition: opacity 3s ease;
         overflow-y: auto;
-        padding: 40px 24px;
+        -webkit-overflow-scrolling: touch; /* Asegura el scroll en iOS y trackpads */
+        padding: 24px;
     }
 
     .success-overlay.active {
@@ -958,11 +953,30 @@
         pointer-events: auto;
     }
 
-    /* LOGOS Y TEXTOS - Transiciones suaves */
+    /* CONTENEDOR FLEX: Centra todo inicialmente y luego lo desliza arriba */
+    .overlay-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        /* Curva Ease-in-out muy suave y fluida para el deslizamiento */
+        transition: margin-top 1.5s cubic-bezier(0.25, 1, 0.3, 1);
+    }
+
+    /* ESTADO ACTIVO (CAL.COM ABIERTO): Se empuja el contenedor a la parte superior */
+    .success-overlay.booking-active .overlay-content-wrapper {
+        margin-top: 30px; 
+        margin-bottom: 0;
+    }
+
     .feraz-logo-overlay {
         width: 67px;
         margin-bottom: 40px;
-        transition: all 0.5s ease;
+        transition: opacity 0.8s ease, max-height 0.8s ease, margin 0.8s ease;
+        max-height: 100px;
     }
 
     .success-text {
@@ -974,7 +988,8 @@
         text-align: center;
         max-width: 320px;
         margin-bottom: 40px;
-        transition: all 0.5s ease;
+        transition: opacity 0.8s ease, max-height 0.8s ease, margin 0.8s ease;
+        max-height: 200px;
         overflow: hidden;
     }
     
@@ -985,52 +1000,50 @@
         margin-bottom: 0;
     }
 
+    /* Colapso suave al presionar el botón */
+    .success-overlay.booking-active .feraz-logo-overlay,
+    .success-overlay.booking-active .success-text {
+        opacity: 0;
+        max-height: 0;
+        margin-bottom: 0;
+        pointer-events: none;
+    }
+
+    /* Logo del Hotel: Nace invisible, se escala y aparece lento */
     .hotel-logo-overlay {
         height: 0;
         opacity: 0;
         margin: 0;
         object-fit: contain;
         filter: brightness(0) invert(1);
-        transition: all 0.5s ease;
+        /* Delay de 0.5s en la altura para que espere al botón, y fade-in muuuy suave de 2s */
+        transition: opacity 2s ease 1s, height 1s cubic-bezier(0.25, 1, 0.3, 1) 0.5s, margin 1s ease 0.5s;
     }
 
+    .success-overlay.booking-active .hotel-logo-overlay {
+        height: 24px; /* Aprox 60% del original */
+        opacity: 1;
+        margin: 35px 0 10px 0;
+    }
+
+    /* EMBED CAL.COM: Animación y visibilidad */
     #cal-booking-place {
         width: 100%;
         height: 0;
         opacity: 0;
-        transition: all 0.5s ease;
-        overflow: hidden;
-    }
-
-    /* ESTADOS DURANTE LA RESERVA (Animación UI) */
-    .success-overlay.booking-active .feraz-logo-overlay {
-        height: 0;
-        margin-bottom: 0;
-        opacity: 0;
-    }
-
-    .success-overlay.booking-active .success-text {
-        height: 0;
-        margin-bottom: 0;
-        opacity: 0;
-    }
-
-    .success-overlay.booking-active .btn-metallic {
-        pointer-events: none; /* Bloqueamos el botón una vez en modo reserva */
-        cursor: default;
-    }
-
-    .success-overlay.booking-active .hotel-logo-overlay {
-        height: 40px;
-        opacity: 1;
-        margin: 30px 0 10px 0;
+        pointer-events: none;
+        overflow: visible; 
+        /* Retraso exacto de 2s antes de que empiece a aparecer el calendario (fade in) */
+        transition: opacity 1.5s ease 2s; 
     }
 
     .success-overlay.booking-active #cal-booking-place {
         height: auto;
-        min-height: 500px;
+        min-height: 600px; /* Base para asegurar área de scroll */
         opacity: 1;
+        pointer-events: auto;
         margin-top: 10px;
+        margin-bottom: 40px;
     }
 
     /* BOTONES */
@@ -1049,6 +1062,12 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         margin: 0 auto;
         flex-shrink: 0;
+        transition: pointer-events 0.1s;
+    }
+
+    .success-overlay.booking-active .btn-metallic {
+        pointer-events: none; /* Bloqueamos clics repetidos */
+        cursor: default;
     }
 
     .btn-metallic::before {
@@ -1094,8 +1113,8 @@
     }
 
     .btn-volver {
-        margin-top: auto; /* Empuja el botón siempre hasta abajo */
-        padding-top: 40px;
+        margin-top: auto; /* Manda el botón siempre al fondo del scroll */
+        margin-bottom: 20px;
         font-family: 'HK Grotesk', sans-serif;
         font-size: 12px;
         font-weight: 600;
@@ -1121,27 +1140,27 @@
 <!-- OVERLAY DINÁMICO DE CONFIRMACIÓN Y CAL.COM -->
 <div class="success-overlay" id="success-overlay">
     
-    <!-- Header original de Feraz -->
-    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay">
-    
-    <!-- Texto original -->
-    <div class="success-text" id="success-text-content">
-        <p>Muchas gracias por su selección.<br>En breve recibirá la cotización con los servicios de nuestro taller.</p>
-        <p>Por favor, le invitamos a reservar un tasting sensorial en su propiedad, donde vivirá una experiencia única cortesía de Feraz.</p>
+    <!-- WRAPPER FLEX PARA CENTRADO FÍSICO PERFECTO -->
+    <div class="overlay-content-wrapper" id="overlay-wrapper">
+        <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay">
+        
+        <div class="success-text" id="success-text-content">
+            <p>Muchas gracias por su selección.<br>En breve recibirá la cotización con los servicios de nuestro taller.</p>
+            <p>Por favor, le invitamos a reservar un tasting sensorial en su propiedad, donde vivirá una experiencia única cortesía de Feraz.</p>
+        </div>
+
+        <a href="#" class="btn-metallic" id="btn-agendar-cal-overlay">
+            <span>Reservar Tasting</span>
+        </a>
+
+        <!-- Logo Blanco del Hotel que aparece con fade-in lento -->
+        <img id="overlay-hotel-logo" src="" alt="Hotel" class="hotel-logo-overlay">
+
+        <!-- Contenedor del Calendario Inline (Con delay de 2s) -->
+        <div id="cal-booking-place"></div>
     </div>
 
-    <!-- Botón que activa la animación y Cal.com -->
-    <a href="#" class="btn-metallic" id="btn-agendar-cal-overlay">
-        <span>Reservar Tasting</span>
-    </a>
-
-    <!-- Logo Blanco del Hotel que aparece arriba del calendario -->
-    <img id="overlay-hotel-logo" src="" alt="Hotel" class="hotel-logo-overlay">
-
-    <!-- Contenedor del Calendario Inline -->
-    <div id="cal-booking-place"></div>
-
-    <!-- Botón Volver -->
+    <!-- Botón Volver siempre al fondo del contenedor -->
     <a href="#" class="btn-volver" id="btn-volver"><span>VOLVER</span></a>
 </div>
 
@@ -1605,12 +1624,13 @@ document.addEventListener("DOMContentLoaded", function () {
             logoCheckout.style.transform = `scale(${factorEscala})`;
         }
         
-        // Inyectar el logo del hotel en el Overlay para Cal.com (el CSS lo pone en blanco)
+        // Inyectar y escalar el logo del hotel en el Overlay para Cal.com
         const overlayHotelLogo = document.getElementById("overlay-hotel-logo");
         if (overlayHotelLogo) {
             overlayHotelLogo.src = datosHotel.logo;
             const factorEscala = datosHotel.scale || 1;
-            overlayHotelLogo.style.transform = `scale(${factorEscala})`;
+            /* Se aplica scale del 60% en base a la escala original del hotel */
+            overlayHotelLogo.style.transform = `scale(${factorEscala * 0.8})`; 
         }
 
         const roomsInput = document.getElementById("rooms-count-top");
@@ -1660,7 +1680,6 @@ const chkSetAmbos = document.getElementById('chk-set-ambos');
 
 let preSetState = null;
 
-// LÓGICA DE HABITACIONES Y VARIABLES DINÁMICAS
 function updateVajillaText() {
     const rooms = parseInt(roomsInputTop.value) || 0;
     let multiplier = chkSetAmbos.checked ? 2 : 1;
@@ -1681,7 +1700,6 @@ roomsInputTop.addEventListener('blur', () => {
     roomsWarning.style.display = r < 4 ? 'block' : 'none';
 });
 
-// LÓGICA INCLUSIÓN EXPERIENCIA DIGITAL
 chkContenido.addEventListener('change', () => {
     if (chkContenido.checked) {
         chkExpDigital.checked = true;
@@ -1704,16 +1722,8 @@ chkExpDigital.addEventListener('change', () => {
     calculateTotal();
 });
 
-// FUNCIONES AUXILIARES DE ESTADO
-function captureState() {
-    return Array.from(checkboxes).map(chk => chk.checked);
-}
-
-function restoreState(stateArray) {
-    checkboxes.forEach((chk, i) => {
-        chk.checked = stateArray[i];
-    });
-}
+function captureState() { return Array.from(checkboxes).map(chk => chk.checked); }
+function restoreState(stateArray) { checkboxes.forEach((chk, i) => { chk.checked = stateArray[i]; }); }
 
 function forceCheckAndStyle(chk, newPriceLabel) {
     chk.checked = true;
@@ -1757,11 +1767,9 @@ function applySetInclusions() {
         forceCheckAndStyle(chkVajilla);
         forceCheckAndStyle(chkPapeleria);
     }
-    
-    updateVajillaText(); // Refrescar variable dinámica
+    updateVajillaText();
 }
 
-// LÓGICA DE EXCLUSIVOS
 function handleExclusive(group, currentBox) {
     if (currentBox.checked) {
         group.forEach(other => {
@@ -1774,7 +1782,6 @@ function handleExclusive(group, currentBox) {
 checkinBoxes.forEach(box => box.addEventListener('change', () => handleExclusive(checkinBoxes, box)));
 turndownBoxes.forEach(box => box.addEventListener('change', () => handleExclusive(turndownBoxes, box)));
 
-// COMPORTAMIENTO DE LOS SETS
 setBoxes.forEach(setBox => {
     setBox.addEventListener('change', (e) => {
         if (setBox.checked) {
@@ -1796,7 +1803,6 @@ setBoxes.forEach(setBox => {
     });
 });
 
-// DESMARCAR SERVICIOS DEPENDIENTES ROMPE EL SET
 const setDependentChildren = [chkCheckinBase, chkCheckinFirma, chkTurndownFirma, chkVajilla, chkPapeleria];
 setDependentChildren.forEach(child => {
     child.addEventListener('click', (e) => {
@@ -1821,7 +1827,6 @@ setDependentChildren.forEach(child => {
     });
 });
 
-// CÁLCULO
 checkboxes.forEach(box => {
     if (box !== chkContenido && box !== chkExpDigital && !box.classList.contains('checkin-exclusive') && !box.classList.contains('turndown-exclusive') && !box.classList.contains('set-exclusive')) {
         box.addEventListener('change', calculateTotal);
@@ -1832,7 +1837,6 @@ function calculateTotal() {
     let roomsCostSum = 0;
     let fixedCostSum = 0;
     let activeCount = 0;
-
     let activeItemsData = new Map();
 
     checkboxes.forEach(box => {
@@ -2017,12 +2021,11 @@ btnToggleCheckout.addEventListener('click', () => {
 document.getElementById('btn-volver').addEventListener('click', (e) => {
     e.preventDefault();
     
-    // Remover estados activos del overlay y resetear animación
     const overlay = document.getElementById('success-overlay');
     overlay.classList.remove('active');
     overlay.classList.remove('booking-active');
     
-    // Limpiar el contenedor de Cal por si quieren volver a abrirlo
+    // Limpiamos el embed por si reingresan
     document.getElementById('cal-booking-place').innerHTML = '';
     
     document.getElementById('main-container').classList.remove('crossfade-out');
@@ -2091,11 +2094,12 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
         servicios: selectedServices
     };
 
-    // Bloquear scroll trasero y mostrar el Overlay initial (Crossfade)
+    // Bloquear scroll general del sitio y mostrar el Overlay initial
     document.body.style.overflow = 'hidden'; 
     document.getElementById('main-container').classList.add('crossfade-out');
     document.getElementById('success-overlay').classList.add('active');
 
+    // Envío silencioso a Make (AQUÍ ESTÁ LISTO TU WEBHOOK)
     fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2113,7 +2117,7 @@ function triggerCalComBooking() {
     const overlay = document.getElementById('success-overlay');
     overlay.classList.add('booking-active');
     
-    // Esperar un poquito a que la animación deslice el botón y luego cargar el Embed
+    // El delay natural permite que el botón se deslice antes de cargar el widget
     setTimeout(() => {
         const calContainer = document.getElementById('cal-booking-place');
         if (calContainer.innerHTML.trim() === "") {
@@ -2122,7 +2126,7 @@ function triggerCalComBooking() {
             const clientEmail = document.getElementById('client-email').value.trim();
             const notesContent = `Hotel / Propiedad: ${currentHotelName || "Hotel sin especificar"}\nDirección: ${currentHotelAddress || "No especificada"}`;
 
-            // Iniciar Embed de Cal.com
+            // Iniciar Embed Inline de Cal.com
             Cal.ns["feraz-tasting"]("inline", {
                 elementOrSelector: "#cal-booking-place",
                 calLink: "feraz-studio/feraz-tasting",
@@ -2130,14 +2134,14 @@ function triggerCalComBooking() {
                 config: {
                     name: clientName,
                     email: clientEmail,
-                    notes: notesContent
+                    notes: notesContent,
+                    // Si tienes el Custom Input llamado 'hotel', se pasará aquí
+                    hotel: currentHotelName
                 }
             });
 
-            // UI configs de Cal
             Cal.ns["feraz-tasting"]("ui", {"hideEventTypeDetails": false, "layout": "month_view"});
             
-            // Escuchar el evento de reserva exitosa si quieres hacer algo extra después
             Cal("on", {
                 action: "bookingSuccessful",
                 callback: (e) => {
@@ -2145,7 +2149,7 @@ function triggerCalComBooking() {
                 }
             });
         }
-    }, 400); // 400ms delay para sincronizar con la animación visual
+    }, 400); 
 }
 
 // Al presionar el botón del Overlay inicial
@@ -2154,13 +2158,12 @@ document.getElementById('btn-agendar-cal-overlay').addEventListener('click', (e)
     triggerCalComBooking();
 });
 
-// Al presionar el botón Flotante Post-Submit (si ya se habían salido del overlay)
+// Al presionar el CTA Flotante Post-Submit (si se salieron del overlay pero quieren agendar después)
 document.getElementById('btn-post-submit-cal').addEventListener('click', (e) => {
     e.preventDefault();
     document.body.style.overflow = 'hidden'; 
     document.getElementById('main-container').classList.add('crossfade-out');
     document.getElementById('success-overlay').classList.add('active');
-    
     triggerCalComBooking();
 });
 
