@@ -2103,7 +2103,6 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
 // DISPARADOR DE MODAL CAL.COM DIRECTO DESDE JAVASCRIPT
 function triggerCalComBooking() {
     if (document.getElementById('btn-post-submit-cal').classList.contains('success-state')) {
-        // Mostrar confirmación directamente si ya reservó
         document.getElementById('feraz-initial-message').style.display = 'none';
         
         const successMsg = document.getElementById('feraz-success-message');
@@ -2134,16 +2133,29 @@ function triggerCalComBooking() {
         callback: (e) => {
             console.log("¡Tasting reservado con éxito!", e.detail);
 
+            // CIERRE AUTOMÁTICO DEL MODAL DE CAL.COM
+            document.querySelectorAll('cal-modal, dialog').forEach(el => {
+                if (el.tagName.toLowerCase() === 'dialog') el.close();
+                el.remove();
+            });
+            document.querySelectorAll('iframe[src*="app.cal.com"]').forEach(iframe => {
+                let parent = iframe.parentElement;
+                while (parent && parent !== document.body) {
+                    if (parent.style.position === 'fixed' || parent.style.position === 'absolute') {
+                        parent.remove();
+                        break;
+                    }
+                    parent = parent.parentElement;
+                }
+            });
+
             // Ocultamos la UI inicial del overlay
             document.getElementById('feraz-initial-message').style.display = 'none';
 
             // Mostramos la tarjeta exclusiva de éxito Feraz con blur-in lento de 1.8s
             const successMsg = document.getElementById('feraz-success-message');
             successMsg.style.display = 'flex';
-            
-            // Forzamos un repintado para asegurar la transición de CSS
             void successMsg.offsetWidth;
-            
             successMsg.classList.add('visible');
 
             // Transición a verde metálico en el botón sticky principal
