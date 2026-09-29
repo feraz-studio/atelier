@@ -49,14 +49,20 @@
         background-color: #111111;
         color: #ffffff;
         font-family: 'HK Grotesk', sans-serif;
-        display: flex;
-        justify-content: center;
         margin: 0; 
         padding: 0;
         width: 100vw;
         overflow-x: hidden;
+        /* Fade in on load */
+        animation: fadeInLoad 1.5s ease-in-out; 
     }
 
+    @keyframes fadeInLoad {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    /* Contenedor principal de la página. Para PC, este será el lado derecho. */
     .atelier-container {
         width: 100%;
         max-width: 375px;
@@ -86,12 +92,14 @@
         object-position: center;
     }
 
+    /* Ocultamos el logo original del hero en escritorio para poner el del banner */
     .hero-logo {
         position: absolute;
         top: 24px;
         left: 50%;
         transform: translateX(-50%);
         width: 67px;
+        z-index: 2; /* Para que quede sobre la imagen */
     }
 
     .hero-content {
@@ -182,19 +190,19 @@
         color: #b3b2ad;
     }
 
-.rooms-input {
-  width: 44px; /* Dale un poco más de aire horizontal */
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #666;
-  color: #fff;
-  font-family: 'HK Grotesk', sans-serif;
-  font-size: 16px !important; /* Obligatorio para evitar el zoom en iOS */
-  zoom: 0.8; /* Achica el elemento visualmente manteniendo los 16px reales */
-  text-align: center;
-  outline: none;
-  padding: 0;
-}
+    .rooms-input {
+        width: 44px;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #666;
+        color: #fff;
+        font-family: 'HK Grotesk', sans-serif;
+        font-size: 16px !important; 
+        zoom: 0.8; 
+        text-align: center;
+        outline: none;
+        padding: 0;
+    }
 
     .rooms-input::-webkit-outer-spin-button,
     .rooms-input::-webkit-inner-spin-button {
@@ -484,18 +492,7 @@
         text-decoration: line-through;
         font-family: 'HK Grotesk', sans-serif;
     }
-    @media (min-width: 768px) {
-    .atelier-container {
-        max-width: 440px; /* Le damos un poco más de ancho base */
-        zoom: 1.15;      /* Amplía todo el sitio un 25% de manera limpia */
-    }
     
-    /* Ajuste para que la barra flotante (sticky) y el overlay sigan centrados y bien proporcionados */
-    .sticky-pill-bar {
-        max-width: 390px;
-    }
-}
-
     /* BARRA STICKY */
     .sticky-pill-bar {
         position: -webkit-sticky;
@@ -798,7 +795,7 @@
         padding: 10px 16px;
         font-family: 'HK Grotesk', sans-serif;
         font-size: 16px !important;
-        zoom: 0.7; /* Achica el elemento visualmente manteniendo los 16px reales */
+        zoom: 0.7; 
         color: #111;
         outline: none;
     }
@@ -971,13 +968,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; /* Consolidación al centro */
+        justify-content: center; 
         opacity: 0;
         pointer-events: none;
         transition: opacity 1.5s ease;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch; 
-        padding: 60px 24px; /* Offset fuerte arriba y abajo */
+        padding: 60px 24px; 
     }
 
     .success-overlay.active {
@@ -992,7 +989,7 @@
         justify-content: center;
         width: 100%;
         max-width: 340px;
-        margin: auto; /* Mantiene todo libre en los extremos verticales */
+        margin: auto; 
     }
 
     .feraz-logo-overlay {
@@ -1122,7 +1119,7 @@
 
     .btn-volver {
         margin-top: auto; 
-        margin-bottom: 40px; /* Botón un poco más arriba */
+        margin-bottom: 40px;
         font-family: 'HK Grotesk', sans-serif;
         font-size: 12px;
         font-weight: 600;
@@ -1140,10 +1137,142 @@
     .btn-volver:hover {
         opacity: 0.7;
     }
+
+    /* Ocultar elementos exclusivos de PC por defecto (móvil) */
+    .desktop-only-banner, .desktop-only-image-container {
+        display: none;
+    }
+
+    /* ============================================== */
+    /* MEDIA QUERY PARA ESCRITORIO (PC)               */
+    /* ============================================== */
+    @media (min-width: 768px) {
+        /* Hacemos que el body sea un contenedor flex fila para poner la imagen a la izq y el sitio a la derecha */
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: center; /* Centrará ambos elementos */
+            align-items: flex-start;
+            height: 100vh;
+            overflow: hidden; /* Ocultamos el scroll principal en PC para controlar las áreas individualmente */
+            padding-top: 60px; /* Espacio para el banner negro */
+        }
+
+        /* BANNER NEGRO SUPERIOR EXCLUSIVO DE ESCRITORIO */
+        .desktop-only-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 60px;
+            background-color: #111111;
+            z-index: 1000;
+        }
+
+        .desktop-only-banner a {
+            display: inline-block;
+        }
+
+        .desktop-only-banner img {
+            width: 80px; /* Aproximadamente 20% más grande que los 67px originales */
+            height: auto;
+        }
+
+        /* CONTENEDOR DE LA IMAGEN CENTRAL IZQUIERDA */
+        .desktop-only-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 440px; /* Ancho fijo para coincidir con el lado derecho */
+            height: calc(100vh - 60px); /* Altura total menos el banner */
+            background-color: #111111;
+            position: relative;
+        }
+
+        /* Las imágenes dentro de este contenedor tendrán transiciones para crossfade */
+        .desktop-only-image-container img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Bordes negros muy pequeños a los lados, como solicitaste */
+            padding: 0 5px; 
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Transición suave de 1s */
+        }
+
+        .desktop-only-image-container img.active {
+            opacity: 1;
+        }
+
+        /* CONTENEDOR PRINCIPAL (Lado Derecho) */
+        .atelier-container {
+            max-width: 440px; 
+            height: calc(100vh - 60px); /* Altura total menos el banner */
+            overflow-y: auto; /* Habilitamos scroll independiente solo en esta área */
+            /* Quitamos el zoom para no afectar las imágenes en móvil, 
+               y mejor lo manejamos todo a escala 1:1 o ajustando fuentes si fuera necesario, 
+               pero lo dejaremos sin zoom como pediste que no se modifique la escala */
+            zoom: 1; 
+            margin: 0; /* Quitamos el margin auto para que se acomode junto a la imagen */
+        }
+
+        /* Ocultamos el hero image y hero logo en PC ya que estarán en el banner y panel izq */
+        .hero-image, .hero-logo {
+            display: none;
+        }
+        
+        /* Ajustamos el hero section en PC para que no ocupe tanto espacio si la imagen está a la izq */
+        .hero-section {
+           height: auto;
+           padding: 40px 0;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+        }
+
+        /* Ajuste para que la barra flotante (sticky) siga bien proporcionada */
+        .sticky-pill-bar {
+            max-width: 390px;
+            bottom: 20px; /* Aseguramos que se mantenga arriba del borde inferior */
+        }
+        
+        /* El overlay de exito debe cubrir toda la pantalla en PC también */
+        .success-overlay {
+            z-index: 2000;
+        }
+    }
 </style>
 </head>
 
 <body>
+
+<!-- BANNER SUPERIOR EXCLUSIVO DE ESCRITORIO -->
+<div class="desktop-only-banner">
+    <a href="https://feraz.studio">
+        <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo">
+    </a>
+</div>
+
+<!-- PANEL IZQUIERDO DE IMÁGENES EXCLUSIVO DE ESCRITORIO -->
+<!-- Las imágenes se irán intercambiando con la clase 'active' -->
+<div class="desktop-only-image-container" id="desktop-image-slider">
+    <!-- Aquí puedes poner las URLs de tus imágenes para el slider. He puesto placeholders -->
+    <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Slider Image 1">
+    <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Slider Image 2">
+    <!-- Añade más imágenes aquí según necesites -->
+</div>
 
 <!-- OVERLAY DINÁMICO DE CONFIRMACIÓN -->
 <div class="success-overlay" id="success-overlay">
@@ -1662,9 +1791,20 @@ document.addEventListener("DOMContentLoaded", function () {
             roomsInput.value = datosHotel.habitaciones;
             roomsInput.dispatchEvent(new Event('input'));
         }
+        
+        // Actualizar la imagen del hero en móvil
         const heroImage = document.querySelector(".hero-image");
         if (heroImage && datosHotel.portada) {
             heroImage.src = datosHotel.portada;
+        }
+        
+        // Actualizar las imágenes del slider en PC
+        if (datosHotel.portada) {
+            const sliderImgs = document.querySelectorAll(".slider-img");
+            if(sliderImgs.length > 0) {
+                // Puedes decidir cómo manejar múltiples imágenes, aquí actualizo la primera
+                sliderImgs[0].src = datosHotel.portada;
+            }
         }
     }
 
@@ -2018,21 +2158,61 @@ function evaluateStates(activeCount) {
     document.getElementById('bg-' + activeBg).classList.add('active');
 }
 
-window.addEventListener('scroll', () => {
+// LOGICA DE SCROLL PARA LAS IMAGENES EN PC
+const mainContainer = document.getElementById('main-container');
+mainContainer.addEventListener('scroll', () => {
+    // Calculadora logica de scroll
     let activeCount = 0;
     checkboxes.forEach(box => { if (box.checked) activeCount++; });
     evaluateStates(activeCount);
+    
+    // Logica para cambiar las imagenes basadas en el scroll (Solo en PC)
+    if (window.innerWidth >= 768) {
+        const checkinTop = document.getElementById('checkin-section').getBoundingClientRect().top;
+        const turndownTop = document.getElementById('turndown-section').getBoundingClientRect().top;
+        const sliderImgs = document.querySelectorAll(".slider-img");
+        
+        // Si tienes 2 imágenes. Puedes agregar más lógica aquí para más secciones
+        if (sliderImgs.length >= 2) {
+            // Ejemplo: cambiar a la segunda imagen cuando se llega a turndown
+            if (turndownTop < window.innerHeight / 2) {
+                sliderImgs[0].classList.remove('active');
+                sliderImgs[1].classList.add('active');
+            } else {
+                sliderImgs[1].classList.remove('active');
+                sliderImgs[0].classList.add('active');
+            }
+        }
+    }
+});
+
+// Event listener original de ventana para mantener compatibilidad en movil
+window.addEventListener('scroll', () => {
+    if (window.innerWidth < 768) {
+        let activeCount = 0;
+        checkboxes.forEach(box => { if (box.checked) activeCount++; });
+        evaluateStates(activeCount);
+    }
 });
 
 document.getElementById('stickyPill').addEventListener('click', () => {
     const contactoSection = document.getElementById('contacto-section');
-    const elementPosition = contactoSection.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - 120;
-
-    window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-    });
+    
+    if (window.innerWidth >= 768) {
+        // En PC el scroll es interno al contenedor
+        const elementPosition = contactoSection.offsetTop;
+        mainContainer.scrollTo({
+            top: elementPosition - 120,
+            behavior: 'smooth'
+        });
+    } else {
+        const elementPosition = contactoSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - 120;
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
 });
 
 const btnToggleCheckout = document.getElementById('btn-toggle-checkout');
@@ -2062,6 +2242,11 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
     
     document.getElementById('main-container').classList.remove('crossfade-out');
     document.body.style.overflow = '';
+    
+    // Restaurar scroll oculto en PC al cerrar overlay
+    if (window.innerWidth >= 768) {
+        document.body.style.overflow = 'hidden'; 
+    }
 
     document.getElementById('actionWrapper').style.display = 'none';
     document.getElementById('expandable-checkout-form').style.display = 'none';
