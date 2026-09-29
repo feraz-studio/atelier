@@ -53,7 +53,7 @@
         font-family: 'HK Grotesk', sans-serif;
         margin: 0; 
         padding: 0;
-        width: 100vw;
+        width: 100%;
         overflow-x: hidden;
         animation: fadeInLoad 1.5s ease-in-out; 
     }
@@ -63,10 +63,16 @@
         100% { opacity: 1; }
     }
 
+    /* Contenedor envolvente derecho (Controla el scroll en PC) */
+    .right-scroll-wrapper {
+        width: 100%;
+        background-color: #FAF9F6;
+    }
+
     .atelier-container {
         width: 100%;
-        max-width: 375px;
-        background: #FAF9F6;
+        max-width: 480px; /* Tamaño máximo de lectura cómodo */
+        background: transparent;
         position: relative;
         margin: 0 auto; 
         transition: opacity 3s ease;
@@ -99,12 +105,12 @@
         transform: translateX(-50%);
         width: 67px;
         z-index: 2; 
-        transition: opacity 0.3s ease;
+        transition: opacity 0.4s ease;
     }
 
     .hero-content {
         position: absolute;
-        bottom: 30px;
+        bottom: 40px;
         left: 24px;
         right: 24px;
         text-align: center;
@@ -150,7 +156,7 @@
         font-weight: 400;
         line-height: 1.6;
         color: #333333;
-        margin-bottom: 45px; /* Más respiro */
+        margin-bottom: 60px; /* Respiro */
     }
 
     .promise-icon {
@@ -197,7 +203,7 @@
         border-bottom: 1px solid #999;
         color: #000000;
         font-family: 'HK Grotesk', sans-serif;
-        font-size: 16px !important; 
+        font-size: 16px !important; /* Mantiene 16px para evitar zoom en iOS */
         text-align: center;
         outline: none;
         padding: 0 0 2px 0;
@@ -240,11 +246,29 @@
         width: 100%;
     }
 
+    /* ============================================== */
+    /* ZONA DE CONTROL DE ESPACIOS ENTRE SECCIONES    */
+    /* ============================================== */
     .category-block {
-        margin-bottom: 90px; /* Respiración solicitada de 90px */
+        margin-bottom: 90px; /* MARGEN GENERAL ENTRE SECCIONES */
         border-top: 1px solid #E5E5E5;
         padding-top: 40px;
     }
+
+    /* Puedes cambiar el margen de cada uno independientemente si lo requieres */
+    #checkin-section { margin-bottom: 90px; }
+    #turndown-section { margin-bottom: 90px; }
+    #editorial-section { margin-bottom: 90px; }
+    #digital-section { margin-bottom: 90px; }
+    #sets-section { margin-bottom: 90px; }
+    
+    .temi-block {
+        margin-bottom: 90px;
+        padding-bottom: 0px;
+        border-top: 1px solid #E5E5E5;
+        padding-top: 40px;
+    }
+    /* ============================================== */
 
     .culinary-header-grid {
         display: flex;
@@ -317,7 +341,7 @@
     }
 
     .service-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 700;
         margin-bottom: 6px;
         color: #000000;
@@ -473,13 +497,17 @@
         text-decoration: line-through;
     }
     
-    /* BARRA STICKY - Mantiene textos blancos por los fondos oscuros */
+    /* ============================================== */
+    /* ZONA DE CONTROL DE LA BARRA STICKY             */
+    /* ============================================== */
     .sticky-pill-bar {
         position: -webkit-sticky;
         position: sticky;
-        bottom: 24px;
+        bottom: 24px; /* Flotabilidad principal mientras scrolleas */
+        
+        /* Resto de estilos fijos de la barra */
         width: 100%;
-        max-width: 335px;
+        max-width: 380px; /* Un poco más ancha para respirar */
         height: 65px;
         border: 1px solid #E5E5E5;
         border-radius: 32.5px;
@@ -487,8 +515,14 @@
         align-items: center;
         justify-content: flex-end;
         padding: 0 24px;
-        margin: 0 auto 32px auto;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sombra más suave para modo claro */
+        
+        /* Espaciados hacia arriba y abajo en su estado normal */
+        margin-top: 60px; 
+        margin-bottom: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
         z-index: 100;
         opacity: 0;
         visibility: hidden;
@@ -502,12 +536,15 @@
         visibility: visible;
     }
 
+    /* PADDING / MARGEN CUANDO LA BARRA LLEGA AL FINAL DE SU TRAYECTO */
     .sticky-pill-bar.frozen {
         position: relative !important;
         bottom: 0;
-        margin-bottom: 40px;
+        margin-top: 40px; /* Modifica este valor si quieres acercarlo al contenido de arriba */
+        margin-bottom: 90px; /* Modifica este valor si quieres acercarlo al Resumen de abajo */
         cursor: default;
     }
+    /* ============================================== */
 
     .pill-bg {
         position: absolute;
@@ -549,7 +586,7 @@
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.1em;
-        color: #ffffff; /* Blanco sobre la pastilla */
+        color: #ffffff; 
         text-transform: uppercase;
         margin-bottom: 4px;
         line-height: 1;
@@ -560,7 +597,7 @@
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.05em;
-        color: #ffffff; /* Blanco sobre la pastilla */
+        color: #ffffff; 
         line-height: 1;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
@@ -569,7 +606,7 @@
         display: none;
         font-size: 12px;
         font-weight: 700;
-        color: #ffffff; /* Blanco sobre la pastilla */
+        color: #ffffff; 
         text-transform: uppercase;
         text-align: right;
         max-width: 250px;
@@ -696,11 +733,11 @@
 
     .checkout-action-wrapper {
         position: relative;
-        margin: 32px 0;
+        margin: 40px 0;
     }
 
     .btn-checkout-dynamic {
-        background-color: #111111; /* Botón oscuro sobre fondo claro */
+        background-color: #111111; 
         color: #ffffff;
         border: 1px solid #111111;
         border-radius: 20px;
@@ -802,18 +839,6 @@
         animation: fadeIn 1s ease;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    .temi-block {
-        margin-bottom: 90px;
-        padding-bottom: 0px;
-        border-top: 1px solid #E5E5E5;
-        padding-top: 40px;
-    }
-
     .temi-body-text {
         font-size: 14px;
         font-weight: 400;
@@ -824,7 +849,7 @@
 
     .temi-list {
         list-style: none;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         color: #555555;
         line-height: 2.4;
@@ -913,12 +938,11 @@
     }
 
     /* ============================================== */
-    /* OVERLAY Y FÍSICAS DE ANIMACIÓN MEJORADAS       */
+    /* OVERLAY Y FÍSICAS DE ANIMACIÓN                 */
     /* ============================================== */
-
     .success-overlay {
         position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+        top: 0; left: 0; width: 100vw; height: 100vh;
         background-image: linear-gradient(rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.88)), url('https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true');
         background-size: cover; 
         background-position: center top; 
@@ -1011,13 +1035,7 @@
         width: 240%;
         height: 240%;
         background: conic-gradient(
-            from 0deg,
-            #888888 0%,
-            #fdfdfd 20%,
-            #707070 40%,
-            #e6e6e6 60%,
-            #555555 80%,
-            #ffffff 100%
+            from 0deg, #888888 0%, #fdfdfd 20%, #707070 40%, #e6e6e6 60%, #555555 80%, #ffffff 100%
         );
         animation: etheralMetal 6s ease-in-out infinite alternate;
     }
@@ -1028,13 +1046,7 @@
 
     .btn-metallic.success-state::before {
         background: conic-gradient(
-            from 0deg,
-            #0b2914 0%,
-            #1e592f 20%,
-            #133e20 40%,
-            #2d8246 60%,
-            #0f351a 80%,
-            #41af61 100%
+            from 0deg, #0b2914 0%, #1e592f 20%, #133e20 40%, #2d8246 60%, #0f351a 80%, #41af61 100%
         );
         animation: etheralMetalSuccess 6s ease-in-out infinite alternate;
     }
@@ -1090,34 +1102,20 @@
         opacity: 0.7;
     }
 
-    .desktop-only-banner, .desktop-only-image-container, .desktop-black-strip {
+    .desktop-only-banner, .desktop-only-image-container {
         display: none;
     }
 
     /* ============================================== */
-    /* MEDIA QUERY PARA ESCRITORIO (PC)               */
+    /* MEDIA QUERY PARA ESCRITORIO (SPLIT PERFECTO)   */
     /* ============================================== */
-    @media (min-width: 768px) {
-        
+    @media (min-width: 1024px) {
         body {
             display: flex;
             flex-direction: row;
-            align-items: stretch;
             height: 100vh;
-            overflow: hidden; /* Scroll delegado al contenedor derecho */
-        }
-
-        /* FRANJA NEGRA A LA DERECHA FIJA */
-        .desktop-black-strip {
-            display: block;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 100vh;
-            background-color: #111111;
-            z-index: 100;
-            pointer-events: none;
+            overflow: hidden; /* Se restringe el scroll al lado derecho */
+            background-color: #FAF9F6;
         }
 
         /* BANNER SUPERIOR ANIMADO AL HACER SCROLL */
@@ -1127,8 +1125,8 @@
             align-items: center;
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100vw;
+            left: 50vw; /* Inicia justo a la mitad de la pantalla */
+            width: 50vw; /* Cubre la mitad derecha */
             height: 80px;
             background-color: rgba(250, 249, 246, 0.95);
             backdrop-filter: blur(10px);
@@ -1146,25 +1144,20 @@
             transform: translateY(0);
         }
 
-        .desktop-only-banner a {
-            display: inline-block;
-        }
-
         .desktop-only-banner img {
-            width: 90px;
+            width: 80px;
             height: auto;
             filter: brightness(0); /* Logo negro en banner claro */
         }
 
-        /* CONTENEDOR DE LA IMAGEN CENTRAL IZQUIERDA (100% de su espacio) */
+        /* CONTENEDOR IZQUIERDO (IMÁGENES A SANGRE) */
         .desktop-only-image-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1; /* Ocupa todo el espacio restante */
+            display: block;
+            width: 50vw; /* 50% exacto de la pantalla */
             height: 100vh;
-            background-color: #111111;
             position: relative;
+            overflow: hidden;
+            background-color: #111111;
         }
 
         .desktop-only-image-container img {
@@ -1172,6 +1165,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* Cero padding para que abarque todo el espacio */
+            padding: 0; 
             opacity: 0;
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -1180,45 +1175,31 @@
             opacity: 1;
         }
 
-        /* CONTENEDOR PRINCIPAL (Lado Derecho) */
-        .atelier-container {
-            flex: 0 0 760px; /* Base 500px + 200px franja negra + 60px padding */
+        /* CONTENEDOR DERECHO (DONDE HACES SCROLL) */
+        .right-scroll-wrapper {
+            width: 50vw; /* 50% exacto de la pantalla */
             height: 100vh;
             overflow-y: auto; 
-            padding-left: 60px;
-            padding-right: 260px; /* 200px para evitar la franja negra + 60px de margen */
             background-color: #FAF9F6;
-            margin: 0; 
+            position: relative;
+        }
+
+        /* CONTENEDOR DEL FORMULARIO Y TEXTOS (Centrado en la mitad derecha) */
+        .atelier-container {
+            max-width: 480px; /* Ancho cómodo de lectura */
+            width: 100%;
+            padding: 0 24px;
+            margin: 0 auto; /* Lo centra perfectamente en el espacio sobrante */
         }
 
         /* Ajustes del Hero para PC */
         .hero-section {
-           height: 100vh;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           justify-content: center;
-           margin-left: -60px; /* Para que la imagen tape todo el contenedor hasta la orilla izquierda */
-           width: calc(100% + 60px);
+           display: block !important;
+           height: 100vh; /* Altura completa para el landing inicial */
         }
         
         .hero-content {
-            position: absolute;
             bottom: 60px;
-            left: 0;
-            right: 0;
-        }
-
-        /* Ajuste para centrar el Sticky Pill en el espacio útil (sin invadir la franja negra) */
-        .sticky-pill-bar {
-            max-width: 380px;
-            bottom: 32px; 
-            margin-left: 0; /* Acomodo para PC */
-            margin-right: auto;
-        }
-        
-        .success-overlay {
-            z-index: 2000;
         }
     }
 </style>
@@ -1226,38 +1207,7 @@
 
 <body>
 
-<!-- BANNER SUPERIOR EXCLUSIVO DE ESCRITORIO -->
-<div class="desktop-only-banner" id="top-banner">
-    <a href="https://feraz.studio">
-        <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo">
-    </a>
-</div>
-
-<!-- FRANJA NEGRA FIJA A LA DERECHA (PC) -->
-<div class="desktop-black-strip"></div>
-
-<!-- PANEL IZQUIERDO DE IMÁGENES EXCLUSIVO DE ESCRITORIO -->
-<!-- Las imágenes se irán intercambiando automáticamente al scrollear -->
-<div class="desktop-only-image-container" id="desktop-image-slider">
-    
-    <!-- 1. CHECK-IN -->
-    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
-    
-    <!-- 2. TURNDOWN SERVICE -->
-    <img id="slider-img-turndown" src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Turndown Service">
-    
-    <!-- 3. EDITORIAL Y SOPORTE -->
-    <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true" class="slider-img" alt="Editorial y Soporte">
-    
-    <!-- 4. DIGITAL Y CONTENIDO -->
-    <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true" class="slider-img" alt="Digital y Contenido">
-    
-    <!-- 5. SETS COMPLETOS -->
-    <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true" class="slider-img" alt="Sets de Colección">
-
-</div>
-
-<!-- OVERLAY DINÁMICO DE CONFIRMACIÓN -->
+<!-- OVERLAY (Cubre toda la pantalla, independientemente del layout) -->
 <div class="success-overlay" id="success-overlay">
     <div class="overlay-content-wrapper" id="overlay-wrapper">
         <div id="feraz-initial-message" style="display: flex; flex-direction: column; align-items: center;">
@@ -1291,389 +1241,423 @@
     <a href="#" class="btn-volver" id="btn-volver"><span>VOLVER</span></a>
 </div>
 
-<div class="atelier-container" id="main-container">
-
-<div class="hero-section">
-    <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" alt="Feraz Hospitality Atelier" class="hero-image">
-    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="hero-logo" id="hero-logo">
-    <div class="hero-content">
-        <h1 class="hero-title">Hospitality Services</h1>
-        <a href="#atelier-header" class="btn-iniciar" id="btnIniciar">Iniciar</a>
-    </div>
-</div>
-
-<div class="content-body">
-
-    <div class="section-title-main">Nuestra Promesa</div>
-    <p class="promise-text">
-        En Feraz, pretendemos que tanto usted como todo el personal de la propiedad reciba la atención de una empresa de hospitalidad de clase mundial.<br><br>
-        Nuestro objetivo es facilitar el cuidado y sorpresa de sus huéspedes durante su estancia con la menor fricción posible de manera ágil, eficiente, y con la calidad que nos caracteriza.
-    </p>
-    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Outline_Off%20white.svg" alt="Icono Feraz" class="promise-icon">
-
-    <div class="atelier-header-block" id="atelier-header">
-        <div class="hotel-header-logo-container">
-            <img id="ui-logo-header" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
-        </div>
-
-        <div class="rooms-line">
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" id="rooms-count-top" class="rooms-input" value="20" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-            <span>habitaciones.</span>
-        </div>
-        <div id="rooms-warning" class="rooms-warning-text">Ofrecemos nuestros servicios para un mínimo de 4 habitaciones, por favor modifique su selección.</div>
-        
-        <p class="atelier-desc">
-            Le damos la bienvenida a nuestro atelier, aquí podrá configurar el conjunto de servicios que mejor se adapte a las necesidades y objetivos actuales de su propiedad.<br><br>
-            Esperamos que lo encuentre de utilidad e invite a emocionarle tanto como a nosotros el realizar proyectos de experiencia de huéspedes.
-        </p>
-        <p class="atelier-desc">
-            Todos nuestros servicios se cotizan de forma fija por habitación por mes basándose en un 60% de ocupación promedio.<br>
-            A mayor porcentaje de ocupación, mayor ahorro para el hotel.
-        </p>
-        <div class="notes-small">Precios no incluyen IVA</div>
-    </div>
-
-    <div class="services-wrapper">
-
-        <!-- CHECK-IN -->
-        <div class="category-block" id="checkin-section">
-            <div class="culinary-header-grid">
-                <div class="culinary-title-side">
-                    <div class="culinary-main-title">DISEÑO<br>CULINARIO</div>
-                </div>
-                <div class="culinary-desc-side">
-                    Una colección culinaria personalizada.<br>Exclusiva, para siempre.
-                </div>
-            </div>
-            <div class="culinary-features">
-                <span>• Entrega semanal</span>
-                <span>• Suministro según ocupación + 10% adicional</span>
-            </div>
-
-            <div class="category-type-tag">Check-in</div>
-            <div class="category-subtext">Cree un recibimiento cálido para sus huéspedes con 2 piezas de diseño culinario que los conecten inmediatamente con la identidad de su hotel.</div>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Base</div>
-                    <div class="service-desc">Mazapanes (cacahuate), trufas, pâte de fruit, toffees.</div>
-                </div>
-                <div class="service-right">
-                    <span class="included-tag">Incluido</span>
-                    <span class="service-price">$ 375</span>
-                    <input type="checkbox" class="calc-item checkin-exclusive" id="chk-checkin-base" value="375" data-name="Check-in Base" data-desc="Mazapanes (cacahuate), trufas, pâte de fruit, toffees." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Firma</div>
-                    <div class="service-desc">Bombones, confitería boutique + colecciones / temporada.</div>
-                </div>
-                <div class="service-right">
-                    <span class="included-tag">Incluido</span>
-                    <span class="service-price">$ 590</span>
-                    <input type="checkbox" class="calc-item checkin-exclusive" id="chk-checkin-firma" value="590" data-name="Check-in Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-
-            <label class="service-row" id="magno-checkin-row">
-                <div class="service-info">
-                    <div class="service-title">Magno</div>
-                    <div class="service-desc">El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación.</div>
-                </div>
-                <div class="service-right">
-                    <span class="service-price">$ 780</span>
-                    <input type="checkbox" class="calc-item checkin-exclusive" value="780" data-name="Check-in Magno" data-desc="El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-            <div class="category-legend" id="checkin-end-marker">
-                <span>Incl. 2 piezas por servicio</span>
-                <span>MXN / Habitación / Mes</span>
-            </div>
-        </div>
-
-        <!-- TURNDOWN SERVICE -->
-        <div class="category-block" id="turndown-section">
-            <div class="category-type-tag">Turndown Service</div>
-            <div class="category-subtext">Nuestras piezas diseñadas para hora de dormir son una invitación al descanso y preparan mentalmente al huésped para una noche de relajación.</div>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Base</div>
-                    <div class="service-desc">Mazapanes (cacahuate), trufas, pâte de fruit, toffees.</div>
-                </div>
-                <div class="service-right">
-                    <span class="service-price">$ 750</span>
-                    <input type="checkbox" class="calc-item turndown-exclusive" value="750" data-name="Turndown Base" data-desc="Mazapanes (cacahuate), trufas, pâte de fruit, toffees." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Firma</div>
-                    <div class="service-desc">Bombones, confitería boutique + colecciones / temporada.</div>
-                </div>
-                <div class="service-right">
-                    <span class="included-tag">Incluido</span>
-                    <span class="service-price">$ 1,180</span>
-                    <input type="checkbox" class="calc-item turndown-exclusive" id="chk-turndown-firma" value="1180" data-name="Turndown Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Magno</div>
-                    <div class="service-desc">El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación.</div>
-                </div>
-                <div class="service-right">
-                    <span class="service-price">$ 1,560</span>
-                    <input type="checkbox" class="calc-item turndown-exclusive" value="1560" data-name="Turndown Magno" data-desc="El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-            <div class="category-legend" id="turndown-end-marker">
-                <span>Incl. 2 piezas por noche</span>
-                <span>MXN / Habitación / Mes</span>
-            </div>
-        </div>
-
-        <!-- EDITORIAL Y SOPORTE -->
-        <div class="category-block" id="editorial-section">
-            <div class="section-title-main">Editorial y Soporte</div>
-            <div class="category-subtext">Elementos de diseño y papelería creativa para reforzar la experiencia sensorial en su hotel.</div>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Vajilla permanente</div>
-                    <div class="service-desc" id="desc-vajilla">2.5x número de habitaciones (piezas). Reemplazo por roturas.</div>
-                </div>
-                <div class="service-right">
-                    <span class="included-tag">Incluido</span>
-                    <span class="service-price">$ 200</span>
-                    <input type="checkbox" class="calc-item" id="chk-vajilla" value="200" data-name="Vajilla permanente" data-desc="2.5x número de habitaciones (piezas). Reemplazo por roturas." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Vajilla WASARA</div>
-                    <div class="service-desc">Desechable compostable.</div>
-                </div>
-                <div class="service-right">
-                    <span class="service-price">$ 280</span>
-                    <input type="checkbox" class="calc-item" value="280" data-name="Vajilla WASARA" data-desc="Desechable compostable." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Papelería premium</div>
-                    <div class="service-desc">Bilingüe, papel brillante o de algodón.</div>
-                </div>
-                <div class="service-right">
-                    <span class="included-tag">Incluido</span>
-                    <span class="service-price">$ 45</span>
-                    <input type="checkbox" class="calc-item" id="chk-papeleria" value="45" data-name="Papelería premium" data-desc="Bilingüe, papel brillante o de algodón." data-format="Servicio individual" data-type="room">
-                </div>
-            </label>
-            <div class="category-legend">
-                <span class="legend-right-align">MXN / Habitación / Mes</span>
-            </div>
-        </div>
-
-        <!-- DIGITAL Y CONTENIDO -->
-        <div class="category-block" id="digital-section">
-            <div class="section-title-main">Digital y Contenido</div>
-            <div class="category-subtext">Una extensión de su colección para dispositivos móviles y contenido en redes sociales.</div>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Experiencia digital</div>
-                    <div class="service-desc">Página web personalizada.</div>
-                </div>
-                <div class="service-right">
-                    <span class="included-tag" id="exp-digital-tag">Incluido</span>
-                    <span class="service-price" id="exp-digital-price">$ 420</span>
-                    <input type="checkbox" class="calc-item" id="chk-exp-digital" value="420" data-name="Experiencia digital" data-desc="Página web personalizada." data-format="Servicio individual" data-type="fixed">
-                </div>
-            </label>
-
-            <label class="service-row">
-                <div class="service-info">
-                    <div class="service-title">Creación de contenido mensual</div>
-                    <div class="service-desc">Foto + Video profesional, review booster, experiencia digital.</div>
-                </div>
-                <div class="service-right">
-                    <span class="service-price">$ 3,500</span>
-                    <input type="checkbox" class="calc-item" id="chk-contenido-mensual" value="3500" data-name="Creación de contenido mensual" data-desc="Foto + Video profesional, review booster, experiencia digital." data-format="Paquete" data-type="fixed">
-                </div>
-            </label>
-            <div class="category-legend">
-                <span class="legend-right-align">MXN / Mes</span>
-            </div>
-        </div>
-
-        <!-- SECCIÓN SETS -->
-        <div class="category-block" id="sets-section">
-            <div class="sets-banner-container">
-                <div class="sets-banner-title">Sets</div>
-                <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/SETS.png" alt="Sets" class="sets-banner-img">
-            </div>
-
-            <div class="set-card">
-                <div class="set-card-header">Check-in</div>
-                <div class="set-item-row"><span>Diseño Culinario (Base)</span><span>$ 375</span></div>
-                <div class="set-item-row"><span>Vajilla permanente</span><span>$ 200</span></div>
-                <div class="set-item-row"><span>Papelería creativa</span><span>$ 45</span></div>
-                <div class="set-footer-row">
-                    <span class="crossed-price">$ 620</span>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span>$ 590</span>
-                        <input type="checkbox" class="calc-item set-exclusive" id="chk-set-checkin" value="590" data-name="Set Check-in" data-desc="Diseño Culinario (Base) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
-                    </div>
-                </div>
-            </div>
-
-            <div class="set-card">
-                <div class="set-card-header">Turndown Service</div>
-                <div class="set-item-row"><span>Diseño Culinario (Firma)</span><span>$ 1,180</span></div>
-                <div class="set-item-row"><span>Vajilla permanente</span><span>$ 200</span></div>
-                <div class="set-item-row"><span>Papelería creativa</span><span>$ 45</span></div>
-                <div class="set-footer-row">
-                    <span class="crossed-price">$ 1,425</span>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span>$ 1,350</span>
-                        <input type="checkbox" class="calc-item set-exclusive" id="chk-set-turndown" value="1350" data-name="Set Turndown Service" data-desc="Diseño Culinario (Firma) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
-                    </div>
-                </div>
-            </div>
-
-            <div class="set-card">
-                <div class="set-card-header">Ambos</div>
-                <div class="set-item-row"><span>Diseño Culinario (Firma)</span><span>$ 1,770</span></div>
-                <div class="set-item-row"><span>Vajilla permanente (2)</span><span>$ 400</span></div>
-                <div class="set-item-row"><span>Papelería creativa (2)</span><span>$ 90</span></div>
-                <div class="set-footer-row">
-                    <span class="crossed-price">$ 2,260</span>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span>$ 2,050</span>
-                        <input type="checkbox" class="calc-item set-exclusive" id="chk-set-ambos" value="2050" data-name="Set Ambos" data-desc="Diseño Culinario (Firma) + Vajilla permanente (2) + Papelería creativa (2)" data-format="Paquete" data-type="room">
-                    </div>
-                </div>
-            </div>
-            <div class="category-legend">
-                <span class="legend-right-align">MXN / Habitación / Mes</span>
-            </div>
-        </div>
-
-        <!-- BARRA STICKY (Calculadora) -->
-        <div class="sticky-pill-bar" id="stickyPill">
-            <div class="pill-bg active" id="bg-checkin" title="Fondo Check-in" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%201.png?raw=true')"></div>
-            <div class="pill-bg" id="bg-turndown" title="Fondo Turndown Service" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%203.png?raw=true')"></div>
-            <div class="pill-bg" id="bg-editorial" title="Fondo Editorial y Soporte" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true')"></div>
-            <div class="pill-bg" id="bg-digital" title="Fondo Digital y Contenido" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true')"></div>
-            <div class="pill-bg" id="bg-sets" title="Fondo Sets" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true')"></div>
-
-            <div class="pill-price-text" id="priceContainer">
-                <div class="total-group" id="total-group-normal">
-                    <div class="total-label">TOTAL</div>
-                    <div class="total-value">MXN <span id="total-amount">0</span> / mes</div>
-                </div>
-                <div class="total-warning-text" id="total-group-warning">
-                    Para ver su selección, modifique el número de habitaciones
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- SECCIÓN CHECKOUT -->
-    <div class="checkout-box" id="contacto-section">
-        <div class="checkout-header-grid">
-            <div class="section-title-main">RESUMEN</div>
-            <div class="checkout-logo-container">
-                <img id="ui-logo-checkout" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
-            </div>
-        </div>
-
-        <p class="atelier-desc">Un diseño concebido para trascender. Cada elemento de esta colección será curado meticulosamente para entrelazarse con la narrativa de su hotel, elevando el arte de la hospitalidad a una experiencia sensorial integral.</p>
-
-        <ul class="checkout-summary-list" id="checkout-summary-list">
-            <!-- Items se agregan dinámicamente -->
-        </ul>
-
-        <div class="checkout-action-wrapper" id="actionWrapper">
-            <button type="button" class="btn-checkout-dynamic" id="btn-toggle-checkout">Obtener cotización</button>
-        </div>
-
-        <div class="expandable-form" id="expandable-checkout-form">
-            <p class="atelier-desc" style="color:#c5a059;">Obtenga su cotización Feraz al instante.</p>
-            <input type="text" id="client-name" class="client-input-grey" placeholder="Nombre y apellido" required>
-            <input type="email" id="client-email" class="client-input-grey" placeholder="Correo electrónico" required>
-            <button type="button" class="submit-checkout-btn" id="send-btn">
-                Enviar
-                <svg class="submit-icon" viewBox="0 0 24 24"><path d="M17 12L7 2v20z"/></svg>
-            </button>
-        </div>
-    </div> 
-
-    <!-- CTA STICKY POST ENVÍO -->
-    <div class="post-submit-action" id="post-submit-action">
-        <a href="#" class="btn-metallic" id="btn-post-submit-cal">
-            <span>Reservar Tasting</span>
-        </a>
-    </div>
-
-    <!-- SECCIÓN TEMI -->
-    <div class="temi-block">
-        <div class="sets-banner-container" style="margin-bottom: 32px;">
-            <div class="sets-banner-title" style="top: 35%;">TEMI</div>
-            <div class="sets-banner-subtitle" style="top: 65%;">El sueño hecho visión</div>
-            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Barra%20temi.png" alt="Temi Banner" class="sets-banner-img">
-        </div>
-        <p class="temi-body-text">Cualquier proyecto que imaginen para su propiedad, podemos materializarlo.</p>
-        <ul class="temi-list">
-            <li>Rituales wellness</li>
-            <li>Experiencias para huéspedes</li>
-            <li>Papelería creativa y packaging</li>
-            <li>Honesty bar</li>
-            <li>Diseño gráfico y web</li>
-            <li>Creación de contenido y dirección de arte</li>
-            <li>Amenidades VIP y piezas coleccionables</li>
-            <li>Eventos y bebidas</li>
-        </ul>
-    </div>
+<!-- ============================================== -->
+<!-- IMÁGENES LADO IZQUIERDO PC (Aquí pegas tus links) -->
+<!-- ============================================== -->
+<div class="desktop-only-image-container" id="desktop-image-slider">
+    
+    <!-- 1. CHECK-IN (Sección inicial del cotizador) -->
+    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
+    
+    <!-- 2. TURNDOWN SERVICE -->
+    <img id="slider-img-turndown" src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Turndown Service">
+    
+    <!-- 3. EDITORIAL Y SOPORTE -->
+    <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true" class="slider-img" alt="Editorial y Soporte">
+    
+    <!-- 4. DIGITAL Y CONTENIDO -->
+    <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true" class="slider-img" alt="Digital y Contenido">
+    
+    <!-- 5. SETS COMPLETOS -->
+    <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true" class="slider-img" alt="Sets de Colección">
 
 </div>
 
-<!-- SECCIÓN CONTACTO DIRECTO -->
-<div class="contact-section-light">
-    <div class="contact-header-title">CONTACTO</div>
-    <p class="contact-body-text">
-        Agradecemos enormemente el tiempo que ha dedicado a conocer Feraz. Si desea obtener asistencia personalizada, puede contactarnos por los siguientes medios. Obtendrá una respuesta inmediatamente.
-    </p>
-    <div class="contact-info-block">
-        <strong>Fernando Quezada</strong><br>
-        Founder & Creative Director<br>
-        <a href="https://wa.me/525549400957" target="_blank">55 4940 0957</a><br>
-        <a href="mailto:collabs@feraz.studio">collabs@feraz.studio</a>
+<!-- ENVOLTORIO DERECHO (Área scrolleable en PC) -->
+<div class="right-scroll-wrapper" id="right-scroll-wrapper">
+    
+    <!-- BANNER SUPERIOR EXCLUSIVO DE ESCRITORIO -->
+    <div class="desktop-only-banner" id="top-banner">
+        <a href="https://feraz.studio">
+            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo">
+        </a>
     </div>
-</div>
 
-<!-- FOOTER -->
-<footer class="footer-bar">
-    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo" class="footer-logo">
-    <div class="footer-socials">
-        <a href="https://www.instagram.com/feraz.cdmx/" target="_blank" title="Instagram">
-            <svg class="social-icon" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-        </a>
-        <a href="https://feraz.studio" target="_blank" title="Sitio Web">
-            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/globe.png" alt="Globe Icon" class="globe-icon-img">
-        </a>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="atelier-container" id="main-container">
+
+        <div class="hero-section">
+            <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" alt="Feraz Hospitality Atelier" class="hero-image">
+            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="hero-logo" id="hero-logo">
+            <div class="hero-content">
+                <h1 class="hero-title">Hospitality Services</h1>
+                <a href="#atelier-header" class="btn-iniciar" id="btnIniciar">Iniciar</a>
+            </div>
+        </div>
+
+        <div class="content-body">
+
+            <div class="section-title-main">Nuestra Promesa</div>
+            <p class="promise-text">
+                En Feraz, pretendemos que tanto usted como todo el personal de la propiedad reciba la atención de una empresa de hospitalidad de clase mundial.<br><br>
+                Nuestro objetivo es facilitar el cuidado y sorpresa de sus huéspedes durante su estancia con la menor fricción posible de manera ágil, eficiente, y con la calidad que nos caracteriza.
+            </p>
+            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Outline_Off%20white.svg" alt="Icono Feraz" class="promise-icon">
+
+            <div class="atelier-header-block" id="atelier-header">
+                <div class="hotel-header-logo-container">
+                    <img id="ui-logo-header" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
+                </div>
+
+                <div class="rooms-line">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" id="rooms-count-top" class="rooms-input" value="20" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                    <span>habitaciones.</span>
+                </div>
+                <div id="rooms-warning" class="rooms-warning-text">Ofrecemos nuestros servicios para un mínimo de 4 habitaciones, por favor modifique su selección.</div>
+                
+                <p class="atelier-desc">
+                    Le damos la bienvenida a nuestro atelier, aquí podrá configurar el conjunto de servicios que mejor se adapte a las necesidades y objetivos actuales de su propiedad.<br><br>
+                    Esperamos que lo encuentre de utilidad e invite a emocionarle tanto como a nosotros el realizar proyectos de experiencia de huéspedes.
+                </p>
+                <p class="atelier-desc">
+                    Todos nuestros servicios se cotizan de forma fija por habitación por mes basándose en un 60% de ocupación promedio.<br>
+                    A mayor porcentaje de ocupación, mayor ahorro para el hotel.
+                </p>
+                <div class="notes-small">Precios no incluyen IVA</div>
+            </div>
+
+            <div class="services-wrapper">
+
+                <!-- CHECK-IN -->
+                <div class="category-block" id="checkin-section">
+                    <div class="culinary-header-grid">
+                        <div class="culinary-title-side">
+                            <div class="culinary-main-title">DISEÑO<br>CULINARIO</div>
+                        </div>
+                        <div class="culinary-desc-side">
+                            Una colección culinaria personalizada.<br>Exclusiva, para siempre.
+                        </div>
+                    </div>
+                    <div class="culinary-features">
+                        <span>• Entrega semanal</span>
+                        <span>• Suministro según ocupación + 10% adicional</span>
+                    </div>
+
+                    <div class="category-type-tag">Check-in</div>
+                    <div class="category-subtext">Cree un recibimiento cálido para sus huéspedes con 2 piezas de diseño culinario que los conecten inmediatamente con la identidad de su hotel.</div>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Base</div>
+                            <div class="service-desc">Mazapanes (cacahuate), trufas, pâte de fruit, toffees.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="included-tag">Incluido</span>
+                            <span class="service-price">$ 375</span>
+                            <input type="checkbox" class="calc-item checkin-exclusive" id="chk-checkin-base" value="375" data-name="Check-in Base" data-desc="Mazapanes (cacahuate), trufas, pâte de fruit, toffees." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Firma</div>
+                            <div class="service-desc">Bombones, confitería boutique + colecciones / temporada.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="included-tag">Incluido</span>
+                            <span class="service-price">$ 590</span>
+                            <input type="checkbox" class="calc-item checkin-exclusive" id="chk-checkin-firma" value="590" data-name="Check-in Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+
+                    <label class="service-row" id="magno-checkin-row">
+                        <div class="service-info">
+                            <div class="service-title">Magno</div>
+                            <div class="service-desc">El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="service-price">$ 780</span>
+                            <input type="checkbox" class="calc-item checkin-exclusive" value="780" data-name="Check-in Magno" data-desc="El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+                    <div class="category-legend" id="checkin-end-marker">
+                        <span>Incl. 2 piezas por servicio</span>
+                        <span>MXN / Habitación / Mes</span>
+                    </div>
+                </div>
+
+                <!-- TURNDOWN SERVICE -->
+                <div class="category-block" id="turndown-section">
+                    <div class="category-type-tag">Turndown Service</div>
+                    <div class="category-subtext">Nuestras piezas diseñadas para hora de dormir son una invitación al descanso y preparan mentalmente al huésped para una noche de relajación.</div>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Base</div>
+                            <div class="service-desc">Mazapanes (cacahuate), trufas, pâte de fruit, toffees.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="service-price">$ 750</span>
+                            <input type="checkbox" class="calc-item turndown-exclusive" value="750" data-name="Turndown Base" data-desc="Mazapanes (cacahuate), trufas, pâte de fruit, toffees." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Firma</div>
+                            <div class="service-desc">Bombones, confitería boutique + colecciones / temporada.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="included-tag">Incluido</span>
+                            <span class="service-price">$ 1,180</span>
+                            <input type="checkbox" class="calc-item turndown-exclusive" id="chk-turndown-firma" value="1180" data-name="Turndown Firma" data-desc="Bombones, confitería boutique + colecciones / temporada." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Magno</div>
+                            <div class="service-desc">El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="service-price">$ 1,560</span>
+                            <input type="checkbox" class="calc-item turndown-exclusive" value="1560" data-name="Turndown Magno" data-desc="El despliegue completo de colecciones y hasta 6 recetas simultáneas en rotación." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+                    <div class="category-legend" id="turndown-end-marker">
+                        <span>Incl. 2 piezas por noche</span>
+                        <span>MXN / Habitación / Mes</span>
+                    </div>
+                </div>
+
+                <!-- EDITORIAL Y SOPORTE -->
+                <div class="category-block" id="editorial-section">
+                    <div class="section-title-main">Editorial y Soporte</div>
+                    <div class="category-subtext">Elementos de diseño y papelería creativa para reforzar la experiencia sensorial en su hotel.</div>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Vajilla permanente</div>
+                            <div class="service-desc" id="desc-vajilla">2.5x número de habitaciones (piezas). Reemplazo por roturas.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="included-tag">Incluido</span>
+                            <span class="service-price">$ 200</span>
+                            <input type="checkbox" class="calc-item" id="chk-vajilla" value="200" data-name="Vajilla permanente" data-desc="2.5x número de habitaciones (piezas). Reemplazo por roturas." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Vajilla WASARA</div>
+                            <div class="service-desc">Desechable compostable.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="service-price">$ 280</span>
+                            <input type="checkbox" class="calc-item" value="280" data-name="Vajilla WASARA" data-desc="Desechable compostable." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Papelería premium</div>
+                            <div class="service-desc">Bilingüe, papel brillante o de algodón.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="included-tag">Incluido</span>
+                            <span class="service-price">$ 45</span>
+                            <input type="checkbox" class="calc-item" id="chk-papeleria" value="45" data-name="Papelería premium" data-desc="Bilingüe, papel brillante o de algodón." data-format="Servicio individual" data-type="room">
+                        </div>
+                    </label>
+                    <div class="category-legend">
+                        <span class="legend-right-align">MXN / Habitación / Mes</span>
+                    </div>
+                </div>
+
+                <!-- DIGITAL Y CONTENIDO -->
+                <div class="category-block" id="digital-section">
+                    <div class="section-title-main">Digital y Contenido</div>
+                    <div class="category-subtext">Una extensión de su colección para dispositivos móviles y contenido en redes sociales.</div>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Experiencia digital</div>
+                            <div class="service-desc">Página web personalizada.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="included-tag" id="exp-digital-tag">Incluido</span>
+                            <span class="service-price" id="exp-digital-price">$ 420</span>
+                            <input type="checkbox" class="calc-item" id="chk-exp-digital" value="420" data-name="Experiencia digital" data-desc="Página web personalizada." data-format="Servicio individual" data-type="fixed">
+                        </div>
+                    </label>
+
+                    <label class="service-row">
+                        <div class="service-info">
+                            <div class="service-title">Creación de contenido mensual</div>
+                            <div class="service-desc">Foto + Video profesional, review booster, experiencia digital.</div>
+                        </div>
+                        <div class="service-right">
+                            <span class="service-price">$ 3,500</span>
+                            <input type="checkbox" class="calc-item" id="chk-contenido-mensual" value="3500" data-name="Creación de contenido mensual" data-desc="Foto + Video profesional, review booster, experiencia digital." data-format="Paquete" data-type="fixed">
+                        </div>
+                    </label>
+                    <div class="category-legend">
+                        <span class="legend-right-align">MXN / Mes</span>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN SETS -->
+                <div class="category-block" id="sets-section">
+                    <div class="sets-banner-container">
+                        <div class="sets-banner-title">Sets</div>
+                        <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/SETS.png" alt="Sets" class="sets-banner-img">
+                    </div>
+
+                    <div class="set-card">
+                        <div class="set-card-header">Check-in</div>
+                        <div class="set-item-row"><span>Diseño Culinario (Base)</span><span>$ 375</span></div>
+                        <div class="set-item-row"><span>Vajilla permanente</span><span>$ 200</span></div>
+                        <div class="set-item-row"><span>Papelería creativa</span><span>$ 45</span></div>
+                        <div class="set-footer-row">
+                            <span class="crossed-price">$ 620</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>$ 590</span>
+                                <input type="checkbox" class="calc-item set-exclusive" id="chk-set-checkin" value="590" data-name="Set Check-in" data-desc="Diseño Culinario (Base) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="set-card">
+                        <div class="set-card-header">Turndown Service</div>
+                        <div class="set-item-row"><span>Diseño Culinario (Firma)</span><span>$ 1,180</span></div>
+                        <div class="set-item-row"><span>Vajilla permanente</span><span>$ 200</span></div>
+                        <div class="set-item-row"><span>Papelería creativa</span><span>$ 45</span></div>
+                        <div class="set-footer-row">
+                            <span class="crossed-price">$ 1,425</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>$ 1,350</span>
+                                <input type="checkbox" class="calc-item set-exclusive" id="chk-set-turndown" value="1350" data-name="Set Turndown Service" data-desc="Diseño Culinario (Firma) + Vajilla permanente + Papelería creativa" data-format="Paquete" data-type="room">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="set-card">
+                        <div class="set-card-header">Ambos</div>
+                        <div class="set-item-row"><span>Diseño Culinario (Firma)</span><span>$ 1,770</span></div>
+                        <div class="set-item-row"><span>Vajilla permanente (2)</span><span>$ 400</span></div>
+                        <div class="set-item-row"><span>Papelería creativa (2)</span><span>$ 90</span></div>
+                        <div class="set-footer-row">
+                            <span class="crossed-price">$ 2,260</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>$ 2,050</span>
+                                <input type="checkbox" class="calc-item set-exclusive" id="chk-set-ambos" value="2050" data-name="Set Ambos" data-desc="Diseño Culinario (Firma) + Vajilla permanente (2) + Papelería creativa (2)" data-format="Paquete" data-type="room">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-legend">
+                        <span class="legend-right-align">MXN / Habitación / Mes</span>
+                    </div>
+                </div>
+
+                <!-- BARRA STICKY (Calculadora) -->
+                <div class="sticky-pill-bar" id="stickyPill">
+                    <div class="pill-bg active" id="bg-checkin" title="Fondo Check-in" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%201.png?raw=true')"></div>
+                    <div class="pill-bg" id="bg-turndown" title="Fondo Turndown Service" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%203.png?raw=true')"></div>
+                    <div class="pill-bg" id="bg-editorial" title="Fondo Editorial y Soporte" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true')"></div>
+                    <div class="pill-bg" id="bg-digital" title="Fondo Digital y Contenido" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true')"></div>
+                    <div class="pill-bg" id="bg-sets" title="Fondo Sets" style="background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true')"></div>
+
+                    <div class="pill-price-text" id="priceContainer">
+                        <div class="total-group" id="total-group-normal">
+                            <div class="total-label">TOTAL</div>
+                            <div class="total-value">MXN <span id="total-amount">0</span> / mes</div>
+                        </div>
+                        <div class="total-warning-text" id="total-group-warning">
+                            Para ver su selección, modifique el número de habitaciones
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SECCIÓN CHECKOUT -->
+            <div class="checkout-box" id="contacto-section">
+                <div class="checkout-header-grid">
+                    <div class="section-title-main">RESUMEN</div>
+                    <div class="checkout-logo-container">
+                        <img id="ui-logo-checkout" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
+                    </div>
+                </div>
+
+                <p class="atelier-desc">Un diseño concebido para trascender. Cada elemento de esta colección será curado meticulosamente para entrelazarse con la narrativa de su hotel, elevando el arte de la hospitalidad a una experiencia sensorial integral.</p>
+
+                <ul class="checkout-summary-list" id="checkout-summary-list">
+                    <!-- Items se agregan dinámicamente -->
+                </ul>
+
+                <div class="checkout-action-wrapper" id="actionWrapper">
+                    <button type="button" class="btn-checkout-dynamic" id="btn-toggle-checkout">Obtener cotización</button>
+                </div>
+
+                <div class="expandable-form" id="expandable-checkout-form">
+                    <p class="atelier-desc" style="color:#c5a059;">Obtenga su cotización Feraz al instante.</p>
+                    <input type="text" id="client-name" class="client-input-grey" placeholder="Nombre y apellido" required>
+                    <input type="email" id="client-email" class="client-input-grey" placeholder="Correo electrónico" required>
+                    <button type="button" class="submit-checkout-btn" id="send-btn">
+                        Enviar
+                        <svg class="submit-icon" viewBox="0 0 24 24"><path d="M17 12L7 2v20z"/></svg>
+                    </button>
+                </div>
+            </div> 
+
+            <!-- CTA STICKY POST ENVÍO -->
+            <div class="post-submit-action" id="post-submit-action">
+                <a href="#" class="btn-metallic" id="btn-post-submit-cal">
+                    <span>Reservar Tasting</span>
+                </a>
+            </div>
+
+            <!-- SECCIÓN TEMI -->
+            <div class="temi-block">
+                <div class="sets-banner-container" style="margin-bottom: 32px;">
+                    <div class="sets-banner-title" style="top: 35%;">TEMI</div>
+                    <div class="sets-banner-subtitle" style="top: 65%;">El sueño hecho visión</div>
+                    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Barra%20temi.png" alt="Temi Banner" class="sets-banner-img">
+                </div>
+                <p class="temi-body-text">Cualquier proyecto que imaginen para su propiedad, podemos materializarlo.</p>
+                <ul class="temi-list">
+                    <li>Rituales wellness</li>
+                    <li>Experiencias para huéspedes</li>
+                    <li>Papelería creativa y packaging</li>
+                    <li>Honesty bar</li>
+                    <li>Diseño gráfico y web</li>
+                    <li>Creación de contenido y dirección de arte</li>
+                    <li>Amenidades VIP y piezas coleccionables</li>
+                    <li>Eventos y bebidas</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN CONTACTO DIRECTO -->
+        <div class="contact-section-light">
+            <div class="contact-header-title">CONTACTO</div>
+            <p class="contact-body-text">
+                Agradecemos enormemente el tiempo que ha dedicado a conocer Feraz. Si desea obtener asistencia personalizada, puede contactarnos por los siguientes medios. Obtendrá una respuesta inmediatamente.
+            </p>
+            <div class="contact-info-block">
+                <strong>Fernando Quezada</strong><br>
+                Founder & Creative Director<br>
+                <a href="https://wa.me/525549400957" target="_blank">55 4940 0957</a><br>
+                <a href="mailto:collabs@feraz.studio">collabs@feraz.studio</a>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer-bar">
+            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo" class="footer-logo">
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/feraz.cdmx/" target="_blank" title="Instagram">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://feraz.studio" target="_blank" title="Sitio Web">
+                    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/globe.png" alt="Globe Icon" class="globe-icon-img">
+                </a>
+            </div>
+        </footer>
     </div>
-</footer>
 </div>
 
 <!-- SCRIPT CAL.COM SDK (MODAL) Y LÓGICA GENERAL -->
@@ -2119,12 +2103,12 @@ function evaluateStates(activeCount) {
         activeBg = 'turndown';
     }
 
-    // Actualiza la barra Sticky
+    // Sincroniza fondos en la Sticky Pill
     document.querySelectorAll('.pill-bg').forEach(bg => bg.classList.remove('active'));
     document.getElementById('bg-' + activeBg).classList.add('active');
 
-    // Sincroniza las imágenes completas de la izquierda en PC
-    if (window.innerWidth >= 768) {
+    // Sincroniza la Imagen Izquierda en Computadora
+    if (window.innerWidth >= 1024) {
         document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
         const activeImg = document.getElementById('slider-img-' + activeBg);
         if (activeImg) {
@@ -2133,46 +2117,42 @@ function evaluateStates(activeCount) {
     }
 }
 
-// LOGICA DE SCROLL (ANIMACIÓN DEL LOGO, BANNER E IMAGENES LATERALES)
-const mainContainer = document.getElementById('main-container');
-const topBanner = document.getElementById('top-banner');
-const heroLogo = document.getElementById('hero-logo');
-
-mainContainer.addEventListener('scroll', () => {
+// LOGICA CENTRALIZADA DE SCROLL (Maneja el difuminado del Logo, Banner y Cambios de Imagen)
+function handleScroll() {
     let activeCount = 0;
     checkboxes.forEach(box => { if (box.checked) activeCount++; });
     evaluateStates(activeCount);
     
-    // Difumina el logo del hero cuando el usuario comienza a scrollear
-    if (mainContainer.scrollTop > 50) {
+    // Obtenemos la posición de scroll dependiendo si estamos en PC o Móvil
+    const scrollPos = window.innerWidth >= 1024 ? document.getElementById('right-scroll-wrapper').scrollTop : window.scrollY;
+    
+    // Difumina el logo del Hero al bajar
+    const heroLogo = document.getElementById('hero-logo');
+    if (scrollPos > 50) {
         heroLogo.style.opacity = 0;
     } else {
         heroLogo.style.opacity = 1;
     }
 
-    // Aparece el banner cuando ya se pasó la primera sección
-    if (mainContainer.scrollTop > 150) {
-        if (window.innerWidth >= 768) topBanner.classList.add('visible');
+    // Aparece el Banner en PC cuando bajamos más de 150px
+    const topBanner = document.getElementById('top-banner');
+    if (scrollPos > 150 && window.innerWidth >= 1024) {
+        topBanner.classList.add('visible');
     } else {
         topBanner.classList.remove('visible');
     }
-});
+}
 
-// Respaldo para móvil donde el scroll es sobre la ventana (window)
-window.addEventListener('scroll', () => {
-    if (window.innerWidth < 768) {
-        let activeCount = 0;
-        checkboxes.forEach(box => { if (box.checked) activeCount++; });
-        evaluateStates(activeCount);
-    }
-});
+// Agregamos el listener a ambos contenedores para que funcione en cualquier dispositivo
+window.addEventListener('scroll', handleScroll);
+document.getElementById('right-scroll-wrapper').addEventListener('scroll', handleScroll);
 
 document.getElementById('stickyPill').addEventListener('click', () => {
     const contactoSection = document.getElementById('contacto-section');
     
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1024) {
         const elementPosition = contactoSection.offsetTop;
-        mainContainer.scrollTo({
+        document.getElementById('right-scroll-wrapper').scrollTo({
             top: elementPosition - 120,
             behavior: 'smooth'
         });
@@ -2213,7 +2193,7 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
     document.getElementById('main-container').classList.remove('crossfade-out');
     document.body.style.overflow = '';
     
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1024) {
         document.body.style.overflow = 'hidden'; 
     }
 
