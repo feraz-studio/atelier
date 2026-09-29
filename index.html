@@ -1154,8 +1154,10 @@
             display: block;
             width: 50vw; 
             height: 100vh;
+            position: fixed; /* Asegura que la columna izquierda esté fija en pantalla */
             position: relative;
             overflow: hidden;
+            pointer-events: none;
             background-color: #111111;
         }
 
@@ -1179,6 +1181,7 @@
             overflow-y: auto; 
             background-color: #FAF9F6;
             position: relative;
+            z-index: 2;
         }
 
         .atelier-container {
@@ -1236,7 +1239,7 @@
 </div>
 
 <div class="desktop-only-image-container" id="desktop-image-slider">
-    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Leafs.webp?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
+    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Bonbon.webp?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
     <!-- NUEVA IMAGEN PARA NUESTRA PROMESA -->
     <img id="slider-img-promesa" src="https://github.com/feraz-studio/feraz-assets/blob/main/Maracuya.webp?raw=true" class="slider-img" alt="Nuestra Promesa">
     
@@ -2348,14 +2351,7 @@ document.getElementById('btn-post-submit-cal').addEventListener('click', (e) => 
     document.getElementById('success-overlay').classList.add('active');
     triggerCalComBooking();
 });
-const desktopSlider = document.getElementById('desktop-image-slider');
-const rightWrapper = document.getElementById('right-scroll-wrapper');
 
-if (desktopSlider && rightWrapper) {
-    desktopSlider.addEventListener('wheel', (e) => {
-        rightWrapper.scrollTop += e.deltaY;
-    });
-}
 
 updateVajillaText();
 </script>
