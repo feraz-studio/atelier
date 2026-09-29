@@ -27,6 +27,12 @@
         font-style: normal;
     }
     @font-face {
+    font-family: 'HK Grotesk';
+    src: url('https://github.com/feraz-studio/feraz-assets/raw/main/HKGrotesk-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+    @font-face {
         font-family: 'HK Grotesk';
         src: url('https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/HKGrotesk-SemiBold.woff2') format('woff2');
         font-weight: 600;
@@ -138,7 +144,7 @@
     }
 
     .content-body {
-        padding: 40px 24px 60px 24px;
+        padding: 40px 24px 30px 24px;
         position: relative;
     }
 
@@ -160,9 +166,9 @@
     }
 
     .promise-icon {
-        width: 25px;
-        height: 25px;
-        margin-bottom: 90px;
+        width: 35px;
+        height: auto;
+        margin-bottom: 20px;
         display: block;
         filter: brightness(0); 
     }
@@ -170,7 +176,7 @@
     .atelier-header-block {
         border-top: 1px solid #E5E5E5;
         padding-top: 45px;
-        margin-bottom: 90px;
+        margin-bottom: 40px;
     }
 
     .hotel-header-logo-container {
@@ -256,14 +262,14 @@
         padding-top: 40px;
     }
 
-    #checkin-section { margin-bottom: 90px; }
-    #turndown-section { margin-bottom: 90px; }
-    #editorial-section { margin-bottom: 90px; }
-    #digital-section { margin-bottom: 90px; }
-    #sets-section { margin-bottom: 90px; }
+    #checkin-section { margin-bottom: 40px; }
+    #turndown-section { margin-bottom: 40px; }
+    #editorial-section { margin-bottom: 40px; }
+    #digital-section { margin-bottom: 40px; }
+    #sets-section { margin-bottom: 40px; }
     
     .temi-block {
-        margin-bottom: 90px;
+        margin-bottom: 20px;
         padding-bottom: 0px;
         border-top: 1px solid #E5E5E5;
         padding-top: 40px;
@@ -535,7 +541,7 @@
         position: relative !important;
         bottom: 0;
         margin-top: 40px; 
-        margin-bottom: 90px; 
+        margin-bottom: 30px; 
         cursor: default;
     }
     /* ============================================== */
@@ -611,7 +617,7 @@
 
     /* SECCIÓN CHECKOUT / COTIZACIÓN */
     .checkout-box {
-        padding-top: 40px;
+        padding-top: 00px;
         padding-bottom: 0px;
         scroll-margin-top: 120px;
     }
@@ -1230,11 +1236,15 @@
 </div>
 
 <div class="desktop-only-image-container" id="desktop-image-slider">
-    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
-    <img id="slider-img-turndown" src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Turndown Service">
-    <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true" class="slider-img" alt="Editorial y Soporte">
-    <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true" class="slider-img" alt="Digital y Contenido">
-    <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true" class="slider-img" alt="Sets de Colección">
+    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Leafs.webp?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
+    <!-- NUEVA IMAGEN PARA NUESTRA PROMESA -->
+    <img id="slider-img-promesa" src="https://github.com/feraz-studio/feraz-assets/blob/main/Maracuya.webp?raw=true" class="slider-img" alt="Nuestra Promesa">
+    
+    <img id="slider-img-turndown" src="https://github.com/feraz-studio/feraz-assets/blob/main/Mawii.webp?raw=true" class="slider-img" alt="Turndown Service">
+    <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Coeri.webp?raw=true" class="slider-img" alt="Editorial y Soporte">
+    <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Vajilla.webp?raw=true" class="slider-img" alt="Digital y Contenido">
+    <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Manitas.webp?raw=true" class="slider-img" alt="Sets de Colección">
+    <img id="slider-img-submitted" src="https://github.com/feraz-studio/feraz-assets/raw/main/Tasting.webp" class="slider-img" alt="Experiencia Culinaria Feraz">
 </div>
 
 <div class="right-scroll-wrapper" id="right-scroll-wrapper">
@@ -2076,10 +2086,26 @@ function evaluateStates(activeCount) {
     document.getElementById('bg-' + activeBg).classList.add('active');
 
     if (window.innerWidth >= 1024) {
-        document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
-        const activeImg = document.getElementById('slider-img-' + activeBg);
-        if (activeImg) {
-            activeImg.classList.add('active');
+        const heroSection = document.querySelector('.hero-section');
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+
+        // Si aún estamos en la portada (Hero)
+        if (heroBottom > 0) {
+            document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+            const checkinImg = document.getElementById('slider-img-checkin');
+            if (checkinImg) checkinImg.classList.add('active');
+        } 
+        // Si ya pasamos la portada pero aún no entramos a la sección de Check-in
+        else if (checkinBottom > triggerLine) {
+            document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+            const promesaImg = document.getElementById('slider-img-promesa');
+            if (promesaImg) promesaImg.classList.add('active');
+        } 
+        // Para las siguientes secciones en adelante
+        else {
+            document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+            const activeImg = document.getElementById('slider-img-' + activeBg);
+            if (activeImg) activeImg.classList.add('active');
         }
     }
 }
@@ -2098,8 +2124,12 @@ function handleScroll() {
         heroLogo.style.opacity = 1;
     }
 
+    // El banner superior en desktop aparece exactamente cuando se termina de scrollear el Hero
     const topBanner = document.getElementById('top-banner');
-    if (scrollPos > 150 && window.innerWidth >= 1024) {
+    const heroSection = document.querySelector('.hero-section');
+    const heroHeight = heroSection ? heroSection.offsetHeight : 640;
+
+    if (scrollPos >= heroHeight && window.innerWidth >= 1024) {
         topBanner.classList.add('visible');
     } else {
         topBanner.classList.remove('visible');
@@ -2120,7 +2150,7 @@ document.getElementById('stickyPill').addEventListener('click', () => {
         });
     } else {
         const elementPosition = contactoSection.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - 120;
+        const offsetPosition = elementPosition + window.pageYOffset - 145;
         window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
