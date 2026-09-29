@@ -19,6 +19,13 @@
 <meta name="twitter:description" content="Atelier de diseño culinario y hospitalidad de alta gama en Ciudad de México.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Thumbnail.jpg">
 <style>
+    /* TIPOGRAFÍA: 100% HK Grotesk */
+    @font-face {
+        font-family: 'HK Grotesk';
+        src: url('https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/HKGrotesk-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+    }
     @font-face {
         font-family: 'HK Grotesk';
         src: url('https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/HKGrotesk-SemiBold.woff2') format('woff2');
@@ -31,12 +38,6 @@
         font-weight: 700;
         font-style: normal;
     }
-    @font-face {
-        font-family: 'Zilla Slab';
-        src: url('https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/ZillaSlab-Regular.ttf') format('truetype');
-        font-weight: 400;
-        font-style: normal;
-    }
 
     * {
         box-sizing: border-box;
@@ -45,15 +46,15 @@
         scroll-behavior: smooth;
     }
 
+    /* ESQUEMA DE COLOR LIGHT MODE FERAZ */
     body {
-        background-color: #111111;
-        color: #ffffff;
+        background-color: #FAF9F6;
+        color: #000000;
         font-family: 'HK Grotesk', sans-serif;
         margin: 0; 
         padding: 0;
         width: 100vw;
         overflow-x: hidden;
-        /* Fade in on load */
         animation: fadeInLoad 1.5s ease-in-out; 
     }
 
@@ -62,11 +63,10 @@
         100% { opacity: 1; }
     }
 
-    /* Contenedor principal de la página. Para PC, este será el lado derecho. */
     .atelier-container {
         width: 100%;
         max-width: 375px;
-        background: #111111;
+        background: #FAF9F6;
         position: relative;
         margin: 0 auto; 
         transition: opacity 3s ease;
@@ -92,14 +92,14 @@
         object-position: center;
     }
 
-    /* Ocultamos el logo original del hero en escritorio para poner el del banner */
     .hero-logo {
         position: absolute;
         top: 24px;
         left: 50%;
         transform: translateX(-50%);
         width: 67px;
-        z-index: 2; /* Para que quede sobre la imagen */
+        z-index: 2; 
+        transition: opacity 0.3s ease;
     }
 
     .hero-content {
@@ -108,70 +108,69 @@
         left: 24px;
         right: 24px;
         text-align: center;
+        color: #ffffff; /* Texto sobre foto siempre blanco */
     }
 
     .hero-title {
-        font-family: 'HK Grotesk', sans-serif;
         font-size: 18px;
         font-weight: 700;
         letter-spacing: 0.05em;
         margin-bottom: 12px;
+        color: #ffffff;
     }
 
     .btn-iniciar {
         display: inline-block;
-        font-family: 'HK Grotesk', sans-serif;
         font-size: 14px;
         font-weight: 600;
         letter-spacing: normal;
         text-transform: uppercase;
-        color: #fff;
+        color: #ffffff;
         text-decoration: none;
-        border-bottom: 1px solid #fff;
+        border-bottom: 1px solid #ffffff;
         padding-bottom: 2px;
     }
 
     .content-body {
-        padding: 24px 20px;
+        padding: 40px 24px 60px 24px;
         position: relative;
     }
 
-    .section-title-serif {
-        font-family: 'Zilla Slab', serif;
-        font-size: 14px;
-        font-weight: 600;
+    .section-title-main {
+        font-size: 16px;
+        font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        margin-bottom: 12px;
-        color: #f0efe9;
+        margin-bottom: 24px;
+        color: #000000;
     }
 
     .promise-text {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 10px;
-        font-weight: 600;
-        line-height: 1.5;
-        color: #b3b2ad;
-        margin-bottom: 16px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #333333;
+        margin-bottom: 45px; /* Más respiro */
     }
 
     .promise-icon {
         width: 25px;
         height: 25px;
-        margin-bottom: 32px;
+        margin-bottom: 90px;
         display: block;
+        filter: brightness(0); /* Ícono negro */
     }
 
     .atelier-header-block {
-        border-top: 1px solid #333;
-        padding-top: 24px;
-        margin-bottom: 24px;
+        border-top: 1px solid #E5E5E5;
+        padding-top: 45px;
+        margin-bottom: 90px;
     }
 
     .hotel-header-logo-container {
-        width: 120px;
-        height: 30px;
-        margin-bottom: 16px;
+        width: 140px;
+        height: 35px;
+        margin-bottom: 24px;
     }
 
     .hotel-header-logo-container img {
@@ -184,24 +183,24 @@
     .rooms-line {
         display: flex;
         align-items: center;
-        gap: 6px;
-        font-size: 11px;
-        margin-bottom: 8px;
-        color: #b3b2ad;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #555555;
     }
 
     .rooms-input {
-        width: 44px;
+        width: 50px;
         background: transparent;
         border: none;
-        border-bottom: 1px solid #666;
-        color: #fff;
+        border-bottom: 1px solid #999;
+        color: #000000;
         font-family: 'HK Grotesk', sans-serif;
         font-size: 16px !important; 
-        zoom: 0.8; 
         text-align: center;
         outline: none;
-        padding: 0;
+        padding: 0 0 2px 0;
     }
 
     .rooms-input::-webkit-outer-spin-button,
@@ -215,24 +214,23 @@
 
     .rooms-warning-text {
         color: #c5a059;
-        font-size: 10px;
-        font-family: 'HK Grotesk', sans-serif;
+        font-size: 12px;
         font-weight: 600;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
         display: none;
     }
 
     .atelier-desc {
-        font-size: 10px;
-        font-weight: 600;
-        line-height: 1.5;
-        color: #b3b2ad;
-        margin-bottom: 16px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #333333;
+        margin-bottom: 24px;
     }
 
     .notes-small {
-        font-size: 9px;
-        color: #888;
+        font-size: 12px;
+        color: #666666;
         margin-bottom: 24px;
     }
 
@@ -243,125 +241,115 @@
     }
 
     .category-block {
-        margin-bottom: 32px;
-        border-top: 1px solid #222;
-        padding-top: 16px;
+        margin-bottom: 90px; /* Respiración solicitada de 90px */
+        border-top: 1px solid #E5E5E5;
+        padding-top: 40px;
     }
 
     .culinary-header-grid {
         display: flex;
         gap: 16px;
         align-items: flex-start;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
     }
 
     .culinary-title-side {
         border-left: 2px solid #c5a059;
-        padding-left: 10px;
+        padding-left: 12px;
     }
 
     .culinary-main-title {
-        font-family: 'Zilla Slab', serif;
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 16px;
+        font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        line-height: 1.1;
-        color: #fff;
+        line-height: 1.2;
+        color: #000000;
     }
 
     .culinary-desc-side {
         flex: 1;
-        font-family: 'Zilla Slab', serif;
-        font-size: 12px;
-        line-height: 1.4;
-        color: #e0ded6;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: #333333;
     }
 
     .culinary-features {
         display: flex;
         justify-content: space-between;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
         color: #c5a059;
-        margin-bottom: 20px;
-        padding-top: 4px;
-    }
-
-    .category-main-title {
-        font-family: 'Zilla Slab', serif;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        margin-bottom: 4px;
+        margin-bottom: 32px;
     }
 
     .category-type-tag {
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: #c5a059;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
 
     .category-subtext {
-        font-size: 10px;
-        font-weight: 600;
-        color: #b3b2ad;
-        margin-bottom: 16px;
-        line-height: 1.4;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333333;
+        margin-bottom: 24px;
+        line-height: 1.5;
     }
 
     .service-row {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 10px 0;
-        border-bottom: 1px solid #222;
+        padding: 16px 0;
+        border-bottom: 1px solid #E5E5E5;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
     .service-info {
         flex: 1;
-        padding-right: 12px;
+        padding-right: 16px;
     }
 
     .service-title {
-        font-family: 'Zilla Slab', serif;
-        font-size: 13px;
-        font-weight: 600;
-        margin-bottom: 2px;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: #000000;
     }
 
     .service-desc {
-        font-size: 9px;
-        font-weight: 600;
-        color: #888;
-        line-height: 1.3;
+        font-size: 12px;
+        font-weight: 400;
+        color: #666666;
+        line-height: 1.4;
     }
 
     .service-right {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
     }
 
     .service-price {
-        font-size: 11px;
+        font-size: 14px;
         font-weight: 600;
+        color: #000000;
         transition: all 0.3s ease;
     }
 
     .service-price.included {
         text-decoration: line-through;
-        color: #888;
+        color: #999999;
     }
 
     .included-tag {
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -376,9 +364,9 @@
     input[type="checkbox"].calc-item {
         appearance: none;
         -webkit-appearance: none;
-        width: 14px;
-        height: 14px;
-        border: 1px solid #666;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #999;
         background: transparent;
         cursor: pointer;
         position: relative;
@@ -389,7 +377,7 @@
     }
 
     input[type="checkbox"].calc-item:checked {
-        border-color: #fff;
+        border-color: #000;
         background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Gradient.png?raw=true');
     }
 
@@ -397,11 +385,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 10px;
-        font-family: 'HK Grotesk', sans-serif;
-        color: #ffffff;
-        opacity: 0.6;
-        margin-top: 10px;
+        font-size: 12px;
+        color: #666666;
+        margin-top: 16px;
     }
 
     .legend-right-align {
@@ -411,8 +397,8 @@
     .sets-banner-container {
         position: relative;
         width: 100%;
-        height: 70px;
-        margin-bottom: 20px;
+        height: 90px;
+        margin-bottom: 32px;
     }
 
     .sets-banner-img {
@@ -425,11 +411,10 @@
     .sets-banner-title {
         position: absolute;
         top: 50%;
-        left: 16px;
+        left: 20px;
         transform: translateY(-50%);
-        font-family: 'Zilla Slab', serif;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 16px;
+        font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
         color: #fff;
@@ -438,77 +423,72 @@
 
     .sets-banner-subtitle {
         position: absolute;
-        top: 65%;
-        left: 16px;
+        top: 70%;
+        left: 20px;
         transform: translateY(-50%);
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 10px;
-        font-weight: 600;
+        font-size: 12px;
+        font-weight: 400;
         color: #fff;
         z-index: 2;
     }
 
     .set-card {
-        border: 1px solid #333;
-        padding: 14px;
-        margin-bottom: 16px;
-        background: #151515;
-        font-family: 'HK Grotesk', sans-serif;
+        border: 1px solid #E5E5E5;
+        padding: 20px;
+        margin-bottom: 24px;
+        background: #FFFFFF;
     }
 
     .set-card-header {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 11px;
+        font-size: 14px;
         font-weight: 700;
         letter-spacing: 0.1em;
         color: #c5a059;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
     }
 
     .set-item-row {
         display: flex;
         justify-content: space-between;
-        font-size: 10px;
-        color: #b3b2ad;
-        padding: 4px 0;
-        font-family: 'HK Grotesk', sans-serif;
+        font-size: 12px;
+        color: #333333;
+        padding: 6px 0;
     }
 
     .set-footer-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid #333;
-        margin-top: 8px;
-        padding-top: 8px;
-        font-size: 11px;
+        border-top: 1px solid #E5E5E5;
+        margin-top: 12px;
+        padding-top: 12px;
+        font-size: 14px;
         font-weight: 600;
-        font-family: 'HK Grotesk', sans-serif;
+        color: #000000;
     }
 
     .crossed-price {
         color: rgba(197, 160, 89, 0.7);
         text-decoration: line-through;
-        font-family: 'HK Grotesk', sans-serif;
     }
     
-    /* BARRA STICKY */
+    /* BARRA STICKY - Mantiene textos blancos por los fondos oscuros */
     .sticky-pill-bar {
         position: -webkit-sticky;
         position: sticky;
-        bottom: 20px;
+        bottom: 24px;
         width: 100%;
         max-width: 335px;
         height: 65px;
-        border: 1px solid #444;
+        border: 1px solid #E5E5E5;
         border-radius: 32.5px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         padding: 0 24px;
         margin: 0 auto 32px auto;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sombra más suave para modo claro */
         z-index: 100;
         opacity: 0;
         visibility: hidden;
@@ -566,33 +546,30 @@
     }
 
     .total-label {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: #ffffff; /* Blanco sobre la pastilla */
         text-transform: uppercase;
-        margin-bottom: 2px;
+        margin-bottom: 4px;
         line-height: 1;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .total-value {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.05em;
-        color: #ffffff;
+        color: #ffffff; /* Blanco sobre la pastilla */
         line-height: 1;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     .total-warning-text {
         display: none;
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 700;
-        color: #ffffff;
+        color: #ffffff; /* Blanco sobre la pastilla */
         text-transform: uppercase;
         text-align: right;
         max-width: 250px;
@@ -603,7 +580,7 @@
 
     /* SECCIÓN CHECKOUT / COTIZACIÓN */
     .checkout-box {
-        padding-top: 20px;
+        padding-top: 40px;
         padding-bottom: 0px;
         scroll-margin-top: 120px;
     }
@@ -612,12 +589,12 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 12px;
+        margin-bottom: 24px;
     }
 
     .checkout-logo-container {
-        width: 120px;
-        height: 30px;
+        width: 140px;
+        height: 35px;
         display: flex;
         justify-content: flex-end;
         align-items: flex-start;
@@ -635,13 +612,13 @@
     .checkout-summary-list {
         list-style: none;
         transition: padding 1.5s ease, margin 1.5s ease;
-        border-top: 0 solid #222;
+        border-top: 0 solid #E5E5E5;
     }
 
     .checkout-summary-list.has-items {
-        border-top: 1px solid #222;
-        padding-top: 16px;
-        margin-top: 24px;
+        border-top: 1px solid #E5E5E5;
+        padding-top: 24px;
+        margin-top: 32px;
     }
 
     .checkout-summary-item {
@@ -650,7 +627,7 @@
         align-items: flex-start;
         padding: 0 0;
         margin: 0;
-        border-bottom: 1px solid #222;
+        border-bottom: 1px solid #E5E5E5;
     }
 
     .summary-left {
@@ -661,105 +638,88 @@
     }
 
     .summary-dot {
-        color: #ffffff;
-        font-size: 12px;
+        color: #000000;
+        font-size: 14px;
         line-height: 1;
-        margin-top: 2px;
+        margin-top: 4px;
     }
 
     .summary-text-block {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
     }
 
     .summary-name {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
-        color: #fff;
+        color: #000000;
     }
 
     .summary-format-tag {
-        font-size: 8px;
+        font-size: 12px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: #c5a059;
-        margin-left: 6px;
+        margin-left: 8px;
         font-weight: 700;
     }
 
     .summary-desc {
-        font-size: 9px;
-        color: #888;
-        line-height: 1.4;
+        font-size: 12px;
+        color: #666666;
+        line-height: 1.5;
     }
 
     .summary-price {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 11px;
+        font-size: 14px;
         font-weight: 600;
+        color: #000000;
         white-space: nowrap;
         margin-top: 2px;
     }
 
     .checkout-summary-item.nested-item {
         border-bottom: none !important;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
     .checkout-summary-item.nested-item .summary-left {
-        padding-left: 20px;
+        padding-left: 24px;
         margin-top: -2px;
     }
 
     .checkout-summary-item.nested-item + .checkout-summary-item:not(.nested-item) {
-        border-top: 1px solid #222;
+        border-top: 1px solid #E5E5E5;
     }
 
     .checkout-action-wrapper {
         position: relative;
-        margin: 16px 0 25px 0;
+        margin: 32px 0;
     }
 
     .btn-checkout-dynamic {
-        background-color: #ffffff;
-        color: #000000;
-        border: none;
+        background-color: #111111; /* Botón oscuro sobre fondo claro */
+        color: #ffffff;
+        border: 1px solid #111111;
         border-radius: 20px;
         font-family: 'HK Grotesk', sans-serif;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        padding: 12px 24px;
+        padding: 14px 28px;
         cursor: pointer;
         position: relative;
         display: inline-block;
-        transition: background-color 1.5s ease, color 1.5s ease;
-    }
-
-    .btn-checkout-dynamic::after {
-        content: '';
-        position: absolute;
-        bottom: 10px;
-        left: 24px;
-        right: 24px;
-        height: 1px;
-        background-color: #ffffff;
-        opacity: 0;
-        transition: opacity 1.5s ease;
-        pointer-events: none;
+        transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     .btn-checkout-dynamic.active {
         background-color: transparent;
-        color: #ffffff;
-    }
-
-    .btn-checkout-dynamic.active::after {
-        opacity: 1;
+        color: #111111;
+        border: 1px solid transparent;
     }
 
     .expandable-form {
@@ -769,7 +729,7 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         transition: max-height 1.8s cubic-bezier(0.25, 1, 0.3, 1),
                     opacity 1.8s ease,
                     transform 1.8s cubic-bezier(0.25, 1, 0.3, 1),
@@ -780,7 +740,7 @@
         max-height: 400px;
         opacity: 1;
         transform: translateY(0);
-        padding-bottom: 40px;
+        padding-bottom: 60px;
     }
 
     .expandable-form.closing {
@@ -789,29 +749,28 @@
 
     .client-input-grey {
         width: 100%;
-        background: #e5e5e5;
+        background: #E5E5E5;
         border: none;
         border-radius: 20px;
-        padding: 10px 16px;
+        padding: 12px 20px;
         font-family: 'HK Grotesk', sans-serif;
-        font-size: 16px !important;
-        zoom: 0.7; 
-        color: #111;
+        font-size: 14px !important;
+        color: #000000;
         outline: none;
     }
 
     .client-input-grey::placeholder {
-        color: #666;
+        color: #666666;
     }
 
     .submit-checkout-btn {
-        background: #111;
-        color: #fff;
-        border: 1px solid #333;
+        background: #111111;
+        color: #ffffff;
+        border: none;
         border-radius: 20px;
-        padding: 12px 20px;
+        padding: 14px 24px;
         font-family: 'HK Grotesk', sans-serif;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
@@ -819,13 +778,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: 10px;
         width: fit-content;
     }
 
     .submit-icon {
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         fill: #ffffff;
     }
 
@@ -833,13 +792,13 @@
         display: none;
         position: -webkit-sticky;
         position: sticky;
-        bottom: 20px;
+        bottom: 24px;
         z-index: 100;
         width: 100%;
         justify-content: center;
         padding: 0;
-        margin-top: 30px;
-        margin-bottom: 40px;
+        margin-top: 40px;
+        margin-bottom: 60px;
         animation: fadeIn 1s ease;
     }
 
@@ -849,55 +808,54 @@
     }
 
     .temi-block {
-        margin-bottom: 10px;
+        margin-bottom: 90px;
         padding-bottom: 0px;
+        border-top: 1px solid #E5E5E5;
+        padding-top: 40px;
     }
 
     .temi-body-text {
-        font-size: 11px;
-        font-weight: 600;
-        color: #e0ded6;
-        margin-bottom: 24px;
-        line-height: 1.5;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333333;
+        margin-bottom: 32px;
+        line-height: 1.6;
     }
 
     .temi-list {
         list-style: none;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
-        color: #b3b2ad;
-        line-height: 2.2;
+        color: #555555;
+        line-height: 2.4;
         margin-bottom: 0;
     }
 
     .contact-section-light {
         background-color: #FAF9F6;
         color: #000000;
-        padding: 24px 20px 20px 20px;
-        font-family: 'HK Grotesk', sans-serif;
+        padding: 40px 24px 20px 24px;
     }
 
     .contact-header-title {
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
-        letter-spacing: normal;
         text-transform: uppercase;
         color: #000000;
-        margin-bottom: 16px;
-    }
-
-    .contact-body-text {
-        font-size: 10px;
-        font-weight: 600;
-        line-height: 1.5;
-        color: #333333;
         margin-bottom: 24px;
     }
 
-    .contact-info-block {
-        font-size: 11px;
+    .contact-body-text {
+        font-size: 14px;
+        font-weight: 400;
         line-height: 1.6;
+        color: #333333;
+        margin-bottom: 32px;
+    }
+
+    .contact-info-block {
+        font-size: 14px;
+        line-height: 1.8;
         color: #000000;
     }
 
@@ -911,16 +869,16 @@
     }
 
     .footer-bar {
-        height: 75px;
+        height: 90px;
         background-color: #FAF9F6;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 20px 20px 20px;
+        padding: 0 24px 30px 24px;
     }
 
     .footer-logo {
-        width: 60px;
+        width: 70px;
         height: auto;
         filter: brightness(0);
     }
@@ -928,12 +886,12 @@
     .footer-socials {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 20px;
     }
 
     .social-icon {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         fill: #000000;
         transition: opacity 0.2s;
     }
@@ -943,8 +901,8 @@
     }
 
     .globe-icon-img {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         object-fit: contain;
         filter: brightness(0);
         transition: opacity 0.2s;
@@ -988,34 +946,32 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        max-width: 340px;
+        max-width: 380px;
         margin: auto; 
     }
 
     .feraz-logo-overlay {
-        width: 67px;
-        margin-bottom: 40px;
+        width: 80px;
+        margin-bottom: 48px;
     }
 
     .success-text {
-        font-family: 'HK Grotesk', sans-serif;
         color: #FAF9F6;
         font-weight: 400;
-        font-size: 11px;
+        font-size: 14px;
         line-height: 1.6;
         text-align: center;
-        max-width: 320px;
-        margin-bottom: 40px;
+        max-width: 360px;
+        margin-bottom: 48px;
     }
     
     .success-text p {
-        margin-bottom: 16px;
+        margin-bottom: 20px;
     }
     .success-text p:last-child {
         margin-bottom: 0;
     }
 
-    /* EFECTO BLUR-IN PARA LA TARJETA DE CONFIRMACIÓN FINAL */
     #feraz-success-message {
         display: none;
         flex-direction: column;
@@ -1031,12 +987,11 @@
         filter: blur(0px);
     }
 
-    /* BOTONES METÁLICOS Y GLOW ESMERALDA DINÁMICO */
     .btn-metallic {
         position: relative;
-        width: 200px;
-        height: 45px;
-        border-radius: 22.5px;
+        width: 220px;
+        height: 50px;
+        border-radius: 25px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1067,7 +1022,6 @@
         animation: etheralMetal 6s ease-in-out infinite alternate;
     }
 
-    /* ESTADO VERDE CON GLOW */
     .btn-metallic.success-state {
         box-shadow: 0 0 25px rgba(45, 130, 70, 0.45), 0 10px 30px rgba(0,0,0,0.6);
     }
@@ -1090,15 +1044,14 @@
         position: absolute;
         inset: 1.5px; 
         background: #151515; 
-        border-radius: 21px;
+        border-radius: 23.5px;
     }
 
     .btn-metallic span {
         position: relative;
         z-index: 10;
         color: #fff;
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -1120,8 +1073,7 @@
     .btn-volver {
         margin-top: auto; 
         margin-bottom: 40px;
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         color: #fff;
         text-decoration: none;
@@ -1138,8 +1090,7 @@
         opacity: 0.7;
     }
 
-    /* Ocultar elementos exclusivos de PC por defecto (móvil) */
-    .desktop-only-banner, .desktop-only-image-container {
+    .desktop-only-banner, .desktop-only-image-container, .desktop-black-strip {
         display: none;
     }
 
@@ -1147,18 +1098,29 @@
     /* MEDIA QUERY PARA ESCRITORIO (PC)               */
     /* ============================================== */
     @media (min-width: 768px) {
-        /* Hacemos que el body sea un contenedor flex fila para poner la imagen a la izq y el sitio a la derecha */
+        
         body {
             display: flex;
             flex-direction: row;
-            justify-content: center; /* Centrará ambos elementos */
-            align-items: flex-start;
+            align-items: stretch;
             height: 100vh;
-            overflow: hidden; /* Ocultamos el scroll principal en PC para controlar las áreas individualmente */
-            padding-top: 60px; /* Espacio para el banner negro */
+            overflow: hidden; /* Scroll delegado al contenedor derecho */
         }
 
-        /* BANNER NEGRO SUPERIOR EXCLUSIVO DE ESCRITORIO */
+        /* FRANJA NEGRA A LA DERECHA FIJA */
+        .desktop-black-strip {
+            display: block;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100vh;
+            background-color: #111111;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        /* BANNER SUPERIOR ANIMADO AL HACER SCROLL */
         .desktop-only-banner {
             display: flex;
             justify-content: center;
@@ -1167,9 +1129,21 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 60px;
-            background-color: #111111;
+            height: 80px;
+            background-color: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E5E5;
             z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(-20px);
+        }
+
+        .desktop-only-banner.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
         .desktop-only-banner a {
@@ -1177,32 +1151,29 @@
         }
 
         .desktop-only-banner img {
-            width: 80px; /* Aproximadamente 20% más grande que los 67px originales */
+            width: 90px;
             height: auto;
+            filter: brightness(0); /* Logo negro en banner claro */
         }
 
-        /* CONTENEDOR DE LA IMAGEN CENTRAL IZQUIERDA */
+        /* CONTENEDOR DE LA IMAGEN CENTRAL IZQUIERDA (100% de su espacio) */
         .desktop-only-image-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 440px; /* Ancho fijo para coincidir con el lado derecho */
-            height: calc(100vh - 60px); /* Altura total menos el banner */
+            flex: 1; /* Ocupa todo el espacio restante */
+            height: 100vh;
             background-color: #111111;
             position: relative;
         }
 
-        /* Las imágenes dentro de este contenedor tendrán transiciones para crossfade */
         .desktop-only-image-container img {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Bordes negros muy pequeños a los lados, como solicitaste */
-            padding: 0 5px; 
-            box-sizing: border-box;
             opacity: 0;
-            transition: opacity 1s ease-in-out; /* Transición suave de 1s */
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .desktop-only-image-container img.active {
@@ -1211,44 +1182,41 @@
 
         /* CONTENEDOR PRINCIPAL (Lado Derecho) */
         .atelier-container {
-            max-width: 440px; 
-            height: calc(100vh - 60px); /* Altura total menos el banner */
-            overflow-y: auto; /* Habilitamos scroll independiente solo en esta área */
-            /* Quitamos el zoom para no afectar las imágenes en móvil, 
-               y mejor lo manejamos todo a escala 1:1 o ajustando fuentes si fuera necesario, 
-               pero lo dejaremos sin zoom como pediste que no se modifique la escala */
-            zoom: 1; 
-            margin: 0; /* Quitamos el margin auto para que se acomode junto a la imagen */
+            flex: 0 0 760px; /* Base 500px + 200px franja negra + 60px padding */
+            height: 100vh;
+            overflow-y: auto; 
+            padding-left: 60px;
+            padding-right: 260px; /* 200px para evitar la franja negra + 60px de margen */
+            background-color: #FAF9F6;
+            margin: 0; 
         }
 
-        /* Ocultamos el hero image y hero logo en PC ya que estarán en el banner y panel izq */
-        .hero-image, .hero-logo {
-            display: none;
-        }
-        
-        /* Ajustamos el hero section en PC para que no ocupe tanto espacio si la imagen está a la izq */
+        /* Ajustes del Hero para PC */
         .hero-section {
-           height: auto;
-           padding: 40px 0;
+           height: 100vh;
            display: flex;
            flex-direction: column;
            align-items: center;
+           justify-content: center;
+           margin-left: -60px; /* Para que la imagen tape todo el contenedor hasta la orilla izquierda */
+           width: calc(100% + 60px);
         }
         
         .hero-content {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            right: auto;
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            right: 0;
         }
 
-        /* Ajuste para que la barra flotante (sticky) siga bien proporcionada */
+        /* Ajuste para centrar el Sticky Pill en el espacio útil (sin invadir la franja negra) */
         .sticky-pill-bar {
-            max-width: 390px;
-            bottom: 20px; /* Aseguramos que se mantenga arriba del borde inferior */
+            max-width: 380px;
+            bottom: 32px; 
+            margin-left: 0; /* Acomodo para PC */
+            margin-right: auto;
         }
         
-        /* El overlay de exito debe cubrir toda la pantalla en PC también */
         .success-overlay {
             z-index: 2000;
         }
@@ -1259,67 +1227,67 @@
 <body>
 
 <!-- BANNER SUPERIOR EXCLUSIVO DE ESCRITORIO -->
-<div class="desktop-only-banner">
+<div class="desktop-only-banner" id="top-banner">
     <a href="https://feraz.studio">
         <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo">
     </a>
 </div>
 
+<!-- FRANJA NEGRA FIJA A LA DERECHA (PC) -->
+<div class="desktop-black-strip"></div>
+
 <!-- PANEL IZQUIERDO DE IMÁGENES EXCLUSIVO DE ESCRITORIO -->
-<!-- Las imágenes se irán intercambiando con la clase 'active' -->
+<!-- Las imágenes se irán intercambiando automáticamente al scrollear -->
 <div class="desktop-only-image-container" id="desktop-image-slider">
-    <!-- Aquí puedes poner las URLs de tus imágenes para el slider. He puesto placeholders -->
-    <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Slider Image 1">
-    <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Slider Image 2">
-    <!-- Añade más imágenes aquí según necesites -->
+    
+    <!-- 1. CHECK-IN -->
+    <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
+    
+    <!-- 2. TURNDOWN SERVICE -->
+    <img id="slider-img-turndown" src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Turndown Service">
+    
+    <!-- 3. EDITORIAL Y SOPORTE -->
+    <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true" class="slider-img" alt="Editorial y Soporte">
+    
+    <!-- 4. DIGITAL Y CONTENIDO -->
+    <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true" class="slider-img" alt="Digital y Contenido">
+    
+    <!-- 5. SETS COMPLETOS -->
+    <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true" class="slider-img" alt="Sets de Colección">
+
 </div>
 
 <!-- OVERLAY DINÁMICO DE CONFIRMACIÓN -->
 <div class="success-overlay" id="success-overlay">
-    
     <div class="overlay-content-wrapper" id="overlay-wrapper">
-        
-        <!-- PANTALLA INICIAL DEL OVERLAY -->
         <div id="feraz-initial-message" style="display: flex; flex-direction: column; align-items: center;">
             <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay">
-            
             <div class="success-text">
                 <p>Muchas gracias por su selección.<br>En breve recibirá la cotización con los servicios de nuestro taller.</p>
                 <p>Por favor, le invitamos a reservar un tasting sensorial en su propiedad, donde vivirá una experiencia única cortesía de Feraz.</p>
             </div>
-
             <a href="#" class="btn-metallic" id="btn-agendar-cal-overlay">
                 <span>Reservar Tasting</span>
             </a>
         </div>
-
-        <!-- PANTALLA DE ÉXITO EXCLUSIVA FERAZ (Blur-in) -->
         <div id="feraz-success-message">
             <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo-overlay">
-            
-            <!-- Botón interno de Éxito con Glow Verde -->
-            <div class="btn-metallic success-state" style="margin-bottom: 35px; cursor: default;">
-                <span style="font-size: 10px;">RESERVACIÓN CONFIRMADA</span>
+            <div class="btn-metallic success-state" style="margin-bottom: 40px; cursor: default;">
+                <span style="font-size: 12px;">RESERVACIÓN CONFIRMADA</span>
             </div>
-
             <div class="success-text" style="width: 100%;">
-                <p style="font-family: 'HK Grotesk', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 24px;">NOS VEMOS PRONTO</p>
-                <p style="font-size: 14px; margin-bottom: 12px;">Hemos agendado su experiencia exitosamente.</p>
-                <p style="font-size: 14px; margin-bottom: 12px;">Los detalles y la invitación han sido enviados a su correo electrónico.</p>
-                <p style="font-size: 14px; margin-bottom: 16px;">Si tiene alguna duda o comentario antes de nuestro tasting, no dude en contactarnos en</p>
-                
-                <!-- Línea de contacto en flexbox -->
-                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 290px; margin: 0 auto; font-size: 14px;">
+                <p style="font-family: 'HK Grotesk', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 30px;">NOS VEMOS PRONTO</p>
+                <p style="font-size: 16px; margin-bottom: 16px;">Hemos agendado su experiencia exitosamente.</p>
+                <p style="font-size: 16px; margin-bottom: 16px;">Los detalles y la invitación han sido enviados a su correo electrónico.</p>
+                <p style="font-size: 16px; margin-bottom: 24px;">Si tiene alguna duda o comentario antes de nuestro tasting, no dude en contactarnos en</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 320px; margin: 0 auto; font-size: 16px;">
                     <a href="mailto:collabs@feraz.studio" style="color:#FAF9F6; text-decoration: underline;">collabs@feraz.studio</a>
                     <span style="color:#FAF9F6;">-</span>
                     <a href="https://wa.me/525549400957" target="_blank" style="color:#FAF9F6; text-decoration: underline;">5549400957</a>
                 </div>
             </div>
         </div>
-
     </div>
-
-    <!-- Botón Volver -->
     <a href="#" class="btn-volver" id="btn-volver"><span>VOLVER</span></a>
 </div>
 
@@ -1327,7 +1295,7 @@
 
 <div class="hero-section">
     <img src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" alt="Feraz Hospitality Atelier" class="hero-image">
-    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="hero-logo">
+    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="hero-logo" id="hero-logo">
     <div class="hero-content">
         <h1 class="hero-title">Hospitality Services</h1>
         <a href="#atelier-header" class="btn-iniciar" id="btnIniciar">Iniciar</a>
@@ -1336,7 +1304,7 @@
 
 <div class="content-body">
 
-    <div class="section-title-serif">Nuestra Promesa</div>
+    <div class="section-title-main">Nuestra Promesa</div>
     <p class="promise-text">
         En Feraz, pretendemos que tanto usted como todo el personal de la propiedad reciba la atención de una empresa de hospitalidad de clase mundial.<br><br>
         Nuestro objetivo es facilitar el cuidado y sorpresa de sus huéspedes durante su estancia con la menor fricción posible de manera ágil, eficiente, y con la calidad que nos caracteriza.
@@ -1471,7 +1439,7 @@
 
         <!-- EDITORIAL Y SOPORTE -->
         <div class="category-block" id="editorial-section">
-            <div class="category-main-title">Editorial y Soporte</div>
+            <div class="section-title-main">Editorial y Soporte</div>
             <div class="category-subtext">Elementos de diseño y papelería creativa para reforzar la experiencia sensorial en su hotel.</div>
 
             <label class="service-row">
@@ -1515,7 +1483,7 @@
 
         <!-- DIGITAL Y CONTENIDO -->
         <div class="category-block" id="digital-section">
-            <div class="category-main-title">Digital y Contenido</div>
+            <div class="section-title-main">Digital y Contenido</div>
             <div class="category-subtext">Una extensión de su colección para dispositivos móviles y contenido en redes sociales.</div>
 
             <label class="service-row">
@@ -1622,7 +1590,7 @@
     <!-- SECCIÓN CHECKOUT -->
     <div class="checkout-box" id="contacto-section">
         <div class="checkout-header-grid">
-            <div class="category-main-title">RESUMEN</div>
+            <div class="section-title-main">RESUMEN</div>
             <div class="checkout-logo-container">
                 <img id="ui-logo-checkout" src="https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png" alt="Octavia Casa">
             </div>
@@ -1658,7 +1626,7 @@
 
     <!-- SECCIÓN TEMI -->
     <div class="temi-block">
-        <div class="sets-banner-container" style="margin-bottom: 24px;">
+        <div class="sets-banner-container" style="margin-bottom: 32px;">
             <div class="sets-banner-title" style="top: 35%;">TEMI</div>
             <div class="sets-banner-subtitle" style="top: 65%;">El sueño hecho visión</div>
             <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Barra%20temi.png" alt="Temi Banner" class="sets-banner-img">
@@ -1792,18 +1760,15 @@ document.addEventListener("DOMContentLoaded", function () {
             roomsInput.dispatchEvent(new Event('input'));
         }
         
-        // Actualizar la imagen del hero en móvil
         const heroImage = document.querySelector(".hero-image");
         if (heroImage && datosHotel.portada) {
             heroImage.src = datosHotel.portada;
         }
         
-        // Actualizar las imágenes del slider en PC
         if (datosHotel.portada) {
-            const sliderImgs = document.querySelectorAll(".slider-img");
-            if(sliderImgs.length > 0) {
-                // Puedes decidir cómo manejar múltiples imágenes, aquí actualizo la primera
-                sliderImgs[0].src = datosHotel.portada;
+            const checkinImg = document.getElementById("slider-img-checkin");
+            if(checkinImg) {
+                checkinImg.src = datosHotel.portada;
             }
         }
     }
@@ -2154,39 +2119,46 @@ function evaluateStates(activeCount) {
         activeBg = 'turndown';
     }
 
+    // Actualiza la barra Sticky
     document.querySelectorAll('.pill-bg').forEach(bg => bg.classList.remove('active'));
     document.getElementById('bg-' + activeBg).classList.add('active');
+
+    // Sincroniza las imágenes completas de la izquierda en PC
+    if (window.innerWidth >= 768) {
+        document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+        const activeImg = document.getElementById('slider-img-' + activeBg);
+        if (activeImg) {
+            activeImg.classList.add('active');
+        }
+    }
 }
 
-// LOGICA DE SCROLL PARA LAS IMAGENES EN PC
+// LOGICA DE SCROLL (ANIMACIÓN DEL LOGO, BANNER E IMAGENES LATERALES)
 const mainContainer = document.getElementById('main-container');
+const topBanner = document.getElementById('top-banner');
+const heroLogo = document.getElementById('hero-logo');
+
 mainContainer.addEventListener('scroll', () => {
-    // Calculadora logica de scroll
     let activeCount = 0;
     checkboxes.forEach(box => { if (box.checked) activeCount++; });
     evaluateStates(activeCount);
     
-    // Logica para cambiar las imagenes basadas en el scroll (Solo en PC)
-    if (window.innerWidth >= 768) {
-        const checkinTop = document.getElementById('checkin-section').getBoundingClientRect().top;
-        const turndownTop = document.getElementById('turndown-section').getBoundingClientRect().top;
-        const sliderImgs = document.querySelectorAll(".slider-img");
-        
-        // Si tienes 2 imágenes. Puedes agregar más lógica aquí para más secciones
-        if (sliderImgs.length >= 2) {
-            // Ejemplo: cambiar a la segunda imagen cuando se llega a turndown
-            if (turndownTop < window.innerHeight / 2) {
-                sliderImgs[0].classList.remove('active');
-                sliderImgs[1].classList.add('active');
-            } else {
-                sliderImgs[1].classList.remove('active');
-                sliderImgs[0].classList.add('active');
-            }
-        }
+    // Difumina el logo del hero cuando el usuario comienza a scrollear
+    if (mainContainer.scrollTop > 50) {
+        heroLogo.style.opacity = 0;
+    } else {
+        heroLogo.style.opacity = 1;
+    }
+
+    // Aparece el banner cuando ya se pasó la primera sección
+    if (mainContainer.scrollTop > 150) {
+        if (window.innerWidth >= 768) topBanner.classList.add('visible');
+    } else {
+        topBanner.classList.remove('visible');
     }
 });
 
-// Event listener original de ventana para mantener compatibilidad en movil
+// Respaldo para móvil donde el scroll es sobre la ventana (window)
 window.addEventListener('scroll', () => {
     if (window.innerWidth < 768) {
         let activeCount = 0;
@@ -2199,7 +2171,6 @@ document.getElementById('stickyPill').addEventListener('click', () => {
     const contactoSection = document.getElementById('contacto-section');
     
     if (window.innerWidth >= 768) {
-        // En PC el scroll es interno al contenedor
         const elementPosition = contactoSection.offsetTop;
         mainContainer.scrollTo({
             top: elementPosition - 120,
@@ -2233,7 +2204,6 @@ btnToggleCheckout.addEventListener('click', () => {
     }
 });
 
-// REINICIO AL PRESIONAR VOLVER
 document.getElementById('btn-volver').addEventListener('click', (e) => {
     e.preventDefault();
     
@@ -2243,7 +2213,6 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
     document.getElementById('main-container').classList.remove('crossfade-out');
     document.body.style.overflow = '';
     
-    // Restaurar scroll oculto en PC al cerrar overlay
     if (window.innerWidth >= 768) {
         document.body.style.overflow = 'hidden'; 
     }
@@ -2255,7 +2224,6 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
     document.getElementById('stickyPill').classList.add('frozen');
 });
 
-// ENVÍO DE FORMULARIO -> DESPLIEGA EL OVERLAY
 document.getElementById('send-btn').addEventListener('click', (e) => {
     e.preventDefault(); 
 
@@ -2326,7 +2294,6 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
     });
 });
 
-// DISPARADOR DE MODAL CAL.COM DIRECTO DESDE JAVASCRIPT
 function triggerCalComBooking() {
     if (document.getElementById('btn-post-submit-cal').classList.contains('success-state')) {
         document.getElementById('feraz-initial-message').style.display = 'none';
@@ -2341,7 +2308,6 @@ function triggerCalComBooking() {
     const clientName = document.getElementById('client-name').value.trim();
     const clientEmail = document.getElementById('client-email').value.trim();
 
-    // Lanzamos el modal de Cal.com
     Cal.ns["feraz-tasting"]("modal", {
         calLink: "feraz-studio/feraz-tasting",
         config: {
@@ -2353,13 +2319,11 @@ function triggerCalComBooking() {
         }
     });
 
-    // Interceptamos el éxito desde la ventana flotante
     Cal.ns["feraz-tasting"]("on", {
         action: "bookingSuccessful",
         callback: (e) => {
             console.log("¡Tasting reservado con éxito!", e.detail);
 
-            // CIERRE AUTOMÁTICO DEL MODAL DE CAL.COM
             document.querySelectorAll('cal-modal, dialog').forEach(el => {
                 if (el.tagName.toLowerCase() === 'dialog') el.close();
                 el.remove();
@@ -2375,16 +2339,13 @@ function triggerCalComBooking() {
                 }
             });
 
-            // Ocultamos la UI inicial del overlay
             document.getElementById('feraz-initial-message').style.display = 'none';
 
-            // Mostramos la tarjeta exclusiva de éxito Feraz con blur-in lento de 1.8s
             const successMsg = document.getElementById('feraz-success-message');
             successMsg.style.display = 'flex';
             void successMsg.offsetWidth;
             successMsg.classList.add('visible');
 
-            // Transición a verde metálico en el botón sticky principal
             const btnSticky = document.getElementById('btn-post-submit-cal');
             if (btnSticky) {
                 btnSticky.classList.add('success-state');
