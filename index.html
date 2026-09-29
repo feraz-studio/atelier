@@ -1728,13 +1728,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (heroImage && datosHotel.portada) {
             heroImage.src = datosHotel.portada;
         }
-        
-        if (datosHotel.portada) {
-            const checkinImg = document.getElementById("slider-img-checkin");
-            if(checkinImg) {
-                checkinImg.src = datosHotel.portada;
-            }
-        }
     }
 
     if (slug === "casona") {
@@ -2355,6 +2348,14 @@ document.getElementById('btn-post-submit-cal').addEventListener('click', (e) => 
     document.getElementById('success-overlay').classList.add('active');
     triggerCalComBooking();
 });
+const desktopSlider = document.getElementById('desktop-image-slider');
+const rightWrapper = document.getElementById('right-scroll-wrapper');
+
+if (desktopSlider && rightWrapper) {
+    desktopSlider.addEventListener('wheel', (e) => {
+        rightWrapper.scrollTop += e.deltaY;
+    });
+}
 
 updateVajillaText();
 </script>
