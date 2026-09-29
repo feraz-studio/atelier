@@ -181,18 +181,19 @@
         color: #b3b2ad;
     }
 
-    .rooms-input {
-        width: 32px;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid #666;
-        color: #fff;
-        font-family: 'HK Grotesk', sans-serif;
-        font-size: 16px !important;
-        text-align: center;
-        outline: none;
-        padding: 0;
-    }
+.rooms-input {
+  width: 44px; /* Dale un poco más de aire horizontal */
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: #fff;
+  font-family: 'HK Grotesk', sans-serif;
+  font-size: 16px !important; /* Obligatorio para evitar el zoom en iOS */
+  zoom: 0.8; /* Achica el elemento visualmente manteniendo los 16px reales */
+  text-align: center;
+  outline: none;
+  padding: 0;
+}
 
     .rooms-input::-webkit-outer-spin-button,
     .rooms-input::-webkit-inner-spin-button {
