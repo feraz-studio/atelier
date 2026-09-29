@@ -71,7 +71,7 @@
 
     .atelier-container {
         width: 100%;
-        max-width: 480px; /* Tamaño máximo de lectura cómodo */
+        max-width: 480px; 
         background: transparent;
         position: relative;
         margin: 0 auto; 
@@ -114,7 +114,7 @@
         left: 24px;
         right: 24px;
         text-align: center;
-        color: #ffffff; /* Texto sobre foto siempre blanco */
+        color: #ffffff; 
     }
 
     .hero-title {
@@ -156,7 +156,7 @@
         font-weight: 400;
         line-height: 1.6;
         color: #333333;
-        margin-bottom: 60px; /* Respiro */
+        margin-bottom: 60px; 
     }
 
     .promise-icon {
@@ -164,7 +164,7 @@
         height: 25px;
         margin-bottom: 90px;
         display: block;
-        filter: brightness(0); /* Ícono negro */
+        filter: brightness(0); 
     }
 
     .atelier-header-block {
@@ -184,6 +184,7 @@
         height: 100%;
         object-fit: contain;
         object-position: left;
+        filter: brightness(0); /* Logo de hotel en negro */
     }
 
     .rooms-line {
@@ -203,7 +204,7 @@
         border-bottom: 1px solid #999;
         color: #000000;
         font-family: 'HK Grotesk', sans-serif;
-        font-size: 16px !important; /* Mantiene 16px para evitar zoom en iOS */
+        font-size: 16px !important; 
         text-align: center;
         outline: none;
         padding: 0 0 2px 0;
@@ -250,12 +251,11 @@
     /* ZONA DE CONTROL DE ESPACIOS ENTRE SECCIONES    */
     /* ============================================== */
     .category-block {
-        margin-bottom: 90px; /* MARGEN GENERAL ENTRE SECCIONES */
+        margin-bottom: 90px; 
         border-top: 1px solid #E5E5E5;
         padding-top: 40px;
     }
 
-    /* Puedes cambiar el margen de cada uno independientemente si lo requieres */
     #checkin-section { margin-bottom: 90px; }
     #turndown-section { margin-bottom: 90px; }
     #editorial-section { margin-bottom: 90px; }
@@ -503,11 +503,9 @@
     .sticky-pill-bar {
         position: -webkit-sticky;
         position: sticky;
-        bottom: 24px; /* Flotabilidad principal mientras scrolleas */
-        
-        /* Resto de estilos fijos de la barra */
+        bottom: 24px; 
         width: 100%;
-        max-width: 380px; /* Un poco más ancha para respirar */
+        max-width: 380px; 
         height: 65px;
         border: 1px solid #E5E5E5;
         border-radius: 32.5px;
@@ -515,13 +513,10 @@
         align-items: center;
         justify-content: flex-end;
         padding: 0 24px;
-        
-        /* Espaciados hacia arriba y abajo en su estado normal */
         margin-top: 60px; 
         margin-bottom: 60px;
         margin-left: auto;
         margin-right: auto;
-        
         box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
         z-index: 100;
         opacity: 0;
@@ -536,12 +531,11 @@
         visibility: visible;
     }
 
-    /* PADDING / MARGEN CUANDO LA BARRA LLEGA AL FINAL DE SU TRAYECTO */
     .sticky-pill-bar.frozen {
         position: relative !important;
         bottom: 0;
-        margin-top: 40px; /* Modifica este valor si quieres acercarlo al contenido de arriba */
-        margin-bottom: 90px; /* Modifica este valor si quieres acercarlo al Resumen de abajo */
+        margin-top: 40px; 
+        margin-bottom: 90px; 
         cursor: default;
     }
     /* ============================================== */
@@ -644,6 +638,7 @@
         object-position: top right;
         transform-origin: top right;
         transition: transform 0.3s ease;
+        filter: brightness(0); /* Logo de checkout en negro */
     }
 
     .checkout-summary-list {
@@ -1114,19 +1109,18 @@
             display: flex;
             flex-direction: row;
             height: 100vh;
-            overflow: hidden; /* Se restringe el scroll al lado derecho */
+            overflow: hidden; 
             background-color: #FAF9F6;
         }
 
-        /* BANNER SUPERIOR ANIMADO AL HACER SCROLL */
         .desktop-only-banner {
             display: flex;
             justify-content: center;
             align-items: center;
             position: fixed;
             top: 0;
-            left: 50vw; /* Inicia justo a la mitad de la pantalla */
-            width: 50vw; /* Cubre la mitad derecha */
+            left: 50vw; 
+            width: 50vw; 
             height: 80px;
             background-color: rgba(250, 249, 246, 0.95);
             backdrop-filter: blur(10px);
@@ -1147,13 +1141,12 @@
         .desktop-only-banner img {
             width: 80px;
             height: auto;
-            filter: brightness(0); /* Logo negro en banner claro */
+            filter: brightness(0); 
         }
 
-        /* CONTENEDOR IZQUIERDO (IMÁGENES A SANGRE) */
         .desktop-only-image-container {
             display: block;
-            width: 50vw; /* 50% exacto de la pantalla */
+            width: 50vw; 
             height: 100vh;
             position: relative;
             overflow: hidden;
@@ -1165,7 +1158,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Cero padding para que abarque todo el espacio */
             padding: 0; 
             opacity: 0;
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1175,27 +1167,24 @@
             opacity: 1;
         }
 
-        /* CONTENEDOR DERECHO (DONDE HACES SCROLL) */
         .right-scroll-wrapper {
-            width: 50vw; /* 50% exacto de la pantalla */
+            width: 50vw; 
             height: 100vh;
             overflow-y: auto; 
             background-color: #FAF9F6;
             position: relative;
         }
 
-        /* CONTENEDOR DEL FORMULARIO Y TEXTOS (Centrado en la mitad derecha) */
         .atelier-container {
-            max-width: 480px; /* Ancho cómodo de lectura */
+            max-width: 480px; 
             width: 100%;
             padding: 0 24px;
-            margin: 0 auto; /* Lo centra perfectamente en el espacio sobrante */
+            margin: 0 auto; 
         }
 
-        /* Ajustes del Hero para PC */
         .hero-section {
            display: block !important;
-           height: 100vh; /* Altura completa para el landing inicial */
+           height: 100vh; 
         }
         
         .hero-content {
@@ -1207,7 +1196,6 @@
 
 <body>
 
-<!-- OVERLAY (Cubre toda la pantalla, independientemente del layout) -->
 <div class="success-overlay" id="success-overlay">
     <div class="overlay-content-wrapper" id="overlay-wrapper">
         <div id="feraz-initial-message" style="display: flex; flex-direction: column; align-items: center;">
@@ -1241,39 +1229,22 @@
     <a href="#" class="btn-volver" id="btn-volver"><span>VOLVER</span></a>
 </div>
 
-<!-- ============================================== -->
-<!-- IMÁGENES LADO IZQUIERDO PC (Aquí pegas tus links) -->
-<!-- ============================================== -->
 <div class="desktop-only-image-container" id="desktop-image-slider">
-    
-    <!-- 1. CHECK-IN (Sección inicial del cotizador) -->
     <img id="slider-img-checkin" src="https://github.com/feraz-studio/feraz-assets/blob/main/Portada%201.png?raw=true" class="slider-img active" alt="Diseño Culinario Check-in">
-    
-    <!-- 2. TURNDOWN SERVICE -->
     <img id="slider-img-turndown" src="https://github.com/feraz-studio/feraz-assets/blob/main/Thumbnail.jpg?raw=true" class="slider-img" alt="Turndown Service">
-    
-    <!-- 3. EDITORIAL Y SOPORTE -->
     <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%202.png?raw=true" class="slider-img" alt="Editorial y Soporte">
-    
-    <!-- 4. DIGITAL Y CONTENIDO -->
     <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%205.png?raw=true" class="slider-img" alt="Digital y Contenido">
-    
-    <!-- 5. SETS COMPLETOS -->
     <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Barra%206.png?raw=true" class="slider-img" alt="Sets de Colección">
-
 </div>
 
-<!-- ENVOLTORIO DERECHO (Área scrolleable en PC) -->
 <div class="right-scroll-wrapper" id="right-scroll-wrapper">
     
-    <!-- BANNER SUPERIOR EXCLUSIVO DE ESCRITORIO -->
     <div class="desktop-only-banner" id="top-banner">
         <a href="https://feraz.studio">
             <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo">
         </a>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="atelier-container" id="main-container">
 
         <div class="hero-section">
@@ -1660,7 +1631,6 @@
     </div>
 </div>
 
-<!-- SCRIPT CAL.COM SDK (MODAL) Y LÓGICA GENERAL -->
 <script type="text/javascript">
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "feraz-tasting", {origin:"https://app.cal.com"});
@@ -1771,7 +1741,6 @@ document.getElementById('btnIniciar').addEventListener('click', (e) => {
     document.getElementById('atelier-header').scrollIntoView({ behavior: 'smooth' });
 });
 
-// VARIABLES DE LOGICA
 const checkboxes = document.querySelectorAll('.calc-item');
 const checkinBoxes = document.querySelectorAll('.checkin-exclusive');
 const turndownBoxes = document.querySelectorAll('.turndown-exclusive');
@@ -2103,11 +2072,9 @@ function evaluateStates(activeCount) {
         activeBg = 'turndown';
     }
 
-    // Sincroniza fondos en la Sticky Pill
     document.querySelectorAll('.pill-bg').forEach(bg => bg.classList.remove('active'));
     document.getElementById('bg-' + activeBg).classList.add('active');
 
-    // Sincroniza la Imagen Izquierda en Computadora
     if (window.innerWidth >= 1024) {
         document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
         const activeImg = document.getElementById('slider-img-' + activeBg);
@@ -2117,16 +2084,13 @@ function evaluateStates(activeCount) {
     }
 }
 
-// LOGICA CENTRALIZADA DE SCROLL (Maneja el difuminado del Logo, Banner y Cambios de Imagen)
 function handleScroll() {
     let activeCount = 0;
     checkboxes.forEach(box => { if (box.checked) activeCount++; });
     evaluateStates(activeCount);
     
-    // Obtenemos la posición de scroll dependiendo si estamos en PC o Móvil
     const scrollPos = window.innerWidth >= 1024 ? document.getElementById('right-scroll-wrapper').scrollTop : window.scrollY;
     
-    // Difumina el logo del Hero al bajar
     const heroLogo = document.getElementById('hero-logo');
     if (scrollPos > 50) {
         heroLogo.style.opacity = 0;
@@ -2134,7 +2098,6 @@ function handleScroll() {
         heroLogo.style.opacity = 1;
     }
 
-    // Aparece el Banner en PC cuando bajamos más de 150px
     const topBanner = document.getElementById('top-banner');
     if (scrollPos > 150 && window.innerWidth >= 1024) {
         topBanner.classList.add('visible');
@@ -2143,7 +2106,6 @@ function handleScroll() {
     }
 }
 
-// Agregamos el listener a ambos contenedores para que funcione en cualquier dispositivo
 window.addEventListener('scroll', handleScroll);
 document.getElementById('right-scroll-wrapper').addEventListener('scroll', handleScroll);
 
