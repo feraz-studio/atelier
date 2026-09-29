@@ -2045,6 +2045,7 @@ function calculateTotal() {
 
     evaluateStates(activeCount);
 }
+let isSubmitted = false;
 
 function evaluateStates(activeCount) {
     const magnoRect = magnoRow.getBoundingClientRect();
@@ -2086,22 +2087,27 @@ function evaluateStates(activeCount) {
     document.getElementById('bg-' + activeBg).classList.add('active');
 
     if (window.innerWidth >= 1024) {
+        // Si ya se envió la cotización, fijamos la imagen de Tasting
+        if (isSubmitted) {
+            document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+            const submittedImg = document.getElementById('slider-img-submitted');
+            if (submittedImg) submittedImg.classList.add('active');
+            return;
+        }
+
         const heroSection = document.querySelector('.hero-section');
         const heroBottom = heroSection.getBoundingClientRect().bottom;
 
-        // Si aún estamos en la portada (Hero)
         if (heroBottom > 0) {
             document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
             const checkinImg = document.getElementById('slider-img-checkin');
             if (checkinImg) checkinImg.classList.add('active');
         } 
-        // Si ya pasamos la portada pero aún no entramos a la sección de Check-in
         else if (checkinBottom > triggerLine) {
             document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
             const promesaImg = document.getElementById('slider-img-promesa');
             if (promesaImg) promesaImg.classList.add('active');
         } 
-        // Para las siguientes secciones en adelante
         else {
             document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
             const activeImg = document.getElementById('slider-img-' + activeBg);
@@ -2254,6 +2260,9 @@ document.getElementById('send-btn').addEventListener('click', (e) => {
     document.body.style.overflow = 'hidden'; 
     document.getElementById('main-container').classList.add('crossfade-out');
     document.getElementById('success-overlay').classList.add('active');
+
+    isSubmitted = true;
+    evaluateStates(0);
 
     fetch('https://hook.us2.make.com/rkpp1c5icqb2i1h5skno8xsbqwmrv4rt', {
         method: 'POST',
