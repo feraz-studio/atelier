@@ -1610,10 +1610,9 @@ const baseDeDatosHoteles = {
       "maison-celeste": { "nombre": "Maison Celeste x Lezard", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png", "habitaciones": 13, "direccion": "Yucatán 96, Roma Norte, CDMX" },
       "roso-gh": { "nombre": "Roso Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png", "habitaciones": 10, "scale": 0.7, "direccion": "Tabasco 79, Roma Norte, CDMX" },
       "ignacia": { "nombre": "Ignacia Guest House", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png", "habitaciones": 9, "scale": 0.7, "direccion": "Jalapa 208, Roma Norte, CDMX" },
-      "hoteldama": { "nombre": "Hotel Dama", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "habitaciones": 17, "scale": 0.7, "direccion": "Zamora 94, Condesa, CDMX" }
+      "hoteldama": { "nombre": "Hotel Dama", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "habitaciones": 17, "scale": 0.7, "direccion": "Zamora 94, Condesa, CDMX" },
       "casona": { "nombre": "Casona", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casona.png", "habitaciones": 32, "direccion": "Durango 280, Roma Norte, CDMX" },
       "sara-y-julieta": { "nombre": "Sara y Julieta", "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Sara%20y%20Julieta.png", "habitaciones": 23, "direccion": "Tonalá 42, Roma Norte, CDMX" }
-
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1651,6 +1650,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (roomsInput) {
             roomsInput.value = datosHotel.habitaciones;
             roomsInput.dispatchEvent(new Event('input'));
+        }
+    }
+
+    // Condición para Casona
+    if (slug === "casona") {
+        const casillaBase = document.getElementById("chk-checkin-base");
+        if (casillaBase) {
+            casillaBase.checked = true;
+            calculateTotal();
         }
     }
 });
