@@ -484,6 +484,17 @@
         text-decoration: line-through;
         font-family: 'HK Grotesk', sans-serif;
     }
+    @media (min-width: 768px) {
+    .atelier-container {
+        max-width: 440px; /* Le damos un poco más de ancho base */
+        zoom: 1.25;      /* Amplía todo el sitio un 25% de manera limpia */
+    }
+    
+    /* Ajuste para que la barra flotante (sticky) y el overlay sigan centrados y bien proporcionados */
+    .sticky-pill-bar {
+        max-width: 390px;
+    }
+}
 
     /* BARRA STICKY */
     .sticky-pill-bar {
