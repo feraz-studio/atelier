@@ -2103,23 +2103,23 @@ function evaluateStates(activeCount) {
             return;
         }
 
-        const promesaTop = document.getElementById('promesa-section').getBoundingClientRect().top;
-        const checkinTop = document.getElementById('checkin-section').getBoundingClientRect().top;
-        const contactoTop = document.getElementById('contacto-section').getBoundingClientRect().top;
+ const promesaTop = document.getElementById('promesa-section').getBoundingClientRect().top;
+const checkinBottom = document.getElementById('checkin-section').getBoundingClientRect().bottom;
+const contactoTop = document.getElementById('contacto-section').getBoundingClientRect().top;
 
-        let activeImgId = 'slider-img-checkin'; // Imagen por defecto al cargar
+let activeImgId = 'slider-img-checkin';
 
-        if (contactoTop <= window.innerHeight * 0.75) {
-            activeImgId = 'slider-img-contacto';
-        } else if (checkinTop <= window.innerHeight * 0.6) {
-            activeImgId = 'slider-img-' + activeBg;
-        } else if (promesaTop <= window.innerHeight * 0.5) {
-            activeImgId = 'slider-img-promesa';
-        }
+if (contactoTop <= window.innerHeight * 0.75) {
+    activeImgId = 'slider-img-contacto';
+} else if (checkinBottom <= triggerLine) {
+    activeImgId = 'slider-img-' + activeBg;
+} else if (promesaTop <= window.innerHeight * 0.5) {
+    activeImgId = 'slider-img-promesa';
+}
 
-        document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
-        const activeImg = document.getElementById(activeImgId);
-        if (activeImg) activeImg.classList.add('active');
+document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+const activeImg = document.getElementById(activeImgId);
+if (activeImg) activeImg.classList.add('active');
     }
 }
 
