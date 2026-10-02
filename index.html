@@ -864,8 +864,8 @@
 .contact-section-light {
         background-color: #FAF9F6;
         color: #000000;
-        padding: 35px 24px 20px 0px; /* Aumentamos un poco el espacio superior para separarlo de Temi */
-        border-top: 2px solid #E5E5E5;  /* Línea divisoria fina igual que el resto de las secciones */
+        padding: 35px 24px 20px 0px; 
+        border-top: 2px solid #E5E5E5;  
         margin-top: 40px;
     }
 
@@ -1627,7 +1627,7 @@
 <div class="contact-section-light">
             <div class="contact-header-title">CONTACTO</div>
             <p class="contact-body-text">
-                Agradecemos enormemente el tiempo que ha dedicado a conocer Feraz. Si desea obtener asistencia personalizada, puede contactarnos por los siguientes medios. <br><br>Le daremos respuesta inmediatamente.
+                Agradecemos enormemente el tiempo que ha dedicado a conocer Feraz. Si desea obtener asistencia personalizada, puede contactarnos por nuestros canales habituales. <br><br>Le daremos respuesta inmediatamente.
             </p>
             <div class="contact-info-block">
                 <strong>Fernando Quezada</strong><br>
@@ -2113,7 +2113,6 @@ function evaluateStates(activeCount) {
     document.querySelectorAll('.pill-bg').forEach(bg => bg.classList.remove('active'));
     document.getElementById('bg-' + activeBg).classList.add('active');
 
-    // Manejo exacto de imágenes en escritorio por sección
     if (window.innerWidth >= 1024) {
         if (isSubmitted) {
             document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
@@ -2122,23 +2121,23 @@ function evaluateStates(activeCount) {
             return;
         }
 
- const promesaTop = document.getElementById('promesa-section').getBoundingClientRect().top;
-const checkinBottom = document.getElementById('checkin-section').getBoundingClientRect().bottom;
-const contactoTop = document.getElementById('contacto-section').getBoundingClientRect().top;
+   const promesaTop = document.getElementById('promesa-section').getBoundingClientRect().top;
+   const checkinBottom = document.getElementById('checkin-section').getBoundingClientRect().bottom;
+   const contactoTop = document.getElementById('contacto-section').getBoundingClientRect().top;
 
-let activeImgId = 'slider-img-checkin';
+   let activeImgId = 'slider-img-checkin';
 
-if (contactoTop <= window.innerHeight * 0.75) {
-    activeImgId = 'slider-img-contacto';
-} else if (checkinBottom <= triggerLine) {
-    activeImgId = 'slider-img-' + activeBg;
-} else if (promesaTop <= window.innerHeight * 0.5) {
-    activeImgId = 'slider-img-promesa';
-}
+   if (contactoTop <= window.innerHeight * 0.75) {
+       activeImgId = 'slider-img-contacto';
+   } else if (checkinBottom <= triggerLine) {
+       activeImgId = 'slider-img-' + activeBg;
+   } else if (promesaTop <= window.innerHeight * 0.5) {
+       activeImgId = 'slider-img-promesa';
+   }
 
-document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
-const activeImg = document.getElementById(activeImgId);
-if (activeImg) activeImg.classList.add('active');
+   document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+   const activeImg = document.getElementById(activeImgId);
+   if (activeImg) activeImg.classList.add('active');
     }
 }
 
@@ -2232,10 +2231,9 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
 document.getElementById('send-btn').addEventListener('click', (e) => {
     e.preventDefault(); 
     
-    // Validación de Bot (Honeypot)
     const honeypot = document.getElementById('website_hp').value;
     if (honeypot) {
-        return; // Detiene la ejecución silenciosamente si un bot llena el campo
+        return;
     }
 
     const nameInput = document.getElementById('client-name');
@@ -2398,8 +2396,6 @@ document.addEventListener("DOMContentLoaded", function() {
         mutations.forEach(function(mutation) {
             if (mutation.attributeName === "class") {
                 if (videoContacto.classList.contains('active')) {
-                    // Solo lo reinicia y reproduce si estaba pausado. 
-                    // Si ya está reproduciéndose, el scroll lo deja en paz.
                     if (videoContacto.paused) {
                         videoContacto.currentTime = 0;
                         videoContacto.play().catch(e => console.log("Autoplay bloqueado:", e));
@@ -2419,9 +2415,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 updateVajillaText();
-    <script>
-        // Guarda la URL actual con toda su personalización en la sesión del navegador
-        sessionStorage.setItem('feraz_last_page', window.location.href);
+
+// Guarda la URL actual con toda su personalización en la sesión del navegador
+sessionStorage.setItem('feraz_last_page', window.location.href);
 </script>
 </body>
 </html>
