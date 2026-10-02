@@ -134,8 +134,7 @@
             <a href="https://atelier.feraz.studio">
                 <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="privacy-logo">
             </a>
-          <a href="https://atelier.feraz.studio" onclick="history.back(); return false;" class="back-link">Volver</a>
-        </header>
+<a href="https://atelier.feraz.studio" onclick="if(sessionStorage.getItem('feraz_last_page')) { window.location.href = sessionStorage.getItem('feraz_last_page'); return false; }" class="back-link">Volver</a>        </header>
 
         <main>
             <h1>Aviso de Privacidad</h1>
