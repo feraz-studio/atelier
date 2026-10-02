@@ -1159,19 +1159,19 @@
             z-index: 1;
         }
 
-        .desktop-only-image-container img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            padding: 0; 
-            opacity: 0;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+   .desktop-only-image-container .slider-img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        padding: 0; 
+        opacity: 0;
+        transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .desktop-only-image-container img.active {
-            opacity: 1;
-        }
+    .desktop-only-image-container .slider-img.active {
+        opacity: 1;
+    }
 
         .right-scroll-wrapper {
             width: 50vw; 
@@ -1240,10 +1240,12 @@
     <img id="slider-img-editorial" src="https://github.com/feraz-studio/feraz-assets/blob/main/Coeri.webp?raw=true" class="slider-img" alt="Editorial y Soporte">
     <img id="slider-img-digital" src="https://github.com/feraz-studio/feraz-assets/blob/main/Recinto.webp?raw=true" class="slider-img" alt="Digital y Contenido">
     <img id="slider-img-sets" src="https://github.com/feraz-studio/feraz-assets/blob/main/Manita.webp?raw=true" class="slider-img" alt="Sets de Colección">
-<video id="slider-img-contacto" class="slider-img" autoplay muted loop playsinline preload="auto">
-    <source src="https://github.com/feraz-studio/feraz-assets/raw/main/MO_2.mp4.mp4" type="video/mp4">
-    Tu navegador no soporta la etiqueta de video.
-</video>
+    
+    <video id="slider-img-contacto" class="slider-img" muted loop playsinline preload="metadata">
+        <source src="https://github.com/feraz-studio/feraz-assets/raw/main/MO_2.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video> 
+    
     <img id="slider-img-submitted" src="https://github.com/feraz-studio/feraz-assets/raw/main/Tasting.webp" class="slider-img" alt="Experiencia Culinaria Feraz">
 </div>
 
@@ -2365,6 +2367,34 @@ document.getElementById('btn-post-submit-cal').addEventListener('click', (e) => 
     document.getElementById('main-container').classList.add('crossfade-out');
     document.getElementById('success-overlay').classList.add('active');
     triggerCalComBooking();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const videoContacto = document.getElementById('slider-img-contacto');
+
+    if (!videoContacto) return;
+
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === "class") {
+                if (videoContacto.classList.contains('active')) {
+                    // Nos aseguramos de que empiece desde el inicio para que se sienta fluido
+                    videoContacto.currentTime = 0;
+                    videoContacto.play().catch(e => console.log("Autoplay bloqueado:", e));
+                } else {
+                    // Damos un pequeño respiro antes de pausarlo para que coincida 
+                    // con el tiempo que dura el crossfade visual (1.2 segundos)
+                    setTimeout(() => {
+                        if (!videoContacto.classList.contains('active')) {
+                            videoContacto.pause();
+                        }
+                    }, 1200);
+                }
+            }
+        });
+    });
+
+    observer.observe(videoContacto, { attributes: true });
 });
 
 updateVajillaText();
