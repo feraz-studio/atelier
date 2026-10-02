@@ -861,10 +861,12 @@
         margin-bottom: 0;
     }
 
-    .contact-section-light {
+.contact-section-light {
         background-color: #FAF9F6;
         color: #000000;
-        padding: 40px 24px 20px 24px;
+        padding: 35px 24px 20px 0px; /* Aumentamos un poco el espacio superior para separarlo de Temi */
+        border-top: 2px solid #E5E5E5;  /* Línea divisoria fina igual que el resto de las secciones */
+        margin-top: 40px;
     }
 
     .contact-header-title {
@@ -904,7 +906,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 24px 30px 24px;
+        padding: 0px 24px 30px 24px;
     }
 
     .footer-logo {
@@ -1572,15 +1574,25 @@
                 </div>
 
                 <div class="expandable-form" id="expandable-checkout-form">
-                    <p class="atelier-desc" style="color:#c5a059;">Obtenga su cotización Feraz al instante.</p>
+                    <p class="atelier-desc" style="color:#c5a059;">Reciba su cotización Feraz al instante.</p>
                     <input type="text" id="client-name" class="client-input-grey" placeholder="Nombre y apellido" required>
                     <input type="email" id="client-email" class="client-input-grey" placeholder="Correo electrónico" required>
                     <button type="button" class="submit-checkout-btn" id="send-btn">
+                        
                         Enviar
                         <svg class="submit-icon" viewBox="0 0 24 24"><path d="M17 12L7 2v20z"/></svg>
                     </button>
-                </div>
-            </div> 
+               <!-- Campo trampa contra bots (Honeypot) -->
+    <div style="display:none;" aria-hidden="true">
+        <input type="text" id="website_hp" name="website_hp" tabindex="-1" autocomplete="off">
+    </div>
+
+    <!-- Leyenda legal de privacidad -->
+    <div style="font-size: 12px; color: #888888; line-height: 1.2; margin-top: 10px; padding: 0;">
+        Protegemos su información. Puede consultar nuestro <a href="/privacy" target="_blank" style="color: #888888; text-decoration: underline;">Aviso de privacidad</a>.
+    </div>
+
+</div>
 
             <!-- CTA STICKY POST ENVÍO -->
             <div class="post-submit-action" id="post-submit-action">
@@ -1612,10 +1624,10 @@
         </div>
 
         <!-- SECCIÓN CONTACTO DIRECTO -->
-        <div class="contact-section-light">
+<div class="contact-section-light">
             <div class="contact-header-title">CONTACTO</div>
             <p class="contact-body-text">
-                Agradecemos enormemente el tiempo que ha dedicado a conocer Feraz. Si desea obtener asistencia personalizada, puede contactarnos por los siguientes medios. Obtendrá una respuesta inmediatamente.
+                Agradecemos enormemente el tiempo que ha dedicado a conocer Feraz. Si desea obtener asistencia personalizada, puede contactarnos por los siguientes medios. <br><br>Le daremos respuesta inmediatamente.
             </p>
             <div class="contact-info-block">
                 <strong>Fernando Quezada</strong><br>
@@ -1624,22 +1636,24 @@
                 <a href="mailto:collabs@feraz.studio">collabs@feraz.studio</a>
             </div>
         </div>
+        </div>
 
-        <!-- FOOTER -->
-        <footer class="footer-bar">
-            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo" class="footer-logo">
-            <div class="footer-socials">
-                <a href="https://www.instagram.com/feraz.cdmx/" target="_blank" title="Instagram">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                </a>
-                <a href="https://feraz.studio" target="_blank" title="Sitio Web">
-                    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/globe.png" alt="Globe Icon" class="globe-icon-img">
-                </a>
-            </div>
-        </footer>
+<!-- EL FOOTER VA AQUÍ FUERA, AL MISMO NIVEL -->
+ <footer class="footer-bar">
+    <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz Logo" class="footer-logo">
+    <div class="footer-socials">
+        <a href="https://www.instagram.com/feraz.cdmx/" target="_blank" title="Instagram">
+            <svg class="social-icon" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+        </a>
+        <a href="https://feraz.studio" target="_blank" title="Sitio Web">
+            <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/globe.png" alt="Globe Icon" class="globe-icon-img">
+        </a>
     </div>
+</footer>
+
+</div>
 </div>
 
 <script type="text/javascript">
@@ -2217,6 +2231,12 @@ document.getElementById('btn-volver').addEventListener('click', (e) => {
 
 document.getElementById('send-btn').addEventListener('click', (e) => {
     e.preventDefault(); 
+    
+    // Validación de Bot (Honeypot)
+    const honeypot = document.getElementById('website_hp').value;
+    if (honeypot) {
+        return; // Detiene la ejecución silenciosamente si un bot llena el campo
+    }
 
     const nameInput = document.getElementById('client-name');
     const emailInput = document.getElementById('client-email');
