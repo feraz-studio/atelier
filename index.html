@@ -2378,17 +2378,18 @@ document.addEventListener("DOMContentLoaded", function() {
         mutations.forEach(function(mutation) {
             if (mutation.attributeName === "class") {
                 if (videoContacto.classList.contains('active')) {
-                    // Nos aseguramos de que empiece desde el inicio para que se sienta fluido
-                    videoContacto.currentTime = 0;
-                    videoContacto.play().catch(e => console.log("Autoplay bloqueado:", e));
+                    // Solo lo reinicia y reproduce si estaba pausado. 
+                    // Si ya está reproduciéndose, el scroll lo deja en paz.
+                    if (videoContacto.paused) {
+                        videoContacto.currentTime = 0;
+                        videoContacto.play().catch(e => console.log("Autoplay bloqueado:", e));
+                    }
                 } else {
-                    // Damos un pequeño respiro antes de pausarlo para que coincida 
-                    // con el tiempo que dura el crossfade visual (1.2 segundos)
                     setTimeout(() => {
                         if (!videoContacto.classList.contains('active')) {
                             videoContacto.pause();
                         }
-                    }, 1200);
+                    }, 1400);
                 }
             }
         });
