@@ -415,9 +415,11 @@
         background-position: center;
     }
 
-    input[type="checkbox"].calc-item:checked {
-        border-color: #000;
-        background-image: url('https://github.com/feraz-studio/feraz-assets/blob/main/Gradient.png?raw=true');
+input[type="checkbox"].calc-item:checked {
+        border-color: rgba(255, 210, 140, 0.6);
+        background-color: rgba(255, 175, 90, 0.85);
+        background-image: linear-gradient(135deg, rgba(255, 225, 160, 0.95) 0%, rgba(230, 130, 40, 0.9) 100%);
+
     }
 
     .category-legend {
@@ -598,15 +600,47 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
-    .total-value {
+.total-value {
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.05em;
         color: #ffffff; 
         line-height: 1;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
     }
 
+    #total-amount {
+        position: relative;
+        display: inline-block;
+        min-width: 65px; /* Espacio reservado para evitar saltos */
+        height: 16px;
+        vertical-align: middle;
+        margin: 0 2px;
+    }
+
+    #total-amount span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+        white-space: nowrap;
+    }
+
+    #total-amount span.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #total-amount span.fade-out {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
     .total-warning-text {
         display: none;
         font-size: 12px;
@@ -1545,7 +1579,7 @@
                     <div class="pill-price-text" id="priceContainer">
                         <div class="total-group" id="total-group-normal">
                             <div class="total-label">TOTAL</div>
-                            <div class="total-value">MXN <span id="total-amount">0</span> / mes</div>
+<div class="total-value">MXN <span id="total-amount" class="active">0</span> / mes</div>
                         </div>
                         <div class="total-warning-text" id="total-group-warning">
                             Para ver su selección, por favor modifique el número de habitaciones
@@ -2059,8 +2093,37 @@ function calculateTotal() {
 
     const rooms = parseInt(roomsInputTop.value) || 0;
     const grandTotal = (roomsCostSum * rooms) + fixedCostSum;
-    totalAmountSpan.textContent = grandTotal.toLocaleString('es-MX');
+const formattedTotal = grandTotal.toLocaleString('es-MX');
     
+    // Verificamos el texto actual buscando dentro del span activo
+    const activeSpan = totalAmountSpan.querySelector('.active') || totalAmountSpan;
+    const currentText = activeSpan.textContent ? activeSpan.textContent.trim() : totalAmountSpan.textContent.trim();
+
+    if (currentText !== formattedTotal) {
+        // Si el contenedor todavía no tiene la estructura de spans internos, la inicializamos
+        if (!totalAmountSpan.querySelector('span')) {
+            totalAmountSpan.innerHTML = `<span class="active">${currentText}</span>`;
+        }
+
+        const oldSpan = totalAmountSpan.querySelector('.active');
+        if (oldSpan) {
+            oldSpan.classList.remove('active');
+            oldSpan.classList.add('fade-out');
+        }
+
+        const newSpan = document.createElement('span');
+        newSpan.textContent = formattedTotal;
+        totalAmountSpan.appendChild(newSpan);
+
+        void newSpan.offsetWidth; // Forzar reflow
+        newSpan.classList.add('active');
+
+        setTimeout(() => {
+            if (oldSpan && oldSpan.parentNode) {
+                oldSpan.remove();
+            }
+        }, 400);
+    }
     if (rooms < 4) {
         groupNormal.style.display = 'none';
         groupWarning.style.display = 'block';
