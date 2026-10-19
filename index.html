@@ -618,11 +618,13 @@ input[type="checkbox"].calc-item:checked {
         min-width: 65px;
         height: 16px;
         vertical-align: middle;
+        margin: 0 4px; /* Un pequeño margen para separar de MXN y de / mes */
         margin: 0 2px;
     }
 
     #total-amount span {
         position: absolute;
+        right: 0; /* Alinea los números animados a la derecha */
         left: 0;
         top: 0;
         width: 100%;
@@ -1579,7 +1581,7 @@ input[type="checkbox"].calc-item:checked {
                     <div class="pill-price-text" id="priceContainer">
                         <div class="total-group" id="total-group-normal">
                             <div class="total-label">TOTAL</div>
-<div class="total-value">MXN <span id="total-amount" class="active">0</span> / mes</div>
+<div class="total-value">MXN<span id="total-amount" class="active">0</span>/ mes</div>
                         </div>
                         <div class="total-warning-text" id="total-group-warning">
                             Para ver su selección, por favor modifique el número de habitaciones
