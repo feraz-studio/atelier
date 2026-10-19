@@ -615,7 +615,7 @@ input[type="checkbox"].calc-item:checked {
     #total-amount {
         position: relative;
         display: inline-block;
-        min-width: 65px; /* Espacio reservado para evitar saltos */
+        min-width: 65px;
         height: 16px;
         vertical-align: middle;
         margin: 0 2px;
@@ -1694,7 +1694,7 @@ input[type="checkbox"].calc-item:checked {
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "feraz-tasting", {origin:"https://app.cal.com"});
   Cal.config = Cal.config || {};
-  Cal.config.forwardQueryParams = true;
+  Cal.config.forwardQueryParams = false; /* FIX 1: Apagado el reenvío de parámetros para evitar el ciclo de carga infinita del calendario */
   Cal.ns["feraz-tasting"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
 </script>
 
@@ -2094,14 +2094,12 @@ function calculateTotal() {
 
     const rooms = parseInt(roomsInputTop.value) || 0;
     const grandTotal = (roomsCostSum * rooms) + fixedCostSum;
-const formattedTotal = grandTotal.toLocaleString('es-MX');
+    const formattedTotal = grandTotal.toLocaleString('es-MX');
     
-    // Verificamos el texto actual buscando dentro del span activo
     const activeSpan = totalAmountSpan.querySelector('.active') || totalAmountSpan;
     const currentText = activeSpan.textContent ? activeSpan.textContent.trim() : totalAmountSpan.textContent.trim();
 
     if (currentText !== formattedTotal) {
-        // Si el contenedor todavía no tiene la estructura de spans internos, la inicializamos
         if (!totalAmountSpan.querySelector('span')) {
             totalAmountSpan.innerHTML = `<span class="active">${currentText}</span>`;
         }
@@ -2116,7 +2114,7 @@ const formattedTotal = grandTotal.toLocaleString('es-MX');
         newSpan.textContent = formattedTotal;
         totalAmountSpan.appendChild(newSpan);
 
-        void newSpan.offsetWidth; // Forzar reflow
+        void newSpan.offsetWidth; 
         newSpan.classList.add('active');
 
         setTimeout(() => {
@@ -2185,23 +2183,23 @@ function evaluateStates(activeCount) {
             return;
         }
 
-   const promesaTop = document.getElementById('promesa-section').getBoundingClientRect().top;
-   const checkinBottom = document.getElementById('checkin-section').getBoundingClientRect().bottom;
-   const contactoTop = document.getElementById('contacto-section').getBoundingClientRect().top;
+       /* FIX 2: Removido el "const checkinBottom" re-declarado aquí para prevenir SyntaxError críticos */
+       const promesaTop = document.getElementById('promesa-section').getBoundingClientRect().top;
+       const contactoTop = document.getElementById('contacto-section').getBoundingClientRect().top;
 
-   let activeImgId = 'slider-img-checkin';
+       let activeImgId = 'slider-img-checkin';
 
-   if (contactoTop <= window.innerHeight * 0.75) {
-       activeImgId = 'slider-img-contacto';
-   } else if (checkinBottom <= triggerLine) {
-       activeImgId = 'slider-img-' + activeBg;
-   } else if (promesaTop <= window.innerHeight * 0.5) {
-       activeImgId = 'slider-img-promesa';
-   }
+       if (contactoTop <= window.innerHeight * 0.75) {
+           activeImgId = 'slider-img-contacto';
+       } else if (checkinBottom <= triggerLine) {
+           activeImgId = 'slider-img-' + activeBg;
+       } else if (promesaTop <= window.innerHeight * 0.5) {
+           activeImgId = 'slider-img-promesa';
+       }
 
-   document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
-   const activeImg = document.getElementById(activeImgId);
-   if (activeImg) activeImg.classList.add('active');
+       document.querySelectorAll('.slider-img').forEach(img => img.classList.remove('active'));
+       const activeImg = document.getElementById(activeImgId);
+       if (activeImg) activeImg.classList.add('active');
     }
 }
 
