@@ -1464,7 +1464,7 @@ input[type="checkbox"].calc-item:checked {
                             <div class="service-desc">Desechable compostable.</div>
                         </div>
                         <div class="service-right">
-                            <span class="service-price">$ 280</span>
+                            <span class="service-price">$ 390</span>
                             <input type="checkbox" class="calc-item" value="280" data-name="Vajilla WASARA" data-desc="Desechable compostable." data-format="Servicio individual" data-type="room">
                         </div>
                     </label>
@@ -1476,7 +1476,7 @@ input[type="checkbox"].calc-item:checked {
                         </div>
                         <div class="service-right">
                             <span class="included-tag">Incluido</span>
-                            <span class="service-price">$ 45</span>
+                            <span class="service-price">$ 160</span>
                             <input type="checkbox" class="calc-item" id="chk-papeleria" value="45" data-name="Papelería premium" data-desc="Bilingüe, papel brillante o de algodón." data-format="Servicio individual" data-type="room">
                         </div>
                     </label>
@@ -1497,7 +1497,7 @@ input[type="checkbox"].calc-item:checked {
                         </div>
                         <div class="service-right">
                             <span class="included-tag" id="exp-digital-tag">Incluido</span>
-                            <span class="service-price" id="exp-digital-price">$ 420</span>
+                            <span class="service-price" id="exp-digital-price">$ 520</span>
                             <input type="checkbox" class="calc-item" id="chk-exp-digital" value="420" data-name="Experiencia digital" data-desc="Página web personalizada." data-format="Servicio individual" data-type="fixed">
                         </div>
                     </label>
@@ -1508,7 +1508,7 @@ input[type="checkbox"].calc-item:checked {
                             <div class="service-desc">Foto + Video profesional, review booster, experiencia digital.</div>
                         </div>
                         <div class="service-right">
-                            <span class="service-price">$ 3,500</span>
+                            <span class="service-price">$ 12,500</span>
                             <input type="checkbox" class="calc-item" id="chk-contenido-mensual" value="3500" data-name="Creación de contenido mensual" data-desc="Foto + Video profesional, review booster, experiencia digital." data-format="Paquete" data-type="fixed">
                         </div>
                     </label>
@@ -1528,7 +1528,7 @@ input[type="checkbox"].calc-item:checked {
                         <div class="set-card-header">Check-in</div>
                         <div class="set-item-row"><span>Diseño Culinario (Base)</span><span>$ 375</span></div>
                         <div class="set-item-row"><span>Vajilla permanente</span><span>$ 200</span></div>
-                        <div class="set-item-row"><span>Papelería creativa</span><span>$ 45</span></div>
+                        <div class="set-item-row"><span>Papelería creativa</span><span>$ 160</span></div>
                         <div class="set-footer-row">
                             <span class="crossed-price">$ 620</span>
                             <div style="display: flex; align-items: center; gap: 8px;">
@@ -1542,7 +1542,7 @@ input[type="checkbox"].calc-item:checked {
                         <div class="set-card-header">Turndown Service</div>
                         <div class="set-item-row"><span>Diseño Culinario (Firma)</span><span>$ 1,180</span></div>
                         <div class="set-item-row"><span>Vajilla permanente</span><span>$ 200</span></div>
-                        <div class="set-item-row"><span>Papelería creativa</span><span>$ 45</span></div>
+                        <div class="set-item-row"><span>Papelería creativa</span><span>$ 160</span></div>
                         <div class="set-footer-row">
                             <span class="crossed-price">$ 1,425</span>
                             <div style="display: flex; align-items: center; gap: 8px;">
@@ -1556,7 +1556,7 @@ input[type="checkbox"].calc-item:checked {
                         <div class="set-card-header">Ambos</div>
                         <div class="set-item-row"><span>Diseño Culinario (Firma)</span><span>$ 1,770</span></div>
                         <div class="set-item-row"><span>Vajilla permanente (2)</span><span>$ 400</span></div>
-                        <div class="set-item-row"><span>Papelería creativa (2)</span><span>$ 90</span></div>
+                        <div class="set-item-row"><span>Papelería creativa (2)</span><span>$ 320</span></div>
                         <div class="set-footer-row">
                             <span class="crossed-price">$ 2,260</span>
                             <div style="display: flex; align-items: center; gap: 8px;">
@@ -1918,13 +1918,13 @@ function applySetInclusions() {
     resetServiceVisuals(chkCheckinFirma, "$ 590");
     resetServiceVisuals(chkTurndownFirma, "$ 1,180");
     resetServiceVisuals(chkVajilla, "$ 200");
-    resetServiceVisuals(chkPapeleria, "$ 45");
+    resetServiceVisuals(chkPapeleria, "$ 160");
 
     if (chkSetAmbos.checked) {
         forceCheckAndStyle(chkCheckinFirma);
         forceCheckAndStyle(chkTurndownFirma);
         forceCheckAndStyle(chkVajilla, "$ 400");
-        forceCheckAndStyle(chkPapeleria, "$ 90");
+        forceCheckAndStyle(chkPapeleria, "$ 320");
     } else if (chkSetCheckin.checked) {
         forceCheckAndStyle(chkCheckinBase);
         forceCheckAndStyle(chkVajilla);
